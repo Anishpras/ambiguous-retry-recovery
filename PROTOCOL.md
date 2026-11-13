@@ -474,3 +474,13 @@ Applied on 2026-11-13, after the v1.1.1 run (commit `b95a667`), following an ind
 - **Not run:** the v1.2 core matrix and grid collection.
 
 Because the exploratory analyses are post hoc by definition, none of their outputs counts as a test of a pre-specified prediction.
+
+### Revision v1.2.1 (post-freeze, implementer; exploratory output only)
+
+Applied on 2026-11-13, after the v1.2 run (commit `0b01478`).
+
+- **What.**
+  1. In `results/exploratory/escalation.*`, an open attempt that was *deduplicated* (contract 2: `replay_reply`, `in_progress_reply`, `conflict_reply`) and whose reply was lost was labelled "in-flight time bound". Such an attempt leaves no provider record, so only its lost reply could close it: a correlated positive for a replay, a terminal negative otherwise. It is now labelled that way, under a new category, "lost reply of a deduplicated attempt" (`arr/exploratory.py`).
+  2. `run_sim.py --show` also accepts exploratory scenario IDs such as `PF2` (`arr/scenarios.py: load_scenario`).
+- **Why.** The v1.2 label was wrong. It affected 5 rows, all persistent-fault cells for Bw and D+I under contract 2.
+- **Results changed.** Only `results/exploratory/escalation.md` and `results/exploratory/escalation.csv`. No core, grid, sensitivity, ablation, persistent-fault or boundary number changes. Also updated in this commit, none of them frozen: the docs (`docs/contract-checklist.md`, `docs/decision-table.md`, `docs/trace-schema.md`, `docs/scenario-format.md`), `README.md`, and the hand-written `notes/sensitivity_conclusions.md`, which is rendered into `results/exploratory/sensitivity.md`.

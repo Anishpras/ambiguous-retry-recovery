@@ -330,6 +330,11 @@ def escalation(cells):
                     needs.append("terminal negative or in-flight time bound for %s" % short)
                 elif state == "aborted":
                     needs.append("terminal negative for %s" % short)
+                elif state == "replay_reply":
+                    # v1.2.1: a deduplicated attempt leaves no provider record; only its lost reply could close it
+                    needs.append("correlated positive for %s (its replayed ok was lost; no provider record)" % short)
+                elif state in ("in_progress_reply", "conflict_reply", "rejected"):
+                    needs.append("terminal negative for %s (its reply was lost; no provider record)" % short)
                 else:
                     needs.append("in-flight time bound for %s" % short)
             csv_rows.append({"source": cell.get("source", ""), "contract": cell["contract"], "policy": cell["policy"],
@@ -343,7 +348,8 @@ def escalation(cells):
     cats = {}
     for r in csv_rows:
         for part in r["evidence_that_resolves_it"].split("; "):
-            kind = ("correlated positive" if part.startswith("correlated positive") and "after" not in part else
+            kind = ("lost reply of a deduplicated attempt" if "no provider record" in part else
+                    "correlated positive" if part.startswith("correlated positive") and "after" not in part else
                     "correlated positive after H / longer horizon" if part.startswith("correlated positive") else
                     "terminal negative or in-flight bound" if part.startswith("terminal negative or") else
                     "terminal negative" if part.startswith("terminal negative") else "in-flight time bound")

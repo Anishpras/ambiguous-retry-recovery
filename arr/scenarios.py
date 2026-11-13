@@ -136,6 +136,8 @@ def load_scenario(sid):
             if scn["id"] == sid:
                 return scn
         raise KeyError(sid)
+    if os.path.exists(os.path.join(EXPLORATORY_DIR, "%s.json" % sid)):
+        return load_file(os.path.join(EXPLORATORY_DIR, "%s.json" % sid))
     return _finish(load_json("%s.json" % sid))
 
 
