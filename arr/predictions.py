@@ -177,7 +177,7 @@ def check_all(rows, cell_index):
     return k.out
 
 
-def predictions_md(checks, notes_text, base_verdicts=None, base_label="v1.0"):
+def predictions_md(checks, notes_text, base_verdicts=()):
     n_ok = sum(1 for c in checks if c["verdict"] == "MATCH")
     lines = ["# Predictions check", "",
              "PROTOCOL.md §7 (original and design-update additions) and the §10 worked timeline, checked against "
@@ -188,9 +188,11 @@ def predictions_md(checks, notes_text, base_verdicts=None, base_label="v1.0"):
     for c in checks:
         lines.append("| %s | %s | %s | %s | %s | **%s** |" % (c["id"], c["source"], c["statement"], c["predicted"],
                                                               c["observed"], c["verdict"]))
-    if base_verdicts:
-        changed = ["%s (%s -> %s)" % (c["id"], base_verdicts.get(c["id"], "absent"), c["verdict"])
-                   for c in checks if base_verdicts.get(c["id"]) != c["verdict"]]
+    for base_label, verdicts in base_verdicts:
+        if not verdicts:
+            continue
+        changed = ["%s (%s -> %s)" % (c["id"], verdicts.get(c["id"], "absent"), c["verdict"])
+                   for c in checks if verdicts.get(c["id"]) != c["verdict"]]
         lines += ["", "## Match-status changes since %s" % base_label, "",
                   ("Changed: " + "; ".join(changed) + ".") if changed else
                   "None: every prediction has the same verdict as in the %s run (%d predictions compared)."

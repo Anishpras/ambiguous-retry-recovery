@@ -32,9 +32,12 @@ from arr.runner import run_cell  # noqa: E402
 
 FREEZE = os.path.join(ROOT, "FREEZE.json")
 NOTES = os.path.join(ROOT, "notes", "prediction_explanations.md")
-# Revision v1.1 delta: baseline = committed v1.0 results (git 924aef2), extracted into baselines/v1.0/.
-BASELINE = {"label": "v1.0", "commit": "924aef2", "dir": os.path.join(ROOT, "baselines", "v1.0"),
-            "new_label": "v1.1", "output": "revision_v1.1_delta.md"}
+# Revision deltas. Baselines are committed results extracted byte-for-byte with `git show`:
+# v1.0 from 924aef2, v1.1 from 622e1f1. The current run is v1.1.1.
+BASELINES = [("v1.0", "924aef2", os.path.join(ROOT, "baselines", "v1.0")),
+             ("v1.1", "622e1f1", os.path.join(ROOT, "baselines", "v1.1"))]
+CURRENT_LABEL = "v1.1.1"
+DELTA_OUTPUT = "revision_v1.1_delta.md"
 
 
 # ------------------------------------------------------------------------------------- freeze
@@ -175,18 +178,18 @@ def collect(out):
     report.write_text(os.path.join(out, "grid.csv"), report.csv_text(grows, report.GRID_FIELDS))
     report.write_text(os.path.join(out, "grid_tables.md"),
                       report.grid_tables_md(grows, scenarios.load_json("grids.json")["grids"]))
-    base_verdicts = delta.baseline_verdicts(BASELINE["dir"])
-    report.write_text(os.path.join(out, "predictions_check.md"),
-                      predictions.predictions_md(preds, notes, base_verdicts, BASELINE["label"]))
+    base_verdicts = [(label, delta.baseline_verdicts(d)) for label, _, d in BASELINES]
+    report.write_text(os.path.join(out, "predictions_check.md"), predictions.predictions_md(preds, notes, base_verdicts))
     report.write_text(os.path.join(out, "worked_traces.md"), report.worked_traces_md(cell_index, rows))
     ties = [dict(contract=cl["contract"], policy=cl["policy"], scenario=cl["scenario"], t=x["t"], phase=x["phase"],
                  op=x["op"], order=" > ".join(x["order"])) for cl in cells for x in cl["sim"].ties]
     report.write_text(os.path.join(out, "ties.csv"),
                       report.csv_text(ties, ["contract", "policy", "scenario", "t", "phase", "op", "order"]))
-    if os.path.isdir(BASELINE["dir"]):
-        report.write_text(os.path.join(out, BASELINE["output"]),
-                          delta.delta_md(BASELINE["dir"], out, BASELINE["label"], BASELINE["new_label"],
-                                         BASELINE["commit"]))
+    (l0, c0, d0), (l1, c1, d1) = BASELINES
+    src = "committed %s results (git %s, `baselines/%s/`)"
+    report.write_text(os.path.join(out, DELTA_OUTPUT), delta.delta_md([
+        (d0, d1, l0, l1, src % (l0, c0, l0), src % (l1, c1, l1)),
+        (d1, out, l1, CURRENT_LABEL, src % (l1, c1, l1), "this run (%s)" % CURRENT_LABEL)]))
     report.write_text(os.path.join(out, "validation.json"), json.dumps(checks, indent=2) + "\n")
     run_info = {
         "command": "python3 run_sim.py",

@@ -37,6 +37,20 @@ class RequestPathIgnoredAfterComplete(unittest.TestCase):
                 self.assertEqual(d.policy.belief(), "failed", (cls.name, event))
                 self.assertEqual([a["type"] for a in acts], [expect], (cls.name, event))
 
+    def test_v1_1_1_status_replies_ignored_once_complete(self):
+        # B/Bw: a read issued before completion whose not_found reply lands after the confirming webhook.
+        for cls in (policies.PolicyB, policies.PolicyBw):
+            d = validate.Driver(cls())
+            d.feed({"type": "timeout", "op_key": "op-1", "attempt_id": d.aid(1), "t": 5})
+            d.feed(committed(d, 6))
+            acts = d.feed({"type": "status", "result": "not_found", "op_key": "op-1", "terminal_attempts": [],
+                           "t": 6})
+            self.assertEqual((acts, d.k, d.policy.belief()), ([], 1, "complete"), cls.name)
+        # before completion a not_found reply still triggers B's retry
+        d = validate.Driver(policies.PolicyB())
+        d.feed({"type": "status", "result": "not_found", "op_key": "op-1", "terminal_attempts": [], "t": 6})
+        self.assertEqual(d.k, 2)
+
     def test_request_path_signals_still_act_before_completion(self):
         d = validate.Driver(policies.PolicyA())
         d.feed({"type": "timeout", "op_key": "op-1", "attempt_id": d.aid(1), "t": 5})

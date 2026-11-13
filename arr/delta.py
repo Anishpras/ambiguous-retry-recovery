@@ -37,21 +37,20 @@ def _grid_aggregates(rows):
     return out
 
 
-def delta_md(baseline_dir, current_dir, base_label, new_label, base_commit):
-    lines = ["# Revision delta: %s -> %s" % (base_label, new_label), "",
-             "Every value that differs between the %s results (baseline files extracted byte-for-byte with "
-             "`git show %s:results/<file>` into `baselines/%s/`) and this run. Rows are keyed as shown; "
-             "a cell reads `field: old -> new`. Unchanged rows are omitted." % (base_label, base_commit, base_label), "",
-             "| baseline file | sha256 |", "|---|---|"]
+def delta_section(old_dir, new_dir, old_label, new_label, old_source, new_source):
+    """One section: every value that differs between two result sets."""
+    lines = ["## %s -> %s" % (old_label, new_label), "",
+             "Old: %s. New: %s. Rows are keyed as shown; a cell reads `field: old -> new`. Unchanged rows are "
+             "omitted." % (old_source, new_source), "", "| file compared | old sha256 |", "|---|---|"]
     for name, _, _ in FILES:
-        with open(os.path.join(baseline_dir, name), "rb") as fh:
-            lines.append("| baselines/%s/%s | %s |" % (base_label, name, hashlib.sha256(fh.read()).hexdigest()))
+        with open(os.path.join(old_dir, name), "rb") as fh:
+            lines.append("| %s | %s |" % (name, hashlib.sha256(fh.read()).hexdigest()))
     lines.append("")
     tables = {}
     for name, key, title in FILES:
-        with open(os.path.join(baseline_dir, name), encoding="utf-8") as fh:
+        with open(os.path.join(old_dir, name), encoding="utf-8") as fh:
             old = _read(fh.read())
-        with open(os.path.join(current_dir, name), encoding="utf-8") as fh:
+        with open(os.path.join(new_dir, name), encoding="utf-8") as fh:
             new = _read(fh.read())
         tables[name] = (old, new)
         oi, ni = _index(old, key), _index(new, key)
@@ -64,7 +63,7 @@ def delta_md(baseline_dir, current_dir, base_label, new_label, base_commit):
                      for f in oi[k] if oi[k][f] != ni[k].get(f)]
             if diffs:
                 changed.append((k, "; ".join(diffs)))
-        lines += ["## %s (`%s`): %d of %d rows changed" % (title, name, len(changed), len(old)), ""]
+        lines += ["### %s (`%s`): %d of %d rows changed" % (title, name, len(changed), len(old)), ""]
         if changed:
             lines += ["| %s | changes |" % " | ".join(key), "|" + "---|" * (len(key) + 1)]
             lines += ["| %s | %s |" % (" | ".join(k), d) for k, d in changed]
@@ -79,12 +78,23 @@ def delta_md(baseline_dir, current_dir, base_label, new_label, base_commit):
                  for f in GRID_AGG if oa.get(k, {}).get(f) != na.get(k, {}).get(f)]
         if diffs:
             rows.append("| %s | %s | %s | %s | %s |" % (k[0], k[1], k[2], na.get(k, oa.get(k))["n"], "; ".join(diffs)))
-    lines += ["## Secondary grid, totals per grid x contract x policy (counts of cells; sums of retries and reads)", ""]
+    lines += ["### Secondary grid, totals per grid x contract x policy (counts of cells; sums of retries and reads)", ""]
     if rows:
         lines += ["| grid | contract | policy | cells | changes |", "|---|---|---|---|---|"] + rows
     else:
         lines.append("No value changed.")
-    return "\n".join(lines) + "\n"
+    lines.append("")
+    return lines
+
+
+def delta_md(sections):
+    """`sections`: list of (old_dir, new_dir, old_label, new_label, old_source, new_source)."""
+    lines = ["# Revision deltas", "",
+             "Every value that changed between successive frozen runs. Baseline files are byte-for-byte copies of "
+             "committed results (`git show <commit>:results/<file>`) kept in `baselines/<label>/` and frozen.", ""]
+    for sec in sections:
+        lines += delta_section(*sec)
+    return "\n".join(lines).rstrip("\n") + "\n"
 
 
 def baseline_verdicts(baseline_dir):

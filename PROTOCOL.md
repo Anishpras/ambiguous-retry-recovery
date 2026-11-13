@@ -120,7 +120,7 @@ All four policies share the following:
 
 | Policy | Rule |
 |---|---|
-| **A: immediate retry** | On timeout, `error`, `in_progress` or `rejected`: retry at once if budget remains. On an `ok` response or a `committed` webhook (op_key match only): complete. On an `aborted` webhook: failed, then retry if budget remains. This is operation-level "last terminal-looking event wins"; `processing` is ignored. Budget exhausted with no success: `failed`. *(Revision v1.1: once the belief is `complete`, request-path failure signals (local timeouts; `error`, `in_progress`, `rejected` responses) are ignored; webhooks are unchanged. B and Bw inherit this.)* |
+| **A: immediate retry** | On timeout, `error`, `in_progress` or `rejected`: retry at once if budget remains. On an `ok` response or a `committed` webhook (op_key match only): complete. On an `aborted` webhook: failed, then retry if budget remains. This is operation-level "last terminal-looking event wins"; `processing` is ignored. Budget exhausted with no success: `failed`. *(Revision v1.1: once the belief is `complete`, request-path failure signals (local timeouts; `error`, `in_progress`, `rejected` responses) are ignored; webhooks are unchanged. B and Bw inherit this. Revision v1.1.1: replies to the policy's own status reads are also ignored once `complete`.)* |
 | **B: status check once** | On every failure signal (timeout, `error`, `in_progress`, `rejected`, `aborted` webhook): one status read. `found` → complete. Anything else, including `not_found` with terminal attempts → retry if budget remains. Success and failure events otherwise as in A. Budget exhausted: `failed`. |
 | **C: defer** | Retries only on a *synchronous* `rejected` response, which arrives before any timeout. After a timeout or `error`: never dispatches again. Polls status every 5 ticks and observes webhooks with the §2.5 rules. Final belief: `complete` on correlated positive evidence; `failed` if every attempt is terminal; otherwise `unresolved`. |
 | **D: reconcile** | Same evidence rules as C, plus a retry when every dispatched attempt has a terminal negative, no positive evidence exists and budget remains. Ambiguous evidence (timeout, `error`, `not_found`, `processing`) never triggers a retry. |
@@ -412,3 +412,15 @@ Applied on 2026-11-13, after the v1.0 collection (commit `924aef2`), and re-froz
   - **Bw: no measured value expected to change.** Bw no longer starts a wait on a post-completion timeout, but under C15 it already skipped the read at the end of such a wait.
   - **Predictions: no verdict expected to change.** `results/predictions_check.md` reports match-status changes against the v1.0 run.
 - **Supporting changes.** `arr/delta.py` writes the delta. `baselines/v1.0/` holds `summary.csv`, `by_policy.csv`, `by_family.csv`, `grid.csv` and `predictions_check.md` from commit `924aef2`; these files are frozen. `run_sim.py` hashes `baselines/` in FREEZE.json and writes the delta.
+
+### Revision v1.1.1 (post-freeze, study lead)
+
+Applied on 2026-11-13, after the v1.1 run (commit `622e1f1`), and re-frozen as v1.1.1.
+
+- **What.** Once the belief is `complete`, A, B and Bw also ignore replies to their own status reads (`PolicyB.on_status`, inherited by Bw; A never reads status). Webhook handling is unchanged. A unit test was added to `tests/test_revision_v1_1.py`.
+- **Why.** It is the same request-path principle as v1.1: status replies answer the client's own requests. The study lead left them out of the v1.1 instruction by oversight. The implementer's v1.1 report had flagged the residual: 10 contract-1 grid cells where B's `not_found` reply, to a read issued before completion, arrived in the same tick just after the confirming webhook and triggered a retry.
+- **Results expected to change.** These were derived before the rerun from the committed v1.1 results. The observed changes are listed in the "v1.1 -> v1.1.1" section of `results/revision_v1.1_delta.md`, which compares against `baselines/v1.1/` (byte-for-byte from git `622e1f1`). The file's "v1.0 -> v1.1" section is now computed from the two frozen baselines instead of from the current run; its tables are unchanged.
+  - **Core matrix: no change.** No status reply reaches B or Bw while its belief is `complete`, by the same v1.0 trace scan.
+  - **B: 10 grid cells change in each contract**, namely G1 with W = 4 and G2 with E = 3, both at L ≥ 4. Under contract 1 they lose their duplicate; under contract 2 they lose a replayed retry.
+  - **A and Bw: no change expected.**
+  - **Predictions: no verdict expected to change.**

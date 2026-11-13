@@ -92,7 +92,8 @@ class PolicyA(Policy):
     Revision v1.1 (study lead, post-freeze): once the belief is `complete`, request-path failure
     signals (local timeouts; `error`, `in_progress`, `rejected` responses) are ignored, because a
     client that has confirmed completion stops its own request path. Webhooks still apply 'last
-    terminal-looking event wins' unchanged (S06, S14). B and Bw inherit this."""
+    terminal-looking event wins' unchanged (S06, S14). B and Bw inherit this. Revision v1.1.1 extends
+    the same principle to replies to the policy's own status reads (PolicyB.on_status)."""
     name = "A"
     FAILURE_WEBHOOKS = ("aborted", "deferred")
     FAILURE_RESPONSES = ("error", "in_progress", "rejected")
@@ -151,6 +152,8 @@ class PolicyB(PolicyA):
     def on_status(self, obs):
         if not self._mine(obs):
             return []
+        if self._belief == "complete":
+            return []   # v1.1.1: replies to its own status reads are request path too; ignored once complete
         if obs.get("result") == "found":
             self._belief = "complete"
             return []
