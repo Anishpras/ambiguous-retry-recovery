@@ -1,0 +1,292 @@
+[
+  {
+    "check": "V1_oracle_effect_histories",
+    "ok": true,
+    "detail": "78/78 scripted runs match"
+  },
+  {
+    "check": "V2_nominal_call_one_effect",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V2_committed_timeout_resend",
+    "ok": true,
+    "detail": "c1 effects=2 c2 effects=1 c2 reply=[{'type': 'response', 'kind': 'ok', 'op_key': 'op-1', 'attempt_id': 'op-1#a2', 'payload_hash': 'fe23b698518f2dfb5d16736096c6f4afca633d4d7d52e64e93710a335f14adfe', 'effect_id': 'a77712c198af', 't': 7}]"
+  },
+  {
+    "check": "V2_contract2_payload_mismatch_conflict",
+    "ok": true,
+    "detail": "responses=['ok', 'conflict'] effects=1"
+  },
+  {
+    "check": "V2_distinct_keys_same_payload_two_effects",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V2_contract2_retry_after_abort_executes",
+    "ok": true,
+    "detail": "[['op-1#a2', 8]]"
+  },
+  {
+    "check": "V2_contract2_pending_in_progress",
+    "ok": true,
+    "detail": "[('op-1#a2', 'in_progress', 7), ('op-1#a1', 'ok', 16)]"
+  },
+  {
+    "check": "V2_lost_request_creates_no_record",
+    "ok": true,
+    "detail": "[['op-1#a2', 7]]"
+  },
+  {
+    "check": "V2_status_lag_and_terminal_attempts",
+    "ok": true,
+    "detail": "L=30 [(32, 'not_found'), (33, 'found')]; L=never [(6, 'not_found', []), (60, 'not_found', [])]; abort [(4, []), (5, ['op-1#a1'])]"
+  },
+  {
+    "check": "V2_late_response_after_timeout_observed",
+    "ok": true,
+    "detail": "[('timeout', None, 5), ('response', 'ok', 16)]"
+  },
+  {
+    "check": "V2_seq_vs_delivery_order_and_duplicate_event_ids",
+    "ok": true,
+    "detail": "[(8, 'committed', 212, 'ev-e0307a811cf1'), (9, 'committed', 212, 'ev-e0307a811cf1'), (12, 'processing', 110, 'ev-8457bb23a901')]"
+  },
+  {
+    "check": "V2_deferred_not_terminal_and_violation_only_in_S15",
+    "ok": true,
+    "detail": "violations={'S00': 0, 'S01': 0, 'S02': 0, 'S03': 0, 'S04': 0, 'S05': 0, 'S06': 0, 'S07': 0, 'S08': 0, 'S09': 0, 'S10': 0, 'S11': 0, 'S12': 0, 'S13': 0, 'S14': 0, 'S15': 1}"
+  },
+  {
+    "check": "V2_effect_ids_are_opaque_hmacs",
+    "ok": true,
+    "detail": "93 effects checked; bad=[]"
+  },
+  {
+    "check": "V2_provider_seq_increases_in_emission_order",
+    "ok": true,
+    "detail": "[]"
+  },
+  {
+    "check": "V3_C_older_receipt_cannot_overturn_commit",
+    "ok": true,
+    "detail": "belief=complete dispatches=1"
+  },
+  {
+    "check": "V3_C_duplicate_delivery_idempotent",
+    "ok": true,
+    "detail": "('failed', 1, ['op-1#a1']) vs ('failed', 1, ['op-1#a1'])"
+  },
+  {
+    "check": "V3_C_uncorrelated_positives_ignored",
+    "ok": true,
+    "detail": "belief=unresolved dispatches=1"
+  },
+  {
+    "check": "V3_C_conflict_rule",
+    "ok": true,
+    "detail": "[{'t': 5, 'attempt_id': 'op-1#a1', 'positive': ['webhook committed'], 'negative': ['webhook aborted']}]"
+  },
+  {
+    "check": "V3_C_not_found_not_authoritative",
+    "ok": true,
+    "detail": "dispatches=1 belief=complete"
+  },
+  {
+    "check": "V3_C_deferred_is_progress_only",
+    "ok": true,
+    "detail": "dispatches=1"
+  },
+  {
+    "check": "V3_D_older_receipt_cannot_overturn_commit",
+    "ok": true,
+    "detail": "belief=complete dispatches=2"
+  },
+  {
+    "check": "V3_D_duplicate_delivery_idempotent",
+    "ok": true,
+    "detail": "('unresolved', 2, ['op-1#a1']) vs ('unresolved', 2, ['op-1#a1'])"
+  },
+  {
+    "check": "V3_D_uncorrelated_positives_ignored",
+    "ok": true,
+    "detail": "belief=unresolved dispatches=1"
+  },
+  {
+    "check": "V3_D_conflict_rule",
+    "ok": true,
+    "detail": "[{'t': 5, 'attempt_id': 'op-1#a1', 'positive': ['webhook committed'], 'negative': ['webhook aborted']}]"
+  },
+  {
+    "check": "V3_D_not_found_not_authoritative",
+    "ok": true,
+    "detail": "dispatches=1 belief=complete"
+  },
+  {
+    "check": "V3_D_deferred_is_progress_only",
+    "ok": true,
+    "detail": "dispatches=1"
+  },
+  {
+    "check": "V3_D+I_older_receipt_cannot_overturn_commit",
+    "ok": true,
+    "detail": "belief=complete dispatches=2"
+  },
+  {
+    "check": "V3_D+I_duplicate_delivery_idempotent",
+    "ok": true,
+    "detail": "('unresolved', 2, ['op-1#a1']) vs ('unresolved', 2, ['op-1#a1'])"
+  },
+  {
+    "check": "V3_D+I_uncorrelated_positives_ignored",
+    "ok": true,
+    "detail": "belief=unresolved dispatches=2"
+  },
+  {
+    "check": "V3_D+I_conflict_rule",
+    "ok": true,
+    "detail": "[{'t': 5, 'attempt_id': 'op-1#a1', 'positive': ['webhook committed'], 'negative': ['webhook aborted']}]"
+  },
+  {
+    "check": "V3_D+I_not_found_not_authoritative",
+    "ok": true,
+    "detail": "dispatches=2 belief=complete"
+  },
+  {
+    "check": "V3_D+I_deferred_is_progress_only",
+    "ok": true,
+    "detail": "dispatches=1"
+  },
+  {
+    "check": "V3_all_terminal_retry_D_not_C",
+    "ok": true,
+    "detail": "D dispatches=2 C dispatches=1 C belief=failed"
+  },
+  {
+    "check": "V3_DI_in_progress_keeps_waiting",
+    "ok": true,
+    "detail": "after in_progress=(2, 'unresolved') final=complete"
+  },
+  {
+    "check": "V4_policy_module_imports_nothing",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V4_policies_receive_deep_copies",
+    "ok": true,
+    "detail": "hostile mutation of observations left the run unchanged"
+  },
+  {
+    "check": "V4_S08_S09_identical_A",
+    "ok": true,
+    "detail": "1053 bytes"
+  },
+  {
+    "check": "V4_S08_S09_identical_B",
+    "ok": true,
+    "detail": "1179 bytes"
+  },
+  {
+    "check": "V4_S08_S09_identical_Bw",
+    "ok": true,
+    "detail": "1287 bytes"
+  },
+  {
+    "check": "V4_S08_S09_identical_C",
+    "ok": true,
+    "detail": "3034 bytes"
+  },
+  {
+    "check": "V4_S08_S09_identical_D",
+    "ok": true,
+    "detail": "3034 bytes"
+  },
+  {
+    "check": "V4_S08_S09_identical_D+I",
+    "ok": true,
+    "detail": "3034 bytes"
+  },
+  {
+    "check": "V4_S08_S09_identical_A-fk",
+    "ok": true,
+    "detail": "1071 bytes"
+  },
+  {
+    "check": "V4_effect_ids_opaque_format",
+    "ok": true,
+    "detail": "15 effect IDs"
+  },
+  {
+    "check": "V5_parity_twin_runs",
+    "ok": true,
+    "detail": "14 runs; "
+  },
+  {
+    "check": "unit_and_mutation_tests",
+    "ok": true,
+    "detail": "ran=13 failures=0 errors=0"
+  },
+  {
+    "check": "V4_matrix_S08_S09_identical_A",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V4_matrix_S08_S09_identical_B",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V4_matrix_S08_S09_identical_Bw",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V4_matrix_S08_S09_identical_C",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V4_matrix_S08_S09_identical_D",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V4_matrix_S08_S09_identical_D+I",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "check": "V5_parity_core_matrix",
+    "ok": true,
+    "detail": "272 runs; "
+  },
+  {
+    "check": "V5_parity_grids",
+    "ok": true,
+    "detail": "2040 runs; "
+  },
+  {
+    "check": "V6_S00_one_effect_and_complete_everywhere",
+    "ok": true,
+    "detail": "17 S00 runs; failing []"
+  },
+  {
+    "check": "V6_contract2_no_duplicates_except_S15_and_A-fk",
+    "ok": true,
+    "detail": "1233 contract-2 operations checked; duplicates: []"
+  },
+  {
+    "check": "V2_provider_seq_increases_in_emission_order_all_runs",
+    "ok": true,
+    "detail": "[]"
+  },
+  {
+    "check": "pending_beyond_F_is_zero",
+    "ok": true,
+    "detail": "pending at F: 0"
+  }
+]
