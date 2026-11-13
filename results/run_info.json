@@ -17,8 +17,8 @@
   "fixture_version": "1.0.0",
   "freeze": {
     "frozen": true,
-    "frozen_at_utc": "2026-11-13T15:00:57+00:00",
-    "label": "v1.0",
+    "frozen_at_utc": "2026-11-13T15:08:20+00:00",
+    "label": "v1.1",
     "matches": true,
     "mismatched": [],
     "not_covered": []
@@ -88,7 +88,7 @@
       "role": "reference"
     }
   },
-  "prediction_notes_sha256": "54c0f5f9bae5ac678903e15a239b42e17010bee91ce32ddb4a82f55181b0d13b",
+  "prediction_notes_sha256": "8c273d69abf470ced1826c8c047768162659a029179141a2f1ed53feb0c42d87",
   "predictions": {
     "match": 37,
     "total": 38
@@ -102,14 +102,15 @@
     "operations_grid": 2040
   },
   "sha256": {
-    "PROTOCOL.md": "1a3bbd6598bf80ea00a99917eb3e902e00428f6b57a446d7eb2121cba66688e2",
+    "PROTOCOL.md": "f21e4cad7a47cf7fe9b7dc4accc44ef19133217e2697dad24bec3b3c48719060",
     "arr/__init__.py": "59eb8195dc04299db1b6b77e924c19c31d35b3ce7da86e9058e61ca2b5d85728",
     "arr/client.py": "f0fe3e55510a5acd4499f75909b4959d1881da3ca76eae9f5467402f08b0ba15",
     "arr/constants.py": "17a5812ec94786684739ae0b53d850349cc5eea042e926fc0b156ae51a0fa2e0",
+    "arr/delta.py": "f3230b17696105db55a7c7cc937412daf00caa8d9dbf3f379f0c7cb8e646fa36",
     "arr/ids.py": "694e72018b4e13d71b22de5c04729442236c4185397192a1b47426f269727e48",
     "arr/metrics.py": "b15dda3f735883e9af2237bbbb8e92df084f71fe502193d2a84a280bc8558a7f",
-    "arr/policies.py": "53439793465abd77002b17e7f6c7dc5524a3e50a356a8b34f2e3f6c3c20fbe83",
-    "arr/predictions.py": "3413cac554c7cc9f21d6c1c728482c3b7cc8259eb24fb687e0fbc92ce335819c",
+    "arr/policies.py": "6a7d93d08d5be4947b5429e361d3d3e1f548b7cb37c62a0ecb2fa9379b5a3299",
+    "arr/predictions.py": "b8953e3fe8e6883cb5c01b8f4bcfdec53db2de8de689482c511fc9fe474855f6",
     "arr/provider.py": "b229a9377957d6f1e71f103d6c93ed326871f05470e6231bf9d044dbc6364543",
     "arr/references.py": "80064586f3bee581bda5eab994948ea8bc9482c3b88f59c675ad9fc3a466befa",
     "arr/report.py": "e484292055a2d4a81407ac530f249a3219ae1f4d62656575a0630b528c2f0343",
@@ -117,7 +118,12 @@
     "arr/scenarios.py": "b6314f9e4346052ea1d87f90c2ec80d0e0f9e9f16aeb4c376edf0f337889cc11",
     "arr/sim.py": "c8014834052f4b74bcc77dde42e448af4add5ca7298500136bf25e44eba973fa",
     "arr/validate.py": "114a7ba050c5463387c97757523e3d88f299a596f152214e60c170f5bde6796a",
-    "run_sim.py": "30e996ea95f1e88022359fe6dc8c2d4cc90e930f0bfe1ef9430e603bb9773a40",
+    "baselines/v1.0/by_family.csv": "97cf2359067cc8012907647b9cfdff37218509a2a45f0ded2c00c935dd1b7597",
+    "baselines/v1.0/by_policy.csv": "9a2d4aa0ed065677836671b79c4a68156ce7b0ddd07a07acf9b7d352e543170c",
+    "baselines/v1.0/grid.csv": "5df1784205b2b27a0b9762182e012efc58084553f2fa45937ca8b5b62cb896cf",
+    "baselines/v1.0/predictions_check.md": "32e93f5e765a2e985ae7024b3d7cfeda91a960985ff6a4942949606a1a2170a8",
+    "baselines/v1.0/summary.csv": "970618fad41f069ebcfe8a3904cce0da7520a9a59853a7182086d961722b9a18",
+    "run_sim.py": "f8e7bcd8a526014ae29274e4d7da14796020329750a0b39337e491628ae506c6",
     "scenarios/S00.json": "ae7f0b8a555058331195c41fa9518131a39e994b09afb2516465fb88d9f7a003",
     "scenarios/S01.json": "82d36fbe8264636cec223d625468bcc1819d3d2d210f67c09bf79bac17038b64",
     "scenarios/S02.json": "08383781b08b4a7044ef6b6448813a83501ebb9f2a4ffe351c4dfa719c28bd57",
@@ -139,6 +145,7 @@
     "scenarios/sanity_labels.json": "2569e907018306bc878ea82497c341b5d179a907e38657566efb3fa39f9509c4",
     "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tests/test_mutations.py": "800f4b588bb5e27c05b4ae54179eded5570dda43db9f426dfe888204e203f09a",
+    "tests/test_revision_v1_1.py": "723519e003b0459f9b6fa095f41adf48e302cd64b89d0bb0c872577678cec225",
     "tests/test_rules.py": "9bfc5795f6e00c3da93a9d369fdefea5ae278910ac98ec931a67419f3d71d5dc"
   },
   "validation_all_ok": true

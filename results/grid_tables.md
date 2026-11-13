@@ -10,8 +10,8 @@ G1: for each webhook delay W, the smallest status lag L at which the policy dupl
 
 | policy | W=1 | W=2 | W=4 | W=8 | W=16 | W=32 | W=64 | W=lost |
 |---|---|---|---|---|---|---|---|---|
-| A | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
-| B | 4+ | 4+ | 4+ | 4+ | 4+ | 4+ | 4+ | 4+ |
+| A | - | - | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
+| B | - | - | 4+ | 4+ | 4+ | 4+ | 4+ | 4+ |
 | Bw | - | - | - | - | - | 32+ | 32+ | 32+ |
 | C | - | - | - | - | - | - | - | - |
 | D | - | - | - | - | - | - | - | - |
@@ -29,7 +29,7 @@ G1: for each webhook delay W, the smallest status lag L at which the policy dupl
 | C | - | - | - | - | - | - | - | - |
 | D | - | - | - | - | - | - | - | - |
 | D+I (optional) | - | - | - | - | - | - | - | - |
-| A-fk (ablation) | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
+| A-fk (ablation) | - | - | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
 | ORACLE-S (reference) | - | - | - | - | - | - | - | - |
 | ORACLE-O (reference) | - | - | - | - | - | - | - | - |
 
@@ -39,8 +39,8 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 
 | policy | E=1 | E=3 | E=6 | E=12 | E=24 | E=48 | E=96 |
 |---|---|---|---|---|---|---|---|
-| A | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
-| B | 4+ | 4+ | 0+ | 0+ | 0+ | 0+ | 0+ |
+| A | - | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
+| B | - | 4+ | 0+ | 0+ | 0+ | 0+ | 0+ |
 | Bw | - | - | - | - | 0+ | 0+ | 0+ |
 | C | - | - | - | - | - | - | - |
 | D | - | - | - | - | - | - | - |
@@ -58,7 +58,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | C | - | - | - | - | - | - | - |
 | D | - | - | - | - | - | - | - |
 | D+I (optional) | - | - | - | - | - | - | - |
-| A-fk (ablation) | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
+| A-fk (ablation) | - | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
 | ORACLE-S (reference) | - | - | - | - | - | - | - |
 | ORACLE-O (reference) | - | - | - | - | - | - | - |
 
@@ -66,38 +66,38 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 
 | grid | contract | policy | duplicates | certified & exactly once | unresolved at H | false failure | retries after confirmed completion | TTC median (coverage) |
 |---|---|---|---|---|---|---|---|---|
-| G1 | 1 | A | 72/72 | 0/72 | 0/72 | 0/72 | 18 | 8 (72/72) |
-| G1 | 1 | B | 48/72 | 24/72 | 0/72 | 0/72 | 18 | 6 (72/72) |
+| G1 | 1 | A | 54/72 | 18/72 | 0/72 | 0/72 | 0 | 8 (72/72) |
+| G1 | 1 | B | 36/72 | 36/72 | 0/72 | 0/72 | 6 | 6 (72/72) |
 | G1 | 1 | Bw | 9/72 | 63/72 | 0/72 | 0/72 | 0 | 14 (72/72) |
 | G1 | 1 | C | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 1 | D | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 1 | D+I (optional) | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 1 | ORACLE-S (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
 | G1 | 1 | ORACLE-O (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
-| G1 | 2 | A | 0/72 | 72/72 | 0/72 | 0/72 | 18 | 7 (72/72) |
-| G1 | 2 | B | 0/72 | 72/72 | 0/72 | 0/72 | 18 | 6 (72/72) |
+| G1 | 2 | A | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 7 (72/72) |
+| G1 | 2 | B | 0/72 | 72/72 | 0/72 | 0/72 | 6 | 6 (72/72) |
 | G1 | 2 | Bw | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 14 (72/72) |
 | G1 | 2 | C | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 2 | D | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 2 | D+I (optional) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 6 (72/72) |
-| G1 | 2 | A-fk (ablation) | 72/72 | 0/72 | 0/72 | 0/72 | 18 | 8 (72/72) |
+| G1 | 2 | A-fk (ablation) | 54/72 | 18/72 | 0/72 | 0/72 | 0 | 8 (72/72) |
 | G1 | 2 | ORACLE-S (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
 | G1 | 2 | ORACLE-O (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
-| G2 | 1 | A | 42/42 | 0/42 | 0/42 | 0/42 | 6 | 8 (42/42) |
-| G2 | 1 | B | 38/42 | 4/42 | 0/42 | 0/42 | 8 | 9 (42/42) |
+| G2 | 1 | A | 36/42 | 6/42 | 0/42 | 0/42 | 0 | 8 (42/42) |
+| G2 | 1 | B | 34/42 | 8/42 | 0/42 | 0/42 | 4 | 9 (42/42) |
 | G2 | 1 | Bw | 18/42 | 24/42 | 0/42 | 0/42 | 0 | 15 (42/42) |
 | G2 | 1 | C | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 1 | D | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 1 | D+I (optional) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 1 | ORACLE-S (reference) | 30/42 | 12/42 | 0/42 | 0/42 | 0 | 8 (42/42) |
 | G2 | 1 | ORACLE-O (reference) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
-| G2 | 2 | A | 0/42 | 36/42 | 0/42 | 6/42 | 6 | 12 (36/42) |
-| G2 | 2 | B | 0/42 | 36/42 | 0/42 | 6/42 | 8 | 11.5 (36/42) |
+| G2 | 2 | A | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 12 (36/42) |
+| G2 | 2 | B | 0/42 | 36/42 | 0/42 | 6/42 | 4 | 11.5 (36/42) |
 | G2 | 2 | Bw | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 12 (36/42) |
 | G2 | 2 | C | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 2 | D | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 2 | D+I (optional) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 11.5 (36/42) |
-| G2 | 2 | A-fk (ablation) | 42/42 | 0/42 | 0/42 | 0/42 | 6 | 8 (42/42) |
+| G2 | 2 | A-fk (ablation) | 36/42 | 6/42 | 0/42 | 0/42 | 0 | 8 (42/42) |
 | G2 | 2 | ORACLE-S (reference) | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 11 (36/42) |
 | G2 | 2 | ORACLE-O (reference) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G3 | 1 | A | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
@@ -124,15 +124,15 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 
 | L \ W | 1 | 2 | 4 | 8 | 16 | 32 | 64 | lost |
 |---|---|---|---|---|---|---|---|---|
-| 0 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 1 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 2 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 4 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 8 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 16 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 32 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 64 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| never | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 0 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 1 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 2 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 4 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 8 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 16 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 32 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 64 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| never | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
 
 ### G1, contract 1, B
 
@@ -141,12 +141,12 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 0 | 1C | 1C | 1C | 1C | 1C | 1C | 1C | 1C |
 | 1 | 1C | 1C | 1C | 1C | 1C | 1C | 1C | 1C |
 | 2 | 1C | 1C | 1C | 1C | 1C | 1C | 1C | 1C |
-| 4 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 8 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 16 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 32 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 64 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| never | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 4 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 8 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 16 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 32 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 64 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| never | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
 
 ### G1, contract 1, Bw
 
@@ -320,15 +320,15 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 
 | L \ W | 1 | 2 | 4 | 8 | 16 | 32 | 64 | lost |
 |---|---|---|---|---|---|---|---|---|
-| 0 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 1 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 2 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 4 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 8 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 16 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 32 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| 64 | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
-| never | 2C | 2C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 0 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 1 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 2 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 4 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 8 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 16 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 32 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| 64 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
+| never | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
 
 ### G1, contract 2, ORACLE-S (reference)
 
@@ -364,7 +364,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 
 | E \ L | 0 | 1 | 4 | 16 | 64 | never |
 |---|---|---|---|---|---|---|
-| 1 | 2C | 2C | 2C | 2C | 2C | 2C |
+| 1 | 1C | 1C | 1C | 1C | 1C | 1C |
 | 3 | 2C | 2C | 2C | 2C | 2C | 2C |
 | 6 | 2C | 2C | 2C | 2C | 2C | 2C |
 | 12 | 2C | 2C | 2C | 2C | 2C | 2C |
@@ -376,7 +376,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 
 | E \ L | 0 | 1 | 4 | 16 | 64 | never |
 |---|---|---|---|---|---|---|
-| 1 | 1C | 1C | 2C | 2C | 2C | 2C |
+| 1 | 1C | 1C | 1C | 1C | 1C | 1C |
 | 3 | 1C | 1C | 2C | 2C | 2C | 2C |
 | 6 | 2C | 2C | 2C | 2C | 2C | 2C |
 | 12 | 2C | 2C | 2C | 2C | 2C | 2C |
@@ -532,7 +532,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 
 | E \ L | 0 | 1 | 4 | 16 | 64 | never |
 |---|---|---|---|---|---|---|
-| 1 | 2C | 2C | 2C | 2C | 2C | 2C |
+| 1 | 1C | 1C | 1C | 1C | 1C | 1C |
 | 3 | 2C | 2C | 2C | 2C | 2C | 2C |
 | 6 | 2C | 2C | 2C | 2C | 2C | 2C |
 | 12 | 2C | 2C | 2C | 2C | 2C | 2C |

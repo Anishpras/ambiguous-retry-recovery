@@ -227,7 +227,7 @@
   {
     "check": "unit_and_mutation_tests",
     "ok": true,
-    "detail": "ran=13 failures=0 errors=0"
+    "detail": "ran=16 failures=0 errors=0"
   },
   {
     "check": "V4_matrix_S08_S09_identical_A",
