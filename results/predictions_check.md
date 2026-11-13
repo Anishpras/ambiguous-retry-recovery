@@ -49,6 +49,10 @@ PROTOCOL.md §7 (original and design-update additions) and the §10 worked timel
 
 None: every prediction has the same verdict as in the v1.0 run (38 predictions compared).
 
+## Match-status changes since v1.1
+
+None: every prediction has the same verdict as in the v1.1 run (38 predictions compared).
+
 ## Explanations of mismatches
 
 Written by the implementer after the v1.0 collection run. This file is interpretation, not code or fixtures, so it is not frozen; `run_sim.py` copies it into `results/predictions_check.md`.
@@ -70,4 +74,4 @@ Every other prediction matches. Three of the matches depend on implementation cl
   - In the core matrix this reading changes no outcome. A scan of the traces finds no timeout, `error`, `in_progress`, `rejected` or `not_found` reaching A, B or Bw while their belief is `complete`.
   - A's two dispatches after completion (S06 at t = 30, S14 at t = 12) are triggered by failure-named webhooks. Those retries are behaviour that §3 specifies ("last terminal-looking event wins"), not a consequence of C9.
   - The reading did matter in the v1.0 grids: under contract 1, 24 of A's and 26 of B's grid duplicates followed a retry made after a webhook had already confirmed completion.
-  - Revision v1.1 (study lead) makes A, B and Bw ignore request-path failure signals once `complete`; see PROTOCOL.md Revisions and `results/revision_v1.1_delta.md`. The predictions named above do not depend on that revision.
+  - Revisions v1.1 and v1.1.1 (study lead) make A, B and Bw ignore request-path failure signals, including replies to their own status reads, once `complete`; see PROTOCOL.md Revisions and `results/revision_v1.1_delta.md`. The predictions named above do not depend on these revisions.

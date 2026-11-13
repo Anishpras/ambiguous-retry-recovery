@@ -17,8 +17,8 @@
   "fixture_version": "1.0.0",
   "freeze": {
     "frozen": true,
-    "frozen_at_utc": "2026-11-13T15:08:20+00:00",
-    "label": "v1.1",
+    "frozen_at_utc": "2026-11-13T15:10:20+00:00",
+    "label": "v1.1.1",
     "matches": true,
     "mismatched": [],
     "not_covered": []
@@ -88,7 +88,7 @@
       "role": "reference"
     }
   },
-  "prediction_notes_sha256": "8c273d69abf470ced1826c8c047768162659a029179141a2f1ed53feb0c42d87",
+  "prediction_notes_sha256": "4e3237521744d1dc2a3d9c267caaeb1d8daf890e273f2272e9ba00f52a065eef",
   "predictions": {
     "match": 37,
     "total": 38
@@ -102,15 +102,15 @@
     "operations_grid": 2040
   },
   "sha256": {
-    "PROTOCOL.md": "f21e4cad7a47cf7fe9b7dc4accc44ef19133217e2697dad24bec3b3c48719060",
+    "PROTOCOL.md": "aee1527341cf26bf6e9120a73005a13580b0cd15656d6fe6dca2e679caeb21b8",
     "arr/__init__.py": "59eb8195dc04299db1b6b77e924c19c31d35b3ce7da86e9058e61ca2b5d85728",
     "arr/client.py": "f0fe3e55510a5acd4499f75909b4959d1881da3ca76eae9f5467402f08b0ba15",
     "arr/constants.py": "17a5812ec94786684739ae0b53d850349cc5eea042e926fc0b156ae51a0fa2e0",
-    "arr/delta.py": "f3230b17696105db55a7c7cc937412daf00caa8d9dbf3f379f0c7cb8e646fa36",
+    "arr/delta.py": "7ef8e70683536072df3cc397c3449636c9d9a446672d2089417f641e88a0c3dd",
     "arr/ids.py": "694e72018b4e13d71b22de5c04729442236c4185397192a1b47426f269727e48",
     "arr/metrics.py": "b15dda3f735883e9af2237bbbb8e92df084f71fe502193d2a84a280bc8558a7f",
-    "arr/policies.py": "6a7d93d08d5be4947b5429e361d3d3e1f548b7cb37c62a0ecb2fa9379b5a3299",
-    "arr/predictions.py": "b8953e3fe8e6883cb5c01b8f4bcfdec53db2de8de689482c511fc9fe474855f6",
+    "arr/policies.py": "3bf283d70667d06b488c9b94922431ddd30297349ace19bf76f296838f95d9f4",
+    "arr/predictions.py": "860ec4a0e680f281327d3432ae2e52cc01f000d0340067ca3c2229ad5168843d",
     "arr/provider.py": "b229a9377957d6f1e71f103d6c93ed326871f05470e6231bf9d044dbc6364543",
     "arr/references.py": "80064586f3bee581bda5eab994948ea8bc9482c3b88f59c675ad9fc3a466befa",
     "arr/report.py": "e484292055a2d4a81407ac530f249a3219ae1f4d62656575a0630b528c2f0343",
@@ -123,7 +123,12 @@
     "baselines/v1.0/grid.csv": "5df1784205b2b27a0b9762182e012efc58084553f2fa45937ca8b5b62cb896cf",
     "baselines/v1.0/predictions_check.md": "32e93f5e765a2e985ae7024b3d7cfeda91a960985ff6a4942949606a1a2170a8",
     "baselines/v1.0/summary.csv": "970618fad41f069ebcfe8a3904cce0da7520a9a59853a7182086d961722b9a18",
-    "run_sim.py": "f8e7bcd8a526014ae29274e4d7da14796020329750a0b39337e491628ae506c6",
+    "baselines/v1.1/by_family.csv": "97cf2359067cc8012907647b9cfdff37218509a2a45f0ded2c00c935dd1b7597",
+    "baselines/v1.1/by_policy.csv": "9a2d4aa0ed065677836671b79c4a68156ce7b0ddd07a07acf9b7d352e543170c",
+    "baselines/v1.1/grid.csv": "299d9013c9567b41ae11edbfdab7570f7ef60becd66c690d4b8800f321f3c268",
+    "baselines/v1.1/predictions_check.md": "05f13ec41f24f9c518cfefe722873cf889dec9a4ae8f959fa23df764cabc1046",
+    "baselines/v1.1/summary.csv": "970618fad41f069ebcfe8a3904cce0da7520a9a59853a7182086d961722b9a18",
+    "run_sim.py": "ec597cc461374bfee942e87e7dd96e6a851f0ab475a1eab3b718220b0d2c5843",
     "scenarios/S00.json": "ae7f0b8a555058331195c41fa9518131a39e994b09afb2516465fb88d9f7a003",
     "scenarios/S01.json": "82d36fbe8264636cec223d625468bcc1819d3d2d210f67c09bf79bac17038b64",
     "scenarios/S02.json": "08383781b08b4a7044ef6b6448813a83501ebb9f2a4ffe351c4dfa719c28bd57",
@@ -145,7 +150,7 @@
     "scenarios/sanity_labels.json": "2569e907018306bc878ea82497c341b5d179a907e38657566efb3fa39f9509c4",
     "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "tests/test_mutations.py": "800f4b588bb5e27c05b4ae54179eded5570dda43db9f426dfe888204e203f09a",
-    "tests/test_revision_v1_1.py": "723519e003b0459f9b6fa095f41adf48e302cd64b89d0bb0c872577678cec225",
+    "tests/test_revision_v1_1.py": "6bcb9f03c5d53e5ce7514aadfd507b6290718560f4c9e70d39e9706587dc6326",
     "tests/test_rules.py": "9bfc5795f6e00c3da93a9d369fdefea5ae278910ac98ec931a67419f3d71d5dc"
   },
   "validation_all_ok": true
