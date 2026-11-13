@@ -1,0 +1,98 @@
+{
+  "id": "S02",
+  "family": "auth_negative",
+  "fixture_version": "1.0.0",
+  "protocol_script": "accepted at t = 1, aborted at t = 3; response lost; webhooks lost; L = 1 (status shows a1 terminal from t = 4)",
+  "true_history_no_retry": "0 effects",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "abort_after": 2,
+          "response": null,
+          "webhooks": {
+            "aborted": []
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "Until the t = 5 timeout the client sees nothing; status reads issued at t >= 4 list a1 in `terminal_attempts`, the only authoritative negative, and no response or webhook ever arrives.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [],
+        "contract2": []
+      }
+    },
+    {
+      "case": "retry_at_6",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 6
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            8
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            8
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_2_tie",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 2
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            4
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            4
+          ]
+        ]
+      }
+    }
+  ]
+}

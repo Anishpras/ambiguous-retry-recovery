@@ -1,0 +1,120 @@
+{
+  "id": "S05",
+  "family": "pending",
+  "fixture_version": "1.0.0",
+  "protocol_script": "commit at t = 15; late `ok` response at t = 16; webhook at t = 17; L = 1",
+  "true_history_no_retry": "1 effect at t = 15",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "commit_after": 14
+        }
+      }
+    }
+  ],
+  "evidence": "Between the t = 5 timeout and t = 16 the status replica shows a1 only as accepted (`not_found`, no terminal attempts); the late `ok` response at t = 16 and the webhook at t = 17 are the first positive evidence.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            15
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            7
+          ],
+          [
+            "op-1#a1",
+            15
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            15
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_5_7",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        },
+        {
+          "op": "op-1",
+          "t": 7
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            7
+          ],
+          [
+            "op-1#a3",
+            9
+          ],
+          [
+            "op-1#a1",
+            15
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            15
+          ]
+        ]
+      }
+    }
+  ]
+}

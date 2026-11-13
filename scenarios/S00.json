@@ -1,0 +1,77 @@
+{
+  "id": "S00",
+  "family": "control",
+  "fixture_version": "1.0.0",
+  "protocol_script": "nominal; L = 1",
+  "true_history_no_retry": "1 effect at t = 2",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {}
+    }
+  ],
+  "evidence": "The `ok` response at t = 3 and the `committed` webhook at t = 4 are correlated positives, so from t = 3 on every decision point has authoritative evidence of the single effect.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-1#a2",
+            7
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    }
+  ]
+}

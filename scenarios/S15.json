@@ -1,0 +1,95 @@
+{
+  "id": "S15",
+  "family": "webhook_harm",
+  "fixture_version": "1.0.0",
+  "protocol_script": "CONTRACT VIOLATION: a1 accepted at t = 1; abort recorded and `aborted` (seq 1) emitted at t = 3, delivered at t = 4; status lists a1 terminal from t = 4; the provider then commits a1 at t = 12 and emits `committed` (seq 2), delivered at t = 14; response lost; L = 1",
+  "true_history_no_retry": "1 effect at t = 12",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "abort_after": 2,
+          "violation_commit_after": 11,
+          "response": null,
+          "webhooks": {
+            "aborted": [
+              1
+            ],
+            "committed": [
+              2
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "At t = 4 the client receives an `aborted` webhook and, from reads issued at t >= 4, a status listing a1 as terminal, both authoritative; the provider nevertheless commits a1 at t = 12 and its `committed` webhook arrives at t = 14 (contract violation).",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            12
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            12
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_4",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 4
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            6
+          ],
+          [
+            "op-1#a1",
+            12
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            6
+          ],
+          [
+            "op-1#a1",
+            12
+          ]
+        ]
+      }
+    }
+  ]
+}

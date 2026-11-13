@@ -1,0 +1,89 @@
+{
+  "id": "S12",
+  "family": "lost_ack_error",
+  "fixture_version": "1.0.0",
+  "protocol_script": "commit at t = 2; `error` response at t = 3; `committed` webhook at t = 10; L = 1",
+  "true_history_no_retry": "1 effect",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "response": {
+            "kind": "error",
+            "after": 1
+          },
+          "webhooks": {
+            "committed": [
+              8
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "At t = 3 the client receives a non-authoritative `error` response; a status read issued then returns `found` at t = 4 (L = 1), and the `committed` webhook arrives at t = 10.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_3",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 3
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-1#a2",
+            5
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    }
+  ]
+}

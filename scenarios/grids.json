@@ -1,0 +1,69 @@
+{
+  "fixture_version": "1.0.0",
+  "note": "Secondary deterministic grid (PROTOCOL.md \u00a74.3). Explores timing boundaries; not a rate estimate. Later attempts follow the nominal rule.",
+  "payload": {
+    "contact_id": "ct-0001",
+    "template_id": "tpl-welcome-01",
+    "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+  },
+  "grids": {
+    "G1": {
+      "title": "lost ack",
+      "script": "a1 commits at t = 2, response lost; committed webhook delay W after emission (lost = never delivered); status lag L",
+      "L": [
+        0,
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        "never"
+      ],
+      "W": [
+        1,
+        2,
+        4,
+        8,
+        16,
+        32,
+        64,
+        "lost"
+      ]
+    },
+    "G2": {
+      "title": "pending",
+      "script": "a1 commits E ticks after arrival; response lost; webhook delay 2; status lag L",
+      "E": [
+        1,
+        3,
+        6,
+        12,
+        24,
+        48,
+        96
+      ],
+      "L": [
+        0,
+        1,
+        4,
+        16,
+        64,
+        "never"
+      ]
+    },
+    "G3": {
+      "title": "never arrived",
+      "script": "the request is lost before arrival; status lag L (irrelevant)",
+      "L": [
+        0,
+        1,
+        4,
+        16,
+        64,
+        "never"
+      ]
+    }
+  }
+}

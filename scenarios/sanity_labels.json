@@ -1,0 +1,25 @@
+{
+  "fixture_version": "1.0.0",
+  "V6": {
+    "control": {
+      "scenario": "S00",
+      "effects_F": 1,
+      "belief_H": "complete",
+      "policies": "all",
+      "contracts": "all"
+    },
+    "contract2_no_duplicates": {
+      "contract": 2,
+      "exclude_scenarios": [
+        "S15"
+      ],
+      "exclude_policies": [
+        "A-fk"
+      ],
+      "applies_to": [
+        "core matrix",
+        "grids"
+      ]
+    }
+  }
+}

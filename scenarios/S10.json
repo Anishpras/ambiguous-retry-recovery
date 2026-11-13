@@ -1,0 +1,82 @@
+{
+  "id": "S10",
+  "family": "pending",
+  "fixture_version": "1.0.0",
+  "protocol_script": "commit at t = 90 (after H, before F); response lost; webhook at t = 92; L = 1",
+  "true_history_no_retry": "0 effects at H, 1 at F",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "commit_after": 89,
+          "response": null
+        }
+      }
+    }
+  ],
+  "evidence": "Until H every status read shows a1 only as accepted (`not_found`, no terminal attempts) and no response or webhook arrives; the commit at t = 90 and its webhook at t = 92 fall after H.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            90
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            90
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            7
+          ],
+          [
+            "op-1#a1",
+            90
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            90
+          ]
+        ]
+      }
+    }
+  ]
+}

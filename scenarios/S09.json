@@ -1,0 +1,94 @@
+{
+  "id": "S09",
+  "family": "no_confirmation",
+  "fixture_version": "1.0.0",
+  "protocol_script": "request lost before arrival; L = never; nothing observable",
+  "true_history_no_retry": "0 effects",
+  "status_lag": "never",
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "arrive": null
+        }
+      }
+    }
+  ],
+  "evidence": "The request never reaches the provider, so the client observes exactly what it observes in S08: a timeout at t = 5 and `not_found` forever.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [],
+        "contract2": []
+      }
+    },
+    {
+      "case": "retry_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            7
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_6",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 6
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            8
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            8
+          ]
+        ]
+      }
+    }
+  ]
+}

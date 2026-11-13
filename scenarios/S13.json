@@ -1,0 +1,122 @@
+{
+  "id": "S13",
+  "family": "webhook_harm",
+  "fixture_version": "1.0.0",
+  "protocol_script": "a1 accepted at t = 1; `deferred` (seq 1) emitted at t = 2, delivered at t = 3; provider retries internally and commits at t = 8; `committed` (seq 2) delivered at t = 10; response lost; L = 1",
+  "true_history_no_retry": "1 effect at t = 8",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "commit_after": 7,
+          "deferred_after": 1,
+          "response": null,
+          "webhooks": {
+            "deferred": [
+              1
+            ],
+            "committed": [
+              2
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "At t = 3 the client receives a non-authoritative `deferred` webhook while a1 is still pending; status reads issued before t = 9 show a1 only as accepted, and the `committed` webhook at t = 10 is the first positive evidence.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            8
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            8
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_3",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 3
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            5
+          ],
+          [
+            "op-1#a1",
+            8
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            8
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_6",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 6
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            8
+          ],
+          [
+            "op-1#a2",
+            8
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            8
+          ]
+        ]
+      }
+    }
+  ]
+}

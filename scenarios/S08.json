@@ -1,0 +1,115 @@
+{
+  "id": "S08",
+  "family": "no_confirmation",
+  "fixture_version": "1.0.0",
+  "protocol_script": "commit at t = 2; response lost; all webhooks lost; L = never",
+  "true_history_no_retry": "1 effect",
+  "status_lag": "never",
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "response": null,
+          "webhooks": {
+            "committed": []
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "After the t = 5 timeout no response, webhook or status record about a1 is ever observable (L = never), so the client cannot distinguish this run from S09.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-1#a2",
+            7
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_6",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 6
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-1#a2",
+            8
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    }
+  ]
+}

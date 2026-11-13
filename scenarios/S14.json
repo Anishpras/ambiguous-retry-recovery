@@ -1,0 +1,90 @@
+{
+  "id": "S14",
+  "family": "webhook_harm",
+  "fixture_version": "1.0.0",
+  "protocol_script": "a1 accepted at t = 1; `deferred` (seq 1) emitted at t = 2 but delayed to t = 12; a1 commits at t = 3; `ok` response at t = 4; `committed` (seq 2) at t = 6; L = 1",
+  "true_history_no_retry": "1 effect at t = 3",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "commit_after": 2,
+          "deferred_after": 1,
+          "webhooks": {
+            "deferred": [
+              10
+            ],
+            "committed": [
+              3
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "The client holds the `ok` response from t = 4 and the `committed` webhook from t = 6 when the earlier-emitted `deferred` webhook for the same attempt arrives late at t = 12.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            3
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_12",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 12
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            3
+          ],
+          [
+            "op-1#a2",
+            14
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            3
+          ]
+        ]
+      }
+    }
+  ]
+}

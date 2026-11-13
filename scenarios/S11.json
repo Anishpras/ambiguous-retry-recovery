@@ -1,0 +1,118 @@
+{
+  "id": "S11",
+  "family": "distinct_ops",
+  "fixture_version": "1.0.0",
+  "protocol_script": "op-1: commit at t = 2, response lost, webhooks lost. op-2: starts at t = 1, nominal, identical payload but a different op_key. L = never.",
+  "true_history_no_retry": "op-1: 1, op-2: 1",
+  "status_lag": "never",
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "response": null,
+          "webhooks": {
+            "committed": []
+          }
+        }
+      }
+    },
+    {
+      "op_key": "op-2",
+      "start": 1,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {}
+    }
+  ],
+  "evidence": "op-1 is unobservable after its t = 5 timeout (L = never, response and webhooks lost) while op-2, with an identical payload but a different op_key, produces an `ok` response at t = 4 and a `committed` webhook at t = 5 that must not be credited to op-1.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-2",
+          "t": 1
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-2#a1",
+            3
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-2#a1",
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_op1_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        },
+        {
+          "op": "op-2",
+          "t": 1
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-2#a1",
+            3
+          ],
+          [
+            "op-1#a2",
+            7
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-2#a1",
+            3
+          ]
+        ]
+      }
+    }
+  ]
+}

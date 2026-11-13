@@ -1,0 +1,67 @@
+{
+  "id": "S01",
+  "family": "auth_negative",
+  "fixture_version": "1.0.0",
+  "protocol_script": "rejected at arrival; `rejected` response at t = 2; L = 1",
+  "true_history_no_retry": "0 effects (a retry at t = 2 -> commit at t = 4)",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "decision": "reject"
+        }
+      }
+    }
+  ],
+  "evidence": "At t = 2 the client holds a synchronous `rejected` response, an authoritative terminal negative for a1, so a retry is safe; nothing else is ever observable about a1.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [],
+        "contract2": []
+      }
+    },
+    {
+      "case": "retry_at_2",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 2
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            4
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            4
+          ]
+        ]
+      }
+    }
+  ]
+}

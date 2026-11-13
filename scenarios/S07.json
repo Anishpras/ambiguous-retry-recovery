@@ -1,0 +1,90 @@
+{
+  "id": "S07",
+  "family": "receipt_anomaly",
+  "fixture_version": "1.0.0",
+  "protocol_script": "commit at t = 2; response lost; `processing` (seq 1, emitted t = 1) delivered at t = 12; `committed` (seq 2) delivered at t = 8 and again at t = 9; L = 30",
+  "true_history_no_retry": "1 effect",
+  "status_lag": 30,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "response": null,
+          "webhooks": {
+            "processing": [
+              11
+            ],
+            "committed": [
+              6,
+              7
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "The `committed` webhook (positive) arrives at t = 8 and again at t = 9 with the same event_id, the earlier-emitted `processing` webhook arrives last at t = 12, and status reads issued before t = 32 return `not_found`.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a1",
+            2
+          ],
+          [
+            "op-1#a2",
+            7
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a1",
+            2
+          ]
+        ]
+      }
+    }
+  ]
+}

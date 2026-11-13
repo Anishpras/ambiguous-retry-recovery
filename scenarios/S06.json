@@ -1,0 +1,108 @@
+{
+  "id": "S06",
+  "family": "receipt_anomaly",
+  "fixture_version": "1.0.0",
+  "protocol_script": "aborted at t = 3; response lost; `aborted` webhook delayed to t = 30; L = 1. Later attempts nominal.",
+  "true_history_no_retry": "0 effects",
+  "status_lag": 1,
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "abort_after": 2,
+          "response": null,
+          "webhooks": {
+            "aborted": [
+              27
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evidence": "Status reads issued at t >= 4 list a1 in `terminal_attempts` (authoritative negative); the matching `aborted` webhook arrives only at t = 30, after any retry, as a stale receipt.",
+  "oracle": [
+    {
+      "case": "no_retry",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        }
+      ],
+      "expected_effects": {
+        "contract1": [],
+        "contract2": []
+      }
+    },
+    {
+      "case": "retry_at_5",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            7
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "case": "retry_at_5_30",
+      "dispatches": [
+        {
+          "op": "op-1",
+          "t": 0
+        },
+        {
+          "op": "op-1",
+          "t": 5
+        },
+        {
+          "op": "op-1",
+          "t": 30
+        }
+      ],
+      "expected_effects": {
+        "contract1": [
+          [
+            "op-1#a2",
+            7
+          ],
+          [
+            "op-1#a3",
+            32
+          ]
+        ],
+        "contract2": [
+          [
+            "op-1#a2",
+            7
+          ]
+        ]
+      }
+    }
+  ]
+}

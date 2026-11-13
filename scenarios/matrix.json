@@ -1,0 +1,122 @@
+{
+  "fixture_version": "1.0.0",
+  "scenarios": [
+    "S00",
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11",
+    "S12",
+    "S13",
+    "S14",
+    "S15"
+  ],
+  "contracts": [
+    1,
+    2
+  ],
+  "policies": [
+    {
+      "name": "A",
+      "role": "core",
+      "contracts": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "B",
+      "role": "core",
+      "contracts": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "Bw",
+      "role": "core",
+      "contracts": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "C",
+      "role": "core",
+      "contracts": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "D",
+      "role": "core",
+      "contracts": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "D+I",
+      "role": "optional",
+      "contracts": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "A-fk",
+      "role": "ablation",
+      "contracts": [
+        2
+      ]
+    },
+    {
+      "name": "ORACLE-S",
+      "role": "reference",
+      "contracts": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "ORACLE-O",
+      "role": "reference",
+      "contracts": [
+        1,
+        2
+      ]
+    }
+  ],
+  "original_prediction_scope": {
+    "scenarios": [
+      "S00",
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12"
+    ],
+    "policies": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "D+I"
+    ]
+  }
+}
