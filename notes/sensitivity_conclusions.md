@@ -24,7 +24,7 @@ Written by the implementer after the v1.2 run. This is interpretation, not code 
 - **Persistent faults change who fails.**
   - A and B gain false failures and triple effects. Under contract 1, A has 4 false failures in the core and 24 in the grid; B has 3 and 14.
   - Bw becomes `unresolved` in 6 core operations.
-  - D+I under contract 2 rises from 1 to 4 unresolved (core) and from 6 to 16 (grid): its deduplicated resends whose replies are lost can never be closed.
+  - D+I under contract 2 rises from 1 to 4 unresolved (core) and from 6 to 16 (grid). Where the replies to its deduplicated resends are lost (PF2, and PF4's `in_progress` reply), those resends leave no provider record and can never be closed; under a persistent lost request (PF3) the resends never arrive, so no evidence exists at all (`escalation.csv`).
   - D and C gain no duplicates.
 - **A longer horizon (H = 120)** resolves S10 for C, D and D+I, and cuts C's and D's grid unresolved from 16 to 7.
 
