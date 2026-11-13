@@ -317,26 +317,34 @@ def escalation(cells):
             ids_all = set(a["attempt_id"] for a in client.attempts)
             covered = metrics.authoritative_negatives(client.delivered, keys, ids_all)
             open_ = [a["attempt_id"] for a in client.attempts if a["attempt_id"] not in covered]
-            needs, truths = [], []
+            needs, truths = [], []   # needs: (category, text); v1.2.2: categories are structured, not parsed
             for aid in open_:
                 state, t = _attempt_truth(sim, aid, client.horizon_t)
                 short = aid.split("#")[-1]
                 truths.append("%s %s%s" % (short, state, "" if t is None else "@%d" % t))
                 if state == "committed":
-                    needs.append("correlated positive for %s" % short)
+                    needs.append(("correlated positive", "correlated positive for %s" % short))
                 elif state == "commits_after_H":
-                    needs.append("correlated positive for %s after t=%d (or a longer horizon)" % (short, t))
+                    needs.append(("correlated positive after H / longer horizon",
+                                  "correlated positive for %s after t=%d (or a longer horizon)" % (short, t)))
                 elif state == "never_arrived":
-                    needs.append("terminal negative or in-flight time bound for %s" % short)
+                    needs.append(("terminal negative or in-flight bound",
+                                  "terminal negative or in-flight time bound for %s" % short))
                 elif state == "aborted":
-                    needs.append("terminal negative for %s" % short)
+                    needs.append(("terminal negative", "terminal negative for %s" % short))
                 elif state == "replay_reply":
-                    # v1.2.1: a deduplicated attempt leaves no provider record; only its lost reply could close it
-                    needs.append("correlated positive for %s (its replayed ok was lost; no provider record)" % short)
+                    # a deduplicated attempt leaves no provider record: only its lost reply could close it
+                    needs.append(("lost reply of a deduplicated attempt",
+                                  "correlated positive for %s (its replayed ok was lost, no provider record)" % short))
                 elif state in ("in_progress_reply", "conflict_reply", "rejected"):
-                    needs.append("terminal negative for %s (its reply was lost; no provider record)" % short)
+                    needs.append(("lost reply of a deduplicated attempt",
+                                  "terminal negative for %s (its reply was lost, no provider record)" % short))
                 else:
-                    needs.append("in-flight time bound for %s" % short)
+                    needs.append(("in-flight time bound", "in-flight time bound for %s" % short))
+            if not open_:
+                needs.append(("none: every attempt already closed, policy did not conclude by H",
+                              "none: every dispatched attempt has an observed terminal negative, "
+                              "the policy had not concluded by H"))
             csv_rows.append({"source": cell.get("source", ""), "contract": cell["contract"], "policy": cell["policy"],
                              "scenario": cell["scenario"], "op": client.logical_op,
                              "open_attempts": " ".join(a.split("#")[-1] for a in open_),
@@ -344,15 +352,11 @@ def escalation(cells):
                                                   "[%s]" % ", ".join(a.split("#")[-1] for a in open_),
                              "would_retry_or_fail_on": "terminal negative for each of [%s]" % ", ".join(
                                  a.split("#")[-1] for a in open_),
-                             "evidence_that_resolves_it": "; ".join(needs), "hidden_truth": "; ".join(truths)})
+                             "evidence_that_resolves_it": "; ".join(text for _, text in needs),
+                             "categories": [cat for cat, _ in needs], "hidden_truth": "; ".join(truths)})
     cats = {}
     for r in csv_rows:
-        for part in r["evidence_that_resolves_it"].split("; "):
-            kind = ("lost reply of a deduplicated attempt" if "no provider record" in part else
-                    "correlated positive" if part.startswith("correlated positive") and "after" not in part else
-                    "correlated positive after H / longer horizon" if part.startswith("correlated positive") else
-                    "terminal negative or in-flight bound" if part.startswith("terminal negative or") else
-                    "terminal negative" if part.startswith("terminal negative") else "in-flight time bound")
+        for kind in r.pop("categories"):
             key = (r["source"], r["policy"], kind)
             cats[key] = cats.get(key, 0) + 1
     lines = ["# Escalation detail: what would resolve each unresolved operation", "", "_" + LABEL + "_", "",

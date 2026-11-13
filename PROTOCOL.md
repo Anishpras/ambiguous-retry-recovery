@@ -484,3 +484,13 @@ Applied on 2026-11-13, after the v1.2 run (commit `0b01478`).
   2. `run_sim.py --show` also accepts exploratory scenario IDs such as `PF2` (`arr/scenarios.py: load_scenario`).
 - **Why.** The v1.2 label was wrong. It affected 5 rows, all persistent-fault cells for Bw and D+I under contract 2.
 - **Results changed.** Only `results/exploratory/escalation.md` and `results/exploratory/escalation.csv`. No core, grid, sensitivity, ablation, persistent-fault or boundary number changes. Also updated in this commit, none of them frozen: the docs (`docs/contract-checklist.md`, `docs/decision-table.md`, `docs/trace-schema.md`, `docs/scenario-format.md`), `README.md`, and the hand-written `notes/sensitivity_conclusions.md`, which is rendered into `results/exploratory/sensitivity.md`.
+
+### Revision v1.2.2 (post-freeze, implementer; exploratory output only)
+
+Applied on 2026-11-13, after the v1.2.1 run.
+
+- **What and why: two more labelling bugs in `results/exploratory/escalation.*`.**
+  1. The v1.2.1 evidence text contained "; ", the same separator used to split it into categories. This double-counted the deduplicated attempts: one need produced a "correlated positive" fragment and a "lost reply" fragment.
+  2. An unresolved operation with *no* open attempt fell into "in-flight time bound". These are the two Bw cells in PF4: every attempt there has an observed terminal negative, but under fix L4 Bw's verify timer would fire after H.
+- **The fix.** Categories are now recorded as structured values, not parsed back from text. The no-open-attempt case has its own category: "none: every attempt already closed, policy did not conclude by H".
+- **Results changed.** Only `results/exploratory/escalation.md` and `results/exploratory/escalation.csv`.
