@@ -10,7 +10,8 @@ import os
 import re
 
 from . import constants as K
-from . import ids, policies, scenarios
+from . import ids, policies, registry, scenarios
+from . import options as O
 from .client import PolicyClient
 from .provider import Provider
 from .runner import effect_history, run_cell, run_scripted
@@ -192,6 +193,20 @@ def check_v2(provider_cls=Provider):
                         bad_ids.append(e["effect_id"])
     out.append(result("V2_effect_ids_are_opaque_hmacs", not bad_ids, "%d effects checked; bad=%s" % (n, bad_ids[:5])))
     out.append(result("V2_provider_seq_increases_in_emission_order", not seq_viol, str(seq_viol[:5])))
+
+    # v1.2 fix M4: monotone with a delayed arrival (the review's failing input), and a genuine repeat
+    # emission gets a new event_id while a duplicated delivery keeps its own.
+    scn = adhoc("v2m4", {"arrive": 10}, a2={"commit_after": 5})
+    sim = run_cell(scn, 1, "A", provider_cls=provider_cls)
+    seqs = [(e["t"], e["seq"]) for e in sim.provider.emissions]
+    ok = not sim.provider.seq_order_violations and all(b[1] > a[1] for a, b in zip(seqs, seqs[1:]))
+    out.append(result("V2_provider_seq_monotone_with_delayed_arrival", ok, str(seqs)))
+    scn = adhoc("v2ev", {"commit_after": 9, "deferred_after": [1, 3], "response": None,
+                         "webhooks": {"deferred": [1, 2]}})
+    sim, probe = run_probe(scn, 1)
+    dfr = [(o["t"], o["event_id"]) for o in probe.seen if o["type"] == "webhook" and o["event"] == "deferred"]
+    ok = (len(dfr) == 4 and dfr[0][1] == dfr[1][1] and dfr[2][1] == dfr[3][1] and dfr[0][1] != dfr[2][1])
+    out.append(result("V2_repeat_emission_distinct_event_id", ok, str(dfr)))
     return out
 
 
@@ -331,6 +346,16 @@ def check_v3(policy_classes=None):
     out.append(result("V3_all_terminal_retry_D_not_C", d.k == 2 and c.k == 1 and c.policy.belief() == "failed",
                       "D dispatches=%d C dispatches=%d C belief=%s" % (d.k, c.k, c.policy.belief())))
 
+    # (h0) D+I fix M1: an `error` response arms the resend; a new ambiguous attempt re-arms it
+    d = Driver(_new(policy_classes, "D+I"))
+    d.feed({"type": "response", "kind": "error", "op_key": "op-1", "attempt_id": d.aid(1), "t": 3})
+    d.feed(d.not_found(4))
+    after_error = d.k
+    d.feed(d.timeout(2, 10))
+    d.feed(d.not_found(11))
+    out.append(result("V3_DI_resend_after_error_and_rearmed_per_attempt", (after_error, d.k) == (2, 3),
+                      "dispatches after error+poll=%d, after a2 timeout+poll=%d" % (after_error, d.k)))
+
     # (h) D+I: in_progress is terminal for the resend only; keep waiting, then complete on a1's commit
     d = Driver(_new(policy_classes, "D+I"))
     d.feed(d.timeout(1, 5))
@@ -398,7 +423,7 @@ def io_bytes(sim):
     return "\n".join("\n".join(c.io_log) for c in sim.client_order).encode("utf-8")
 
 
-def check_twins(provider_cls=Provider, policy_classes=None, names=K.CLIENT_POLICIES):
+def check_twins(provider_cls=Provider, policy_classes=None, names=registry.CLIENT_POLICIES):
     """Under contract 1 every client policy's observation sequence and actions are byte-identical
     in S08 and S09 (the references are excluded)."""
     s08, s09 = scenarios.load_scenario("S08"), scenarios.load_scenario("S09")
@@ -431,6 +456,8 @@ def check_v4(provider_cls=Provider, policy_classes=None):
 # ---------------------------------------------------------------------------------------- V5
 def check_v5(sims, label):
     problems = []
+    if any(sim.options != O.DEFAULTS for sim in sims):
+        problems.append("a run used non-default options")
     if policies.POLL_INTERVAL != K.POLL_INTERVAL or policies.WAIT_TAU != K.WAIT_TAU:
         problems.append("policy constants differ from run constants")
     for sim in sims:

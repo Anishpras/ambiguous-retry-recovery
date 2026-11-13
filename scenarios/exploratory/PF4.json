@@ -1,0 +1,33 @@
+{
+  "_comment": "Exploratory, post-review (v1.2): persistent fault; every retry copies attempt 1's fault.",
+  "id": "PF4",
+  "family": "persistent_fault",
+  "title": "persistent abort",
+  "protocol_script": "Every attempt is accepted and aborts two ticks after arrival; response lost; the `aborted` webhook arrives two ticks after the abort. L = 1.",
+  "status_lag": 1,
+  "options": {
+    "retry_fault": "copy_first"
+  },
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "abort_after": 2,
+          "response": null,
+          "webhooks": {
+            "aborted": [
+              2
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

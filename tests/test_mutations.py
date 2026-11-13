@@ -20,18 +20,22 @@ class D_NotFoundAuthoritative(policies.PolicyD):
         return policies.PolicyD.on_status(self, obs)
 
 
-# ---- M2: D ignores provider_seq and attempt correlation: op-level "last webhook wins"
-class D_IgnoreSeqAndCorrelation(policies.PolicyD):
-    def on_webhook(self, obs):
-        if obs.get("op_key") != self.op_key:
-            return []
-        if obs.get("event") == "committed":
-            self.positive.setdefault(self.attempts[-1], []).append("MUTANT committed")
-        elif obs.get("event") == "aborted":
-            self.positive = {}
-            for a in self.attempts:
-                self.terminal.setdefault(a, []).append("MUTANT aborted")
-        return self._after(obs)
+# ---- M2 (split in v1.2 after the independent review)
+# M2a: provider_seq ignored. Not a mutant that should be caught: D's evidence store is monotone and
+#      attempt-keyed, so this must change NOTHING. Asserted as a property in tests/test_v1_2.py.
+# M2b: attempt correlation ignored: positives credited whatever the attempt; an `aborted` receipt for
+#      any attempt marks every dispatched attempt terminal. This must be caught.
+class D_IgnoreAttemptCorrelation(policies.PolicyD):
+    def _correlated(self, obs):
+        return obs.get("op_key") == self.op_key and obs.get("payload_hash") == self.payload_hash
+
+    def _positive(self, obs, label):
+        if self._correlated(obs):
+            self.positive.setdefault(obs.get("attempt_id"), []).append("MUTANT " + label)
+
+    def _terminal(self, attempt_id, obs, label):
+        for a in self.attempts:
+            self.terminal.setdefault(a, []).append("MUTANT " + label)
 
 
 # ---- M3: contract-2 dedup record created at commit instead of acceptance
@@ -74,10 +78,10 @@ class MutationTests(unittest.TestCase):
         self.assertFalse(failing(validate.check_v3()))
         self.assertTrue(failing(validate.check_v3({"D": D_NotFoundAuthoritative})))
 
-    def test_m2_ignore_seq_and_correlation(self):
-        self.assertEqual(effects("S06", 1, "D"), 1)
-        self.assertGreater(effects("S06", 1, "D", policy_classes={"D": D_IgnoreSeqAndCorrelation}), 1)
-        self.assertTrue(failing(validate.check_v3({"D": D_IgnoreSeqAndCorrelation})))
+    def test_m2b_ignore_attempt_correlation_is_caught(self):
+        self.assertFalse(failing(validate.check_v3()))
+        caught = failing(validate.check_v3({"D": D_IgnoreAttemptCorrelation}))
+        self.assertIn("V3_D_uncorrelated_positives_ignored", caught)
 
     def test_m3_dedup_record_at_commit(self):
         self.assertFalse(failing(validate.check_v1()))
@@ -86,6 +90,10 @@ class MutationTests(unittest.TestCase):
         sim = validate.run_scripted(scenarios.load_scenario("S05"), 2, [{"op": "op-1", "t": 0}, {"op": "op-1", "t": 5}],
                                     provider_cls=DedupAtCommit)
         self.assertEqual(len(sim.provider.ledger), 2)   # duplicates in S05
+        # v1.2: the same fault is also available as the named option dedup_record_at=commit
+        sim = validate.run_scripted(scenarios.load_scenario("S05"), 2, [{"op": "op-1", "t": 0}, {"op": "op-1", "t": 5}],
+                                    options={"dedup_record_at": "commit"})
+        self.assertEqual(len(sim.provider.ledger), 2)
 
     def test_m4_sequential_effect_ids(self):
         twins, _ = validate.check_twins()

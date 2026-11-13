@@ -14,6 +14,7 @@ Sim.ties so that every tie the counter resolved can be listed (results/ties.csv)
 import heapq
 
 from . import constants as K
+from . import options as O
 from .provider import Provider
 
 PROVIDER, DELIVERY, CLIENT, BOOKKEEPING = 1, 2, 3, 4
@@ -21,8 +22,10 @@ PROVIDER_EVENTS = ("arrival", "commit", "abort", "deferred", "violation_commit")
 
 
 class Sim(object):
-    def __init__(self, scenario, contract, provider_cls=Provider):
+    def __init__(self, scenario, contract, provider_cls=Provider, options=None):
         self.scenario = scenario
+        # Named options: defaults, then the scenario file's "options", then the run's (arr/options.py).
+        self.options = O.merge(scenario.get("options"), options)
         self.contract = contract
         self.now = 0
         self.phase = 0
@@ -35,6 +38,9 @@ class Sim(object):
         self._groups = {}
         self.provider = provider_cls(self, scenario, contract)
         self.config = dict(K.PARITY)
+        self.config["horizon"] = self.options["horizon"]
+        self.config["wait_tau"] = self.options["wait_tau"]
+        self.config["dedup_window"] = self.options["dedup_window"]
 
     # ------------------------------------------------------------------ scheduling and logging
     def schedule(self, t, phase, kind, data):
@@ -130,6 +136,7 @@ class FastForward(object):
     F, from the schedule". It sees only phase-1 events already scheduled; deliveries are dropped."""
 
     def __init__(self, sim):
+        self.options = sim.options
         self.now = sim.now
         self.phase = PROVIDER
         self.cur_n = sim.cur_n

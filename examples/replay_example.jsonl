@@ -1,0 +1,7 @@
+{"budget": 3, "op_key": "send-welcome-42", "payload": {"body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95", "contact_id": "ct-0042", "template_id": "tpl-welcome-01"}, "payload_hash": "3de5a41e075bd6a33a83ac14ff508434336f91118f740438e673133112fb6caf", "t": 0, "type": "start"}
+{"attempt_id": "send-welcome-42#a1", "op_key": "send-welcome-42", "t": 0, "type": "dispatched"}
+{"attempt_id": "send-welcome-42#a1", "op_key": "send-welcome-42", "t": 5, "type": "timeout"}
+{"op_key": "send-welcome-42", "result": "not_found", "t": 6, "terminal_attempts": [], "type": "status"}
+{"t": 10, "tag": "poll", "type": "timer"}
+{"op_key": "send-welcome-42", "result": "not_found", "t": 11, "terminal_attempts": [], "type": "status"}
+{"attempt_id": "send-welcome-42#a1", "effect_id": "9f8e7d6c5b4a", "event": "committed", "event_id": "ev-0a1b2c3d4e5f", "op_key": "send-welcome-42", "payload_hash": "3de5a41e075bd6a33a83ac14ff508434336f91118f740438e673133112fb6caf", "provider_seq": 4000, "t": 16, "type": "webhook"}

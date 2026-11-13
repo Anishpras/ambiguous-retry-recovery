@@ -32,9 +32,12 @@ class Checker(object):
         return set(op_label(r) for r in self.rows if r["contract"] == c and r["policy"] == p and r["unresolved"]
                    and (scope is None or r["scenario"] in scope))
 
-    def add(self, pid, source, statement, predicted, observed, ok):
+    def add(self, pid, source, statement, predicted, observed, ok, vacuous=None):
+        verdict = "MATCH" if ok else "MISMATCH"
+        if ok and vacuous:
+            verdict = "MATCH (vacuous)"
         self.out.append({"id": pid, "source": source, "statement": statement, "predicted": predicted,
-                         "observed": observed, "verdict": "MATCH" if ok else "MISMATCH"})
+                         "observed": observed, "verdict": verdict, "vacuous_reason": vacuous if ok else None})
 
     def set_eq(self, pid, source, statement, predicted, observed):
         predicted, observed = set(predicted), set(observed)
@@ -130,7 +133,13 @@ def check_all(rows, cell_index):
     first = bw15.clients["op-1"].first_complete_t
     k.add("U04b", du, "C1 Bw in S15 sees `committed` at t = 14 before its read", "complete at 14, read after 14",
           "complete at %s; status reads at %s" % (first, reads or "none (wait ended after completion)"),
-          first == 14 and all(t > 14 for t in reads))
+          first == 14 and all(t > 14 for t in reads),
+          vacuous=None if reads else (
+              "Fix L1 (v1.2): Bw issues no status read at all in S15. It becomes complete at t = 14 and its "
+              "wait (started at t = 4) ends at t = 19, so clarification C15 skips the read. The clause 'before "
+              "its read' holds only because there is no read (the check is an all() over an empty list). The "
+              "substantive part, exactly once and complete at t = 14, is checked by U04a and the 'complete at "
+              "14' half of this row."))
     k.set_eq("U05a", du, "C1 C duplicates in S13-S15: none", [], k.dups(1, "C", NEW))
     c15 = k.r(1, "C", "S15")
     res = [k.r(1, "C", s)["effects_F"] == 1 for s in NEW]
@@ -178,16 +187,24 @@ def check_all(rows, cell_index):
 
 
 def predictions_md(checks, notes_text, base_verdicts=()):
-    n_ok = sum(1 for c in checks if c["verdict"] == "MATCH")
+    n_ok = sum(1 for c in checks if c["verdict"].startswith("MATCH"))
+    n_vac = sum(1 for c in checks if c["verdict"] == "MATCH (vacuous)")
     lines = ["# Predictions check", "",
              "PROTOCOL.md §7 (original and design-update additions) and the §10 worked timeline, checked against "
              "the frozen run. Predictions were written by hand before any matrix run and are not adjusted. "
              "Original §7 predictions use their original scope (S00-S12; policies A, B, C, D, D+I).", "",
-             "**%d of %d predictions match.**" % (n_ok, len(checks)), "",
+             "**%d of %d predictions match%s.** The predictions are hand derivations from deterministic rules: a "
+             "match shows the implementation agrees with the author's reading of the rules. It is a consistency "
+             "check, not a confirmation rate, and the rows are not independent. The design-update predictions "
+             "(U, T rows) are self-attested: git cannot show they preceded the code." % (
+                 n_ok, len(checks), (" (%d vacuously)" % n_vac) if n_vac else ""), "",
              "| id | source | prediction | predicted | observed | verdict |", "|---|---|---|---|---|---|"]
     for c in checks:
         lines.append("| %s | %s | %s | %s | %s | **%s** |" % (c["id"], c["source"], c["statement"], c["predicted"],
                                                               c["observed"], c["verdict"]))
+    vac = [c for c in checks if c["verdict"] == "MATCH (vacuous)"]
+    if vac:
+        lines += ["", "## Vacuous matches", ""] + ["- **%s.** %s" % (c["id"], c["vacuous_reason"]) for c in vac]
     for base_label, verdicts in base_verdicts:
         if not verdicts:
             continue
@@ -197,8 +214,8 @@ def predictions_md(checks, notes_text, base_verdicts=()):
                   ("Changed: " + "; ".join(changed) + ".") if changed else
                   "None: every prediction has the same verdict as in the %s run (%d predictions compared)."
                   % (base_label, len(checks))]
-    lines += ["", "## Explanations of mismatches", ""]
-    mism = [c["id"] for c in checks if c["verdict"] != "MATCH"]
+    lines += ["", "## Explanations of mismatches (hand-written after the run; notes/prediction_explanations.md, not frozen)", ""]
+    mism = [c["id"] for c in checks if not c["verdict"].startswith("MATCH")]
     if not mism:
         lines.append("None.")
     elif notes_text:

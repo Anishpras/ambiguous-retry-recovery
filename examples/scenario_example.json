@@ -1,0 +1,44 @@
+{
+  "_comment": "Example scenario for `python3 run_sim.py explore`. Format: docs/scenario-format.md. Every key that starts with an underscore is a comment and is ignored.",
+  "id": "EX1",
+  "family": "example",
+  "title": "Lost acknowledgement; receipt delayed 12 ticks; status lags 8 ticks and lists pending work; a failed key is burned",
+  "_status_lag": "Status reads at tick t see provider records with record_time <= t - status_lag. Use \"never\" if status never shows anything before the final cutoff.",
+  "status_lag": 8,
+  "options": {
+    "_comment": "Named options (arr/options.py). Omitted options keep the frozen protocol defaults.",
+    "_status_lists_pending": "Does your status API list attempts it has accepted but not finished? true adds pending_attempts to not_found replies.",
+    "status_lists_pending": true,
+    "_abort_record": "Contract 2 only: after a failed (aborted) execution, is the idempotency key released (release) or does a later request with that key get the stored failure (replay_failure)?",
+    "abort_record": "replay_failure",
+    "_horizon": "How long (ticks after the operation starts) your agent waits before it must answer.",
+    "horizon": 60
+  },
+  "operations": [
+    {
+      "_comment": "One logical operation: a stable op_key and an immutable payload. start = tick of the first dispatch.",
+      "op_key": "send-welcome-42",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0042",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "_comment": "Attempt 1 overrides the nominal rule (arrive +1, commit 1 tick after arrival, ok 1 tick after commit, committed receipt 2 ticks after emission). Attempts not listed are nominal unless options.retry_fault is copy_first.",
+          "arrive": 1,
+          "commit_after": 3,
+          "_response": "null = the response is lost; {\"kind\": \"error\", \"after\": 1} would send a 5xx-style error instead of ok.",
+          "response": null,
+          "_webhooks": "Delivery offsets after each emission: [] = lost, [12, 13] = delivered twice. Add \"processing\" or \"deferred\" (with deferred_after) to emit progress events.",
+          "webhooks": {
+            "committed": [
+              12
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

@@ -24,6 +24,8 @@ def effect_id(op_key, attempt_id):
     return _mac([op_key, attempt_id])[:12]
 
 
-def event_id(op_key, attempt_id, event):
-    """Opaque webhook emission ID; a duplicated delivery repeats it."""
-    return "ev-" + _mac(["event", op_key, attempt_id, event])[:12]
+def event_id(op_key, attempt_id, event, n=0):
+    """Opaque webhook emission ID; a duplicated delivery repeats it. `n` counts earlier emissions of
+    the same event type for the same attempt, so genuine repeat emissions get distinct IDs (v1.2)."""
+    parts = ["event", op_key, attempt_id, event] + ([str(n)] if n else [])
+    return "ev-" + _mac(parts)[:12]

@@ -54,6 +54,10 @@ def delta_section(old_dir, new_dir, old_label, new_label, old_source, new_source
             new = _read(fh.read())
         tables[name] = (old, new)
         oi, ni = _index(old, key), _index(new, key)
+        ocols = list(old[0].keys()) if old else []
+        ncols = list(new[0].keys()) if new else []
+        added = [c for c in ncols if c not in ocols]
+        removed = [c for c in ocols if c not in ncols]
         changed = []
         for k in sorted(set(oi) | set(ni), key=lambda x: [(0, int(v)) if v.isdigit() else (1, v) for v in x]):
             if k not in oi or k not in ni:
@@ -64,6 +68,8 @@ def delta_section(old_dir, new_dir, old_label, new_label, old_source, new_source
             if diffs:
                 changed.append((k, "; ".join(diffs)))
         lines += ["### %s (`%s`): %d of %d rows changed" % (title, name, len(changed), len(old)), ""]
+        if added or removed:
+            lines += ["Columns added: %s. Columns removed: %s." % (", ".join(added) or "none", ", ".join(removed) or "none"), ""]
         if changed:
             lines += ["| %s | changes |" % " | ".join(key), "|" + "---|" * (len(key) + 1)]
             lines += ["| %s | %s |" % (" | ".join(k), d) for k, d in changed]
@@ -106,6 +112,6 @@ def baseline_verdicts(baseline_dir):
     with open(path, encoding="utf-8") as fh:
         for line in fh:
             cells = [c.strip() for c in line.strip().strip("|").split("|")]
-            if len(cells) == 6 and cells[5].strip("*") in ("MATCH", "MISMATCH"):
+            if len(cells) == 6 and cells[5].strip("*") in ("MATCH", "MISMATCH", "MATCH (vacuous)"):
                 out[cells[0]] = cells[5].strip("*")
     return out

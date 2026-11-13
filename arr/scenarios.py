@@ -10,10 +10,14 @@ Attempt script fields (times in ticks):
   commit_after            ticks from arrival to commit                     } exactly one of
   abort_after             ticks from arrival to abort                      } these two
   violation_commit_after  ticks from arrival to a commit *after* the abort (S15 contract violation)
-  deferred_after          ticks from arrival to a `deferred` webhook emission (temporary failure)
+  deferred_after          ticks from arrival to a `deferred` webhook emission (temporary failure);
+                          an integer or a list (one emission per entry)
   response                null (lost) or {"kind": override, "after": ticks after the provider decision}
   webhooks                {event: [delivery offsets from emission]}; [] = emitted but lost;
                           absent `processing`/`deferred` = not emitted
+Keys starting with "_" are comments and are ignored everywhere. A scenario may carry "options"
+(arr/options.py); the option "retry_fault": "copy_first" makes every attempt copy attempt 1's script.
+Full format: docs/scenario-format.md.
 """
 import copy
 import json
@@ -23,6 +27,7 @@ from . import ids
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCENARIO_DIR = os.path.join(ROOT, "scenarios")
+EXPLORATORY_DIR = os.path.join(SCENARIO_DIR, "exploratory")
 CORE_IDS = tuple("S%02d" % i for i in range(16))
 ORIGINAL_CORE_IDS = tuple("S%02d" % i for i in range(13))   # scope of the original §7 predictions
 
@@ -42,11 +47,17 @@ ALLOWED_FIELDS = set(NOMINAL)
 WEBHOOK_EVENTS = ("processing", "deferred", "committed", "aborted")
 
 
-def resolve_attempt(op, k):
-    """Script for attempt k of operation `op`: the nominal rule plus the fixture's overrides."""
+def resolve_attempt(op, k, retry_fault="nominal"):
+    """Script for attempt k of operation `op`: the nominal rule plus the fixture's overrides. With
+    retry_fault == "copy_first", an attempt without its own override copies attempt 1's."""
     script = copy.deepcopy(NOMINAL)
-    override = op.get("attempts", {}).get(str(k), {})
+    attempts = op.get("attempts", {})
+    override = attempts.get(str(k))
+    if override is None:
+        override = attempts.get("1", {}) if retry_fault == "copy_first" else {}
     for key, val in override.items():
+        if key.startswith("_"):
+            continue
         if key not in ALLOWED_FIELDS:
             raise ValueError("unknown attempt field %r in %s" % (key, op["op_key"]))
         if key == "webhooks":
@@ -59,6 +70,8 @@ def resolve_attempt(op, k):
             script["commit_after"] = None
         else:
             script[key] = copy.deepcopy(val)
+    d = script["deferred_after"]
+    script["deferred_after"] = [] if d is None else ([d] if isinstance(d, int) else list(d))
     _check_script(script, op["op_key"], k)
     return script
 
@@ -82,14 +95,18 @@ def _finish(scn):
     scn["lag"] = None if lag == "never" else int(lag)   # None: never visible before F
     for op in scn["operations"]:
         op["payload_hash"] = ids.payload_hash(op["payload"])
+        op.setdefault("start", 0)
         for k in (1, 2, 3):
             resolve_attempt(op, k)   # validate eagerly
+            resolve_attempt(op, k, "copy_first")
+    scn.setdefault("family", "custom")
+    scn.setdefault("options", {})
     scn["op_index"] = {op["op_key"]: op for op in scn["operations"]}
     return scn
 
 
-def attempt_script(scn, logical_op, k):
-    return resolve_attempt(scn["op_index"][logical_op], k)
+def attempt_script(scn, logical_op, k, retry_fault="nominal"):
+    return resolve_attempt(scn["op_index"][logical_op], k, retry_fault)
 
 
 def load_json(name):
@@ -100,6 +117,17 @@ def load_json(name):
 def load_core():
     """The frozen core matrix, in ID order."""
     return [_finish(load_json("%s.json" % sid)) for sid in CORE_IDS]
+
+
+def load_file(path):
+    """Any scenario file (e.g. a practitioner's own), validated with the same rules as the fixtures."""
+    with open(path, encoding="utf-8") as fh:
+        return _finish(json.load(fh))
+
+
+def load_exploratory():
+    return [load_file(os.path.join(EXPLORATORY_DIR, f)) for f in sorted(os.listdir(EXPLORATORY_DIR))
+            if f.endswith(".json")]
 
 
 def load_scenario(sid):

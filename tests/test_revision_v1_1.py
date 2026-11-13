@@ -34,7 +34,9 @@ class RequestPathIgnoredAfterComplete(unittest.TestCase):
                 d.feed(committed(d, 3))
                 acts = d.feed({"type": "webhook", "event": event, "provider_seq": 400, "event_id": "ev-x",
                                "op_key": "op-1", "attempt_id": d.aid(1), "t": 4})
-                self.assertEqual(d.policy.belief(), "failed", (cls.name, event))
+                # v1.2 fix L4: Bw stays `unresolved` while its verify timer is pending; A and B turn `failed`.
+                expect_belief = "unresolved" if cls is policies.PolicyBw else "failed"
+                self.assertEqual(d.policy.belief(), expect_belief, (cls.name, event))
                 self.assertEqual([a["type"] for a in acts], [expect], (cls.name, event))
 
     def test_v1_1_1_status_replies_ignored_once_complete(self):

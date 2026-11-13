@@ -106,7 +106,8 @@ class _Reference(object):
 
 
 class OracleS(_Reference):
-    """State oracle: knows whether an effect exists now; does not know about in-flight attempts."""
+    """State probe (not a ceiling, v1.2 label): knows whether an effect exists now; does not know
+    about in-flight attempts."""
     name = "ORACLE-S"
 
 
@@ -116,10 +117,12 @@ class OracleO(_Reference):
     outcome_oracle = True
 
 
+CLASSES = {"ORACLE-S": OracleS, "ORACLE-O": OracleO}
+
+
 class ReferenceClient(PolicyClient):
     is_reference = True
 
     def __init__(self, sim, op, name):
-        cls = {"ORACLE-S": OracleS, "ORACLE-O": OracleO}[name]
         PolicyClient.__init__(self, sim, op, None, name)
-        self.policy = cls(OracleView(sim, self))
+        self.policy = CLASSES[name](OracleView(sim, self))

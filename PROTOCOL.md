@@ -111,7 +111,7 @@ The policy sees only the following. It never sees the ledger, the scenario scrip
 
 ## 3. Policies
 
-All four policies share the following:
+All client policies share the following *(v1.2 wording; originally "all four policies")*:
 
 - the same op_key and payload for every dispatch of one operation;
 - a budget of 3 dispatches;
@@ -129,7 +129,7 @@ All four policies share the following:
 
 **References, not client policies** *(pre-freeze design update)*. These are implemented on the simulator side, are allowed to read hidden state, are excluded from V4 and are labelled as references everywhere:
 
-- **ORACLE-S (state oracle).** Acts at the same decision points as A, plus every 5 ticks. If an effect exists in the ledger → complete. Otherwise retry if budget remains. It does not know about in-flight attempts.
+- **ORACLE-S (state oracle; relabelled in v1.2 as a "state-probe reference, not a ceiling").** Acts at the same decision points as A, plus every 5 ticks. If an effect exists in the ledger → complete. Otherwise retry if budget remains. It does not know about in-flight attempts.
 - **ORACLE-O (outcome oracle).** Knows whether any dispatched attempt will ever commit before F, from the schedule. If an effect exists → complete. If some dispatched attempt will commit → wait. Otherwise retry if budget remains.
 
 **Ablation A-fk** *(pre-freeze design update)*. A with a fresh op_key on every attempt, reported under contract 2 only. It shows that deduplication needs stable keys.
@@ -305,7 +305,7 @@ These are the study lead's hand derivations, added by the pre-freeze design upda
 - the scenario fixtures (the matrix and the sanity labels);
 - every source file.
 
-The collecting run refuses to start unless the hashes match. Post-freeze changes are logged under "Revisions" with their reasons and re-frozen under a new label. The freeze is self-attested.
+The collecting run refuses to start unless the hashes match. Post-freeze changes are logged under "Revisions" with their reasons and re-frozen under a new label. The freeze is self-attested: the repository has no remote and no signed tag, and FREEZE.json can be regenerated. Git cannot show that the design-update predictions (U, T rows) preceded the code that satisfies them; they first appear in the same commit as the implementation.
 
 ## 9. Outputs
 
@@ -424,3 +424,53 @@ Applied on 2026-11-13, after the v1.1 run (commit `622e1f1`), and re-frozen as v
   - **B: 10 grid cells change in each contract**, namely G1 with W = 4 and G2 with E = 3, both at L ≥ 4. Under contract 1 they lose their duplicate; under contract 2 they lose a replayed retry.
   - **A and Bw: no change expected.**
   - **Predictions: no verdict expected to change.**
+
+### Revision v1.2 (post-freeze, study lead; reason: independent review)
+
+Applied on 2026-11-13, after the v1.1.1 run (commit `b95a667`), following an independent senior review of that commit. The study lead accepts the review's verdict: this is a small, hand-checkable conformance suite with a sensitivity analysis. It is **not** evidence that D beats the baselines.
+
+- **What stays frozen.** The v1.1.1 core results remain the pre-specified record. They are kept byte-for-byte in `baselines/v1.1.1/` (from `b95a667`).
+- **What is new.** Everything below is labelled "exploratory, post-review (v1.2)". `results/revision_v1.2_delta.md` lists every core number that changes against v1.1.1.
+
+**A. Fixes to the frozen pipeline**, each with its expected effect on core numbers, stated before the v1.2 run:
+
+1. **H2: time to confirmed completion** is computed only over operations that are certified `complete` at H *and* exactly-once; that count is the coverage. The old measure is kept per operation as `ttc_any_complete`. *Expected: every TTC median, max and coverage changes where duplicates or uncertified completions existed. No outcome changes.*
+2. **M1: D+I.** The idempotent resend is armed by any ambiguous signal (a timeout *or* an `error` response) and fires after one unresolving status poll. Each attempt that becomes ambiguous can arm it again, up to the budget. This supersedes clarification C11. *Expected core change: none.* In S12 the poll after the `error` already finds the commit, and no resend in the core matrix becomes ambiguous.
+3. **M4: provider_seq and event_id.**
+   - `provider_seq` = 1000·t_emit + j, where j is the operation's emission index within that tick. It is strictly monotone in emission order and leaks no counts across ticks. This supersedes the v1.0 form of C1.
+   - `event_id` includes the emission index for repeat emissions of the same event type by the same attempt. The first emission keeps its v1.0 ID.
+   - *Expected: sequence values in traces and worked traces change; no metric changes.* V2 gains checks for a delayed arrival and for a repeated emission.
+4. **L1.** U04b is reported as "MATCH (vacuous)", with the reason given.
+5. **L3.**
+   - ORACLE-S is labelled "state-probe reference (not a ceiling)" everywhere; its role column reads `state-probe reference`.
+   - The references' retry justification is shown as n/a in the headline tables.
+   - *Expected: role labels change; no number changes.*
+6. **L4.** Bw's belief stays `unresolved`, not `failed`, while its verify timer is pending. *Expected core change: none at H, because every Bw wait in the core matrix resolves before H.*
+
+**B. Exploratory analyses** (`results/exploratory/`):
+
+1. **Ablations of C and D:** no provider_seq, no event_id dedupe, no payload correlation, ignore webhooks, ignore status. The written argument is in `docs/monotone-evidence.md`.
+2. **Mutation test M2 is split.** M2a (seq only) is now a property test that must change nothing (`tests/test_v1_2.py`). M2b (attempt correlation only) is a mutant that must be caught.
+3. **The sensitivity table:** one row per alternative rule from review §3.
+4. **The persistent-fault family:** `scenarios/exploratory/PF1–PF4`.
+5. **Unit-step boundaries for Bw.**
+6. **Escalation detail** for every unresolved operation.
+
+**How variants are expressed.** Every alternative rule is a named option (`arr/options.py`), settable in a scenario file, on the command line or by the exploratory runner. Defaults reproduce the frozen rules, and V5 checks that every frozen run uses them. One option, `abort_record: replay_failure`, answers later attempts with `rejected` (refused, never executes): a burned key is a terminal negative for the new attempt.
+
+**C. Reusability.**
+
+- **Policy registry.** Policies are registered in one place, `arr/registry.py`.
+- **New commands.** `run_sim.py explore` and `run_sim.py replay` skip the freeze gate and the predictions.
+- **Docs.** `docs/contract-checklist.md`, `docs/decision-table.md`, `docs/trace-schema.md` and `docs/scenario-format.md`.
+- **Examples.** `examples/` holds a custom policy, a commented scenario and a replay file.
+- **Freeze groups.** FREEZE.json entries now list model and fixture files separately from reporting, validation and analysis files (review §7).
+
+**What ran before this freeze.**
+
+- **Validation and unit tests.** These include the M2a property test and the M1 and L4 tests, which run C and D over every core and grid cell under v1.2 code; C and D are unaffected by the v1.2 fixes.
+- **Smoke runs:** `explore` and `replay` on the examples.
+- **Crash tests of the exploratory functions** on a two-scenario subset, and one full pass of the Bw boundary grid (timing only, outputs not inspected).
+- **Not run:** the v1.2 core matrix and grid collection.
+
+Because the exploratory analyses are post hoc by definition, none of their outputs counts as a test of a pre-specified prediction.

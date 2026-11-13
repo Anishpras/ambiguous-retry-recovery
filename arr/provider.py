@@ -12,8 +12,7 @@ from . import scenarios
 # Phase constants duplicated here to avoid a circular import with sim.py.
 PROVIDER, DELIVERY = 1, 2
 
-# Rank used to order emissions of one operation that fall in the same tick (see provider_seq).
-EVENT_RANK = {"processing": 0, "deferred": 1, "committed": 2, "aborted": 3}
+SEQ_TICK = 1000   # provider_seq = SEQ_TICK * t_emit + index of the op's emission within that tick
 
 
 class Attempt(object):
@@ -44,6 +43,7 @@ class Provider(object):
         self.scenario = scenario
         self.contract = contract
         self.lag = scenario["lag"]          # int, or None for "never"
+        self.options = sim.options          # named options (arr/options.py); defaults = frozen protocol
         self.attempts = {}                  # attempt_id -> Attempt, in dispatch order
         self.records = []                   # status replica source, append-only, time-ordered
         self.dedup = {}                     # contract 2: op_key -> active/released record
@@ -51,25 +51,39 @@ class Provider(object):
         self.last_seq = {}
         self.seq_order_violations = []
         self.emissions = []
+        self._tick_emits = {}               # (op_key, t) -> emissions so far in that tick
+        self._emit_count = {}               # (attempt_id, event) -> emissions so far
 
     # ------------------------------------------------------------------ overridable identities
     def effect_id(self, op_key, attempt_id):
         return ids.effect_id(op_key, attempt_id)
 
     def provider_seq(self, att, event):
-        """Per-op_key sequence, increasing in emission order (§2.4).
+        """Per-op_key sequence, strictly increasing in emission order (§2.4).
 
-        Pre-freeze clarification C1: the value is derived from the provider's emission clock,
-        100*t_emit + 10*k + rank(event), not from a running count. A running count leaks hidden
-        state: in S08 a retry's `committed` webhook would carry seq 2 (a1's lost emission was seq 1)
-        but seq 1 in S09, breaking the S08/S09 indistinguishability that V4 checks. Same-tick
-        emissions of one op are ordered by attempt index then event rank; any emission whose value
-        does not exceed the op's previous one is recorded in seq_order_violations (checked by V2)."""
-        return self.sim.now * 100 + att.k * 10 + EVENT_RANK[event]
+        Clarification C1 (v1.0): derived from the emission clock, not a running count, because a
+        count leaks hidden emissions (S08 vs S09 under V4). Fix M4 (v1.2): the v1.0 form
+        100*t + 10*k + rank was not monotone when a later attempt emitted before an earlier one in
+        the same tick (e.g. a delayed arrival); the value is now 1000*t_emit + j, where j is the
+        index of this op's emission within that tick. Strictly monotone by construction; it leaks
+        only same-tick emissions, never counts across ticks."""
+        key = (att.op_key, self.sim.now)
+        j = self._tick_emits.get(key, 0)
+        self._tick_emits[key] = j + 1
+        return self.sim.now * SEQ_TICK + j
+
+    def event_id(self, att, event):
+        """Opaque emission ID. Fix M4 (v1.2): a genuine repeat emission of the same event type for the
+        same attempt (e.g. a provider that defers twice) gets a new ID; duplicated deliveries of one
+        emission share it. The first emission keeps the v1.0 form."""
+        key = (att.attempt_id, event)
+        n = self._emit_count.get(key, 0)
+        self._emit_count[key] = n + 1
+        return ids.event_id(att.op_key, att.attempt_id, event, n)
 
     # ------------------------------------------------------------------ client-facing entry points
     def dispatch(self, logical_op, op_key, k, attempt_id, payload):
-        script = scenarios.attempt_script(self.scenario, logical_op, k)
+        script = scenarios.attempt_script(self.scenario, logical_op, k, self.options["retry_fault"])
         att = Attempt(logical_op, op_key, k, attempt_id, payload, script, self.sim.now)
         if attempt_id in self.attempts:
             raise ValueError("duplicate attempt id " + attempt_id)
@@ -97,6 +111,11 @@ class Provider(object):
         else:
             terminal = sorted(set(r["attempt_id"] for r in visible if r["state"] == "aborted"))
             obs = {"type": "status", "result": "not_found", "op_key": op_key, "terminal_attempts": terminal}
+            if self.options["status_lists_pending"]:
+                # Option: the reply also lists attempts the replica shows as accepted and not finished.
+                ended = set(r["attempt_id"] for r in visible if r["state"] in ("committed", "aborted"))
+                obs["pending_attempts"] = sorted(set(r["attempt_id"] for r in visible
+                                                     if r["state"] == "accepted") - ended)
         truth = self._truth(logical_op, t)
         hidden = {"cutoff": cutoff, "visible_records": len(visible),
                   "true_effects_now": truth["effects"], "true_pending_now": truth["pending"]}
@@ -124,6 +143,17 @@ class Provider(object):
             return
         if self.contract == 2:
             rec = self.dedup.get(att.op_key)
+            if rec is not None and t - rec["created"] > self.options["dedup_window"]:
+                rec = None   # window expired (option; the default window covers the whole experiment)
+            if rec is not None and rec["state"] == "aborted" and self.options["abort_record"] == "replay_failure":
+                # Option: the stored failure is replayed; the key is burned and this attempt is
+                # refused before execution (a terminal negative for it).
+                att.state = "rejected"
+                att.end_t = t
+                self.sim.log("dedup_replay_failure", "provider", False, att.logical_op, attempt_id=attempt_id,
+                             record_attempt=rec["attempt_id"])
+                self._respond(att, "rejected", {})
+                return
             if rec is not None and rec["state"] in ("pending", "committed"):
                 # Contract 2 (§2.3): an active record for this key answers the attempt; no new effect.
                 att.end_t = t
@@ -153,8 +183,8 @@ class Provider(object):
         self.sim.log("arrival_accepted", "provider", False, att.logical_op, attempt_id=attempt_id,
                      dedup_record=(self.contract == 2))
         self._emit(att, "processing", {})
-        if s["deferred_after"] is not None:
-            self.sim.schedule(t + s["deferred_after"], PROVIDER, "deferred", attempt_id)
+        for d in s["deferred_after"]:
+            self.sim.schedule(t + d, PROVIDER, "deferred", attempt_id)
         if s["commit_after"] is not None:
             self.sim.schedule(t + s["commit_after"], PROVIDER, "commit", attempt_id)
         else:
@@ -220,11 +250,17 @@ class Provider(object):
 
     def _dedup_on_accept(self, att):
         # Contract 2: the record exists from acceptance (arrival), not from commit.
-        self.dedup[att.op_key] = {"attempt_id": att.attempt_id, "payload_hash": att.payload_hash,
-                                  "state": "pending", "effect_id": None, "created": self.sim.now}
+        if self.options["dedup_record_at"] == "acceptance":
+            self.dedup[att.op_key] = {"attempt_id": att.attempt_id, "payload_hash": att.payload_hash,
+                                      "state": "pending", "effect_id": None, "created": self.sim.now}
 
     def _dedup_on_commit(self, att, eid):
         rec = self.dedup.get(att.op_key)
+        if self.options["dedup_record_at"] == "commit":
+            # Option (mutant M3 as configuration): the record only appears when an attempt commits.
+            self.dedup[att.op_key] = {"attempt_id": att.attempt_id, "payload_hash": att.payload_hash,
+                                      "state": "committed", "effect_id": eid, "created": self.sim.now}
+            return
         if rec is not None and rec["attempt_id"] == att.attempt_id:
             rec["state"] = "committed"
             rec["effect_id"] = eid
@@ -247,7 +283,7 @@ class Provider(object):
         if last is not None and seq <= last:
             self.seq_order_violations.append({"op_key": att.op_key, "t": self.sim.now, "seq": seq, "last": last})
         self.last_seq[att.op_key] = seq
-        obs = {"type": "webhook", "event": event, "event_id": ids.event_id(att.op_key, att.attempt_id, event),
+        obs = {"type": "webhook", "event": event, "event_id": self.event_id(att, event),
                "provider_seq": seq, "op_key": att.op_key, "attempt_id": att.attempt_id}
         obs.update(extra)
         times = [self.sim.now + o for o in offsets]

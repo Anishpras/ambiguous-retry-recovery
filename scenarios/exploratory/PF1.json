@@ -1,0 +1,30 @@
+{
+  "_comment": "Exploratory, post-review (v1.2): persistent fault; every retry copies attempt 1's fault.",
+  "id": "PF1",
+  "family": "persistent_fault",
+  "title": "persistent lost ack, L = 1",
+  "protocol_script": "Every attempt commits one tick after arrival; its response and webhooks are lost. L = 1.",
+  "status_lag": 1,
+  "options": {
+    "retry_fault": "copy_first"
+  },
+  "operations": [
+    {
+      "op_key": "op-1",
+      "start": 0,
+      "payload": {
+        "contact_id": "ct-0001",
+        "template_id": "tpl-welcome-01",
+        "body_hash": "cc8ce02372a87ccf18abcb7a6118a132616c906d4385680453885313580f9d95"
+      },
+      "attempts": {
+        "1": {
+          "response": null,
+          "webhooks": {
+            "committed": []
+          }
+        }
+      }
+    }
+  ]
+}

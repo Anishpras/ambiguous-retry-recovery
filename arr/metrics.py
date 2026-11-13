@@ -3,6 +3,7 @@ the provider's attempt records and the runtime's record of what the client obser
 measure trusts a policy's self-report except the conflict list (§2.5 asks the policy to count them).
 """
 from . import constants as K
+from . import registry
 
 
 def _attempt_label(attempt_id):
@@ -74,14 +75,17 @@ def op_result(sim, client, scenario, contract, policy_name):
         dup_cause = ("contract" if committed_retries and all(retry_class[a] == "justified" for a in committed_retries)
                      else "policy")
 
-    ttc = None
+    ttc_any = None
     if client.first_complete_t is not None and client.first_complete_t <= H:
-        ttc = client.first_complete_t - client.start_t
+        ttc_any = client.first_complete_t - client.start_t
     report = client.report_at_H or {}
     certified = belief == "complete"
     exactly_once = effects_F == 1
+    # Fix H2 (v1.2): time to confirmed completion counts only operations that are certified at H AND
+    # exactly-once; the v1.0-v1.1.1 measure (first `complete` of any operation) is kept as ttc_any_complete.
+    ttc = ttc_any if (certified and exactly_once) else None
     row = {
-        "contract": contract, "policy": policy_name, "role": K.ROLE[policy_name],
+        "contract": contract, "policy": policy_name, "role": registry.ROLE.get(policy_name, "custom"),
         "scenario": scenario["id"], "family": scenario["family"], "op": op,
         "effects_H": effects_H, "effects_F": effects_F, "extra_effects": max(0, effects_F - 1),
         "duplicate": effects_F > 1, "dup_cause": dup_cause,
@@ -104,6 +108,7 @@ def op_result(sim, client, scenario, contract, policy_name):
         "status_reads": client.status_reads,
         "conflicts": len(report.get("conflicts", [])),
         "ttc": ttc,
+        "ttc_any_complete": ttc_any,
         "dispatch_times": " ".join("%s@%d" % (_attempt_label(a["attempt_id"]), a["t"]) for a in client.attempts),
         "commits": " ".join("%s@%d%s" % (_attempt_label(e["attempt_id"]), e["commit_time"],
                                          "!" if e["violation"] else "") for e in
@@ -175,7 +180,7 @@ def aggregate(rows):
         "conflicts": sum(r["conflicts"] for r in rows),
         "ttc_median": median_str(ttcs),
         "ttc_max": str(max(ttcs)) if ttcs else "",
-        "ttc_coverage": frac(len(ttcs), N),
+        "ttc_coverage": frac(len(ttcs), N),   # n = certified and exactly-once operations (H2)
         "duplicate_ops": " ".join(op_label(r) for r in rows if r["duplicate"]),
         "unresolved_ops": " ".join("%s(H%d/F%d)" % (op_label(r), r["effects_H"], r["effects_F"])
                                    for r in rows if r["unresolved"]),

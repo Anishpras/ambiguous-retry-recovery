@@ -1,5 +1,6 @@
 """Client recovery policies A, B, Bw, C, D and D+I (PROTOCOL.md §3). A-fk is policy A run by a
-runtime that issues a fresh op_key per attempt.
+runtime that issues a fresh op_key per attempt. Names, roles and factories are registered in
+arr/registry.py.
 
 Isolation (V4): this module imports nothing. A policy object handles one logical operation. It
 receives deep-copied observation dicts from the client runtime and returns a list of actions:
@@ -8,10 +9,31 @@ receives deep-copied observation dicts from the client runtime and returns a lis
     {"type": "set_timer", "delay": d, "tag": s}  delivered back as {"type": "timer", "tag": s}
 Observation types: start, dispatched (runtime ack carrying the assigned attempt_id), response,
 timeout, status, webhook, timer. belief() returns "unresolved", "complete" or "failed".
+
+Options (plain dict passed at construction; client configuration, never an observation). The
+defaults reproduce the frozen rules; every alternative is a named option used by the v1.2
+exploratory sensitivity analysis (results/exploratory/).
 """
 
 POLL_INTERVAL = 5   # C, D, D+I (§2.2); V5 checks it equals the run constant
-WAIT_TAU = 15       # Bw (§3); V5 checks it equals the run constant
+WAIT_TAU = 15       # Bw default (§3); V5 checks it equals the run constant
+
+POLICY_DEFAULTS = {
+    # A, B, Bw (baselines)
+    "wait_tau": WAIT_TAU,                            # Bw: ticks between the failure signal and its read
+    "bw_skip_read_if_complete": True,                # Bw: clarification C15
+    "ignore_status_replies_once_complete": True,     # A, B, Bw: revision v1.1.1
+    "deferred_is_progress": False,                   # A, B, Bw: `deferred` is not a failure signal
+    "ignore_failure_webhooks_once_complete": False,  # A, B, Bw: `aborted`/`deferred` ignored once complete
+    "in_progress_is_wait": False,                    # A, B, Bw: `in_progress` is not a failure signal
+    "reread_on_pending": False,                      # B, Bw: `not_found` listing pending attempts -> re-read
+    # C, D, D+I (reconcilers): ablation switches
+    "use_provider_seq": True,
+    "dedupe_event_ids": True,
+    "check_payload": True,
+    "use_webhooks": True,
+    "use_status": True,
+}
 
 
 def _dispatch(reason=""):
@@ -32,13 +54,20 @@ def _timer(delay, tag):
 class Policy(object):
     name = "?"
 
-    def __init__(self):
+    def __init__(self, options=None):
+        self.options = dict(POLICY_DEFAULTS)
+        for key, val in (options or {}).items():
+            if key in POLICY_DEFAULTS:
+                self.options[key] = val
         self.op_key = None
         self.payload_hash = None
         self.budget = 0
         self.attempts = []     # attempt_ids, from the runtime's `dispatched` acks
         self.keys = []         # op_keys used by those attempts (one key unless the runtime is A-fk)
         self._belief = "unresolved"
+
+    def opt(self, key):
+        return self.options[key]
 
     def belief(self):
         return self._belief
@@ -88,15 +117,18 @@ class PolicyA(Policy):
 
     Matching is by op_key only (no payload or attempt correlation). Failure-named webhooks
     (`aborted`, `deferred`) are mapped to failure by name (naive mapping, design update §2.4).
-    Pre-freeze clarification C9: budget exhaustion sets `failed` only if the belief is not `complete`.
-    Revision v1.1 (study lead, post-freeze): once the belief is `complete`, request-path failure
-    signals (local timeouts; `error`, `in_progress`, `rejected` responses) are ignored, because a
-    client that has confirmed completion stops its own request path. Webhooks still apply 'last
-    terminal-looking event wins' unchanged (S06, S14). B and Bw inherit this. Revision v1.1.1 extends
-    the same principle to replies to the policy's own status reads (PolicyB.on_status)."""
+    Clarification C9: budget exhaustion sets `failed` only if the belief is not `complete`.
+    Revision v1.1: once `complete`, request-path failure signals (local timeouts; `error`,
+    `in_progress`, `rejected` responses) are ignored. Revision v1.1.1: so are replies to the policy's
+    own status reads (B, Bw). Webhooks keep 'last terminal-looking event wins' (S06, S14)."""
     name = "A"
-    FAILURE_WEBHOOKS = ("aborted", "deferred")
-    FAILURE_RESPONSES = ("error", "in_progress", "rejected")
+    failure_webhook_belief = "failed"
+
+    def failure_webhooks(self):
+        return ("aborted",) if self.opt("deferred_is_progress") else ("aborted", "deferred")
+
+    def failure_responses(self):
+        return ("error", "rejected") if self.opt("in_progress_is_wait") else ("error", "in_progress", "rejected")
 
     def _mine(self, obs):
         return obs.get("op_key") in self.keys
@@ -118,11 +150,11 @@ class PolicyA(Policy):
         if kind == "ok":
             self._belief = "complete"
             return []
-        if kind in self.FAILURE_RESPONSES:
+        if kind in self.failure_responses():
             if self._belief == "complete":
                 return []   # v1.1: request path stopped after confirmed completion
             return self.on_failure_signal(obs)
-        return []   # `conflict` is not among A's signals
+        return []   # `conflict` (and `in_progress` when it means "wait") are not A's signals
 
     def on_timeout(self, obs):
         if self._belief == "complete":
@@ -136,10 +168,12 @@ class PolicyA(Policy):
         if event == "committed":
             self._belief = "complete"
             return []
-        if event in self.FAILURE_WEBHOOKS:
-            self._belief = "failed"
+        if event in self.failure_webhooks():
+            if self._belief == "complete" and self.opt("ignore_failure_webhooks_once_complete"):
+                return []
+            self._belief = self.failure_webhook_belief
             return self.on_failure_signal(obs)
-        return []   # `processing` ignored
+        return []   # `processing` (and `deferred` when it means progress) ignored
 
 
 class PolicyB(PolicyA):
@@ -152,49 +186,62 @@ class PolicyB(PolicyA):
     def on_status(self, obs):
         if not self._mine(obs):
             return []
-        if self._belief == "complete":
-            return []   # v1.1.1: replies to its own status reads are request path too; ignored once complete
+        if self._belief == "complete" and self.opt("ignore_status_replies_once_complete"):
+            return []   # v1.1.1: replies to its own status reads are request path too
         if obs.get("result") == "found":
             self._belief = "complete"
             return []
+        if self.opt("reread_on_pending") and obs.get("pending_attempts"):
+            return [_timer(POLL_INTERVAL, "reread")]   # option: a pending attempt means wait, not retry
         return self._retry_or_fail()   # includes not_found with terminal attempts
+
+    def on_timer(self, obs):
+        if obs.get("tag") == "reread" and self._belief != "complete":
+            return [_status()]
+        return []
 
 
 class PolicyBw(PolicyB):
-    """Bw: B, but the single status read is issued WAIT_TAU ticks after the failure signal. At most
-    one wait is pending; failure signals during the wait are absorbed. Pre-freeze clarification C15:
-    if the belief is already `complete` when the wait ends, there is nothing to verify and no read
-    is issued (implied by the study lead's S04 tie note)."""
+    """Bw: B, but the single status read is issued `wait_tau` ticks after the failure signal. At most
+    one wait is pending; failure signals during the wait are absorbed. Clarification C15: if the
+    belief is already `complete` when the wait ends, no read is issued. Fix L4 (v1.2): a
+    failure-named webhook leaves the belief `unresolved` (not `failed`) while the verify timer is
+    pending."""
     name = "Bw"
+    failure_webhook_belief = "unresolved"
 
-    def __init__(self):
-        Policy.__init__(self)
+    def __init__(self, options=None):
+        PolicyB.__init__(self, options)
         self.waiting = False
 
     def on_failure_signal(self, obs):
         if self.waiting:
             return []
         self.waiting = True
-        return [_timer(WAIT_TAU, "verify")]
+        return [_timer(self.opt("wait_tau"), "verify")]
 
     def on_timer(self, obs):
-        if obs.get("tag") != "verify":
-            return []
-        self.waiting = False
-        if self._belief == "complete":
-            return []
-        return [_status()]
+        if obs.get("tag") == "verify":
+            self.waiting = False
+            if self._belief == "complete" and self.opt("bw_skip_read_if_complete"):
+                return []
+            return [_status()]
+        return PolicyB.on_timer(self, obs)
 
 
 # ---------------------------------------------------------------------------------------------
 class PolicyD(Policy):
     """D: reconcile with the §2.5 evidence rules; retry only when every dispatched attempt has its
     own terminal negative, no positive evidence exists and budget remains. Ambiguous evidence
-    (timeout, error, not_found, processing, deferred) never triggers a retry."""
+    (timeout, error, not_found, processing, deferred) never triggers a retry.
+
+    The evidence store is monotone and keyed by attempt (positive and terminal sets only grow), so
+    delivery order and repeated deliveries cannot change the decision (docs/monotone-evidence.md);
+    provider_seq and event_id are recorded for the trace. The ablation options switch parts off."""
     name = "D"
 
-    def __init__(self):
-        Policy.__init__(self)
+    def __init__(self, options=None):
+        Policy.__init__(self, options)
         self.positive = {}        # attempt_id -> [evidence labels]
         self.terminal = {}        # attempt_id -> [evidence labels]
         self.seen_events = []     # webhook event_ids already applied
@@ -215,8 +262,9 @@ class PolicyD(Policy):
 
     def _correlated(self, obs):
         # Correlation (§2.5): op_key and payload_hash match this operation, and the attempt is ours.
-        return (obs.get("op_key") == self.op_key and obs.get("payload_hash") == self.payload_hash
-                and obs.get("attempt_id") in self.attempts)
+        if obs.get("op_key") != self.op_key or obs.get("attempt_id") not in self.attempts:
+            return False
+        return obs.get("payload_hash") == self.payload_hash or not self.opt("check_payload")
 
     def _positive(self, obs, label):
         if self._correlated(obs):
@@ -254,6 +302,8 @@ class PolicyD(Policy):
         return self._after(obs)
 
     def on_status(self, obs):
+        if not self.opt("use_status"):
+            return []
         if obs.get("op_key") != self.op_key:
             self._note(obs, "ignored uncorrelated status")
             return self._after(obs)
@@ -268,23 +318,24 @@ class PolicyD(Policy):
         return self._after(obs)
 
     def on_webhook(self, obs):
-        event_id = obs.get("event_id")
-        if event_id in self.seen_events:
-            self._note(obs, "duplicate delivery ignored " + str(event_id))   # §2.5 duplicates
+        if not self.opt("use_webhooks"):
             return []
-        self.seen_events.append(event_id)
+        event_id = obs.get("event_id")
+        if self.opt("dedupe_event_ids"):
+            if event_id in self.seen_events:
+                self._note(obs, "duplicate delivery ignored " + str(event_id))   # §2.5 duplicates
+                return []
+            self.seen_events.append(event_id)
         if obs.get("op_key") != self.op_key:
             self._note(obs, "ignored uncorrelated webhook")
             return []
-        seq = obs.get("provider_seq")
-        stale = self.highest_seq is not None and seq <= self.highest_seq
-        if stale:
-            # §2.5 stale events: recorded, cannot regress state. Clarification C8: the only state
-            # changes a webhook can make (add positive evidence, mark its own attempt terminal) are
-            # monotone, so a stale event may add such facts but never reverts `complete`.
-            self._note(obs, "stale (seq %s <= %s)" % (seq, self.highest_seq))
-        else:
-            self.highest_seq = seq
+        if self.opt("use_provider_seq"):
+            seq = obs.get("provider_seq")
+            if self.highest_seq is not None and seq <= self.highest_seq:
+                # §2.5 stale events: recorded, cannot regress state (C8: they may only add monotone facts).
+                self._note(obs, "stale (seq %s <= %s)" % (seq, self.highest_seq))
+            else:
+                self.highest_seq = seq
         event = obs.get("event")
         if event == "committed":
             self._positive(obs, "webhook committed")
@@ -328,7 +379,7 @@ class PolicyD(Policy):
                 self._belief = "failed"
         else:
             self._belief = "unresolved"
-        if self.ambiguous and not self.polling and self._belief == "unresolved":
+        if self.ambiguous and not self.polling and self._belief == "unresolved" and self.opt("use_status"):
             # Clarification C7: polling starts at the first timeout or error, then every 5 ticks.
             self.polling = True
             actions.extend([_status(), _timer(POLL_INTERVAL, "poll")])
@@ -345,48 +396,44 @@ class PolicyC(PolicyD):
 
 
 class PolicyDI(PolicyD):
-    """D+I: D plus, on contract 2 only, one resend with the same op_key and payload if the operation
-    is still unresolved after its first timeout and one status poll (clarification C11: evaluated
-    once, at the first status reply to a read issued at or after the first timeout, and skipped if
-    D's own rule dispatched on that observation). On contract 1 it is exactly D."""
+    """D+I: D plus, on contract 2 only, an idempotent resend with the same op_key and payload.
+
+    Fix M1 (v1.2): the resend is armed by any ambiguous signal for an attempt (a timeout or an
+    `error` response), each attempt arming it at most once; it fires at the first status reply to a
+    read issued at or after the arming tick if the operation is still unresolved, budget remains
+    and D's own rule did not dispatch on that observation. So it can recur for each new attempt
+    that becomes ambiguous, up to the budget. On contract 1 it is exactly D."""
     name = "D+I"
 
-    def __init__(self, idempotent_provider):
-        PolicyD.__init__(self)
+    def __init__(self, idempotent_provider, options=None):
+        PolicyD.__init__(self, options)
         self.idempotent_provider = bool(idempotent_provider)
-        self.first_timeout_t = None
-        self.resend_checked = False
+        self.armed_since = None       # tick of the oldest unconsumed ambiguity
+        self.armed_by = []            # attempts that have already armed a resend
+
+    def _arm(self, attempt_id, t):
+        if attempt_id in self.armed_by or attempt_id not in self.attempts:
+            return
+        self.armed_by.append(attempt_id)
+        if self.armed_since is None:
+            self.armed_since = t
 
     def on_timeout(self, obs):
-        if self.first_timeout_t is None:
-            self.first_timeout_t = obs.get("t")
+        self._arm(obs.get("attempt_id"), obs.get("t"))
         return PolicyD.on_timeout(self, obs)
+
+    def on_response(self, obs):
+        if obs.get("kind") == "error" and obs.get("op_key") == self.op_key:
+            self._arm(obs.get("attempt_id"), obs.get("t"))
+        return PolicyD.on_response(self, obs)
 
     def on_status(self, obs):
         actions = PolicyD.on_status(self, obs)
-        if (self.idempotent_provider and not self.resend_checked and self.first_timeout_t is not None
-                and obs.get("t") is not None and obs.get("t") >= self.first_timeout_t + 1):
-            self.resend_checked = True
+        if (self.idempotent_provider and self.armed_since is not None and obs.get("t") is not None
+                and obs.get("t") >= self.armed_since + 1):
+            self.armed_since = None   # this poll consumes every pending arming
             if (self._belief == "unresolved" and self.budget_left()
                     and not any(a.get("type") == "dispatch" for a in actions)):
                 actions.append(_dispatch("idempotent_resend"))
                 self._note(obs, "idempotent resend (contract 2 guarantees at most one effect)")
         return actions
-
-
-def make(name, idempotent_provider):
-    """Fresh policy object for one operation. `idempotent_provider` is client configuration
-    (whether the provider documents contract-2 deduplication), not an observation."""
-    if name in ("A", "A-fk"):
-        return PolicyA()
-    if name == "B":
-        return PolicyB()
-    if name == "Bw":
-        return PolicyBw()
-    if name == "C":
-        return PolicyC()
-    if name == "D":
-        return PolicyD()
-    if name == "D+I":
-        return PolicyDI(idempotent_provider)
-    raise KeyError(name)

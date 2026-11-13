@@ -24,7 +24,7 @@ class PolicyClient(object):
         self.payload = copy.deepcopy(op["payload"])
         self.payload_hash = op["payload_hash"]
         self.start_t = op["start"]
-        self.horizon_t = self.start_t + K.HORIZON
+        self.horizon_t = self.start_t + sim.options["horizon"]
         self.policy = policy
         self.policy_name = policy_name
         self.key_mode = key_mode          # "stable" (same op_key every attempt) or "fresh" (A-fk)
@@ -181,7 +181,7 @@ class ScriptedClient(object):
         self.attempts = []
         self.observed = []
         self.start_t = op["start"]
-        self.horizon_t = self.start_t + K.HORIZON
+        self.horizon_t = self.start_t + sim.options["horizon"]
 
     def schedule_initial(self):
         for i, t in enumerate(self.times):

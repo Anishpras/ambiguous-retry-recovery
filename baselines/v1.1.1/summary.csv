@@ -1,0 +1,290 @@
+contract,policy,role,scenario,family,op,effects_H,effects_F,extra_effects,duplicate,dup_cause,exactly_once,zero_effects,pending_H,pending_F,belief_H,certified_complete,certified_exactly_once,exactly_once_uncertified,certified_not_exactly_once,unsupported_complete,false_complete,false_failure,unresolved,dispatches,retries,retries_justified,retries_contract_justified,retries_unjustified,retries_after_complete,status_reads,conflicts,ttc,dispatch_times,commits
+1,A,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,A,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+1,A,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,A,core,S03,lost_ack,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+1,A,core,S04,lost_ack,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+1,A,core,S05,pending,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7 a1@15
+1,A,core,S06,receipt_anomaly,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,0,0,2,1,0,0,8,a1@0 a2@5 a3@30,a2@7 a3@32
+1,A,core,S07,receipt_anomaly,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+1,A,core,S08,no_confirmation,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+1,A,core,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,A,core,S10,pending,op-1,1,2,1,1,policy,0,0,1,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7 a1@90
+1,A,core,S11,distinct_ops,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+1,A,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,A,core,S12,lost_ack_error,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,6,a1@0 a2@3,a1@2 a2@5
+1,A,core,S13,webhook_harm,op-1,3,3,2,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,0,0,2,0,0,0,6,a1@0 a2@3 a3@5,a2@5 a3@7 a1@8
+1,A,core,S14,webhook_harm,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,1,0,0,4,a1@0 a2@12,a1@3 a2@14
+1,A,core,S15,webhook_harm,op-1,3,3,2,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,0,1,0,0,0,7,a1@0 a2@4 a3@5,a2@6 a3@7 a1@12!
+1,B,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,B,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,6,a1@0 a2@3,a2@5
+1,B,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+1,B,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+1,B,core,S04,lost_ack,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,9,a1@0 a2@6,a1@2 a2@8
+1,B,core,S05,pending,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,9,a1@0 a2@6,a2@8 a1@15
+1,B,core,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,2,0,9,a1@0 a2@6,a2@8
+1,B,core,S07,receipt_anomaly,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,8,a1@0 a2@6,a1@2 a2@8
+1,B,core,S08,no_confirmation,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,9,a1@0 a2@6,a1@2 a2@8
+1,B,core,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,9,a1@0 a2@6,a2@8
+1,B,core,S10,pending,op-1,1,2,1,1,policy,0,0,1,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,9,a1@0 a2@6,a2@8 a1@90
+1,B,core,S11,distinct_ops,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,9,a1@0 a2@6,a1@2 a2@8
+1,B,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,B,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+1,B,core,S13,webhook_harm,op-1,3,3,2,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,0,0,2,0,2,0,7,a1@0 a2@4 a3@6,a2@6 a1@8 a3@8
+1,B,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@3
+1,B,core,S15,webhook_harm,op-1,3,3,2,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,0,1,0,2,0,8,a1@0 a2@5 a3@6,a2@7 a3@8 a1@12!
+1,Bw,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,Bw,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,21,a1@0 a2@18,a2@20
+1,Bw,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,24,a1@0 a2@21,a2@23
+1,Bw,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,8,a1@0,a1@2
+1,Bw,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,20,a1@0,a1@2
+1,Bw,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,16,a1@0,a1@15
+1,Bw,core,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,2,0,24,a1@0 a2@21,a2@23
+1,Bw,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,8,a1@0,a1@2
+1,Bw,core,S08,no_confirmation,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,24,a1@0 a2@21,a1@2 a2@23
+1,Bw,core,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,24,a1@0 a2@21,a2@23
+1,Bw,core,S10,pending,op-1,1,2,1,1,policy,0,0,1,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,24,a1@0 a2@21,a2@23 a1@90
+1,Bw,core,S11,distinct_ops,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,1,0,24,a1@0 a2@21,a1@2 a2@23
+1,Bw,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,Bw,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,10,a1@0,a1@2
+1,Bw,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,10,a1@0,a1@8
+1,Bw,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@3
+1,Bw,core,S15,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,14,a1@0,a1@12!
+1,C,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,C,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+1,C,core,S02,auth_negative,op-1,0,0,0,0,,0,1,0,0,failed,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,,a1@0,
+1,C,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+1,C,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,20,a1@0,a1@2
+1,C,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,16,a1@0,a1@15
+1,C,core,S06,receipt_anomaly,op-1,0,0,0,0,,0,1,0,0,failed,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,,a1@0,
+1,C,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,8,a1@0,a1@2
+1,C,core,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+1,C,core,S09,no_confirmation,op-1,0,0,0,0,,0,1,0,0,unresolved,0,0,0,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,
+1,C,core,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@90
+1,C,core,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+1,C,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,C,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+1,C,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,10,a1@0,a1@8
+1,C,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+1,C,core,S15,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,14,a1@0,a1@12!
+1,D,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,D,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+1,D,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+1,D,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+1,D,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,20,a1@0,a1@2
+1,D,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,16,a1@0,a1@15
+1,D,core,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+1,D,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,8,a1@0,a1@2
+1,D,core,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+1,D,core,S09,no_confirmation,op-1,0,0,0,0,,0,1,0,0,unresolved,0,0,0,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,
+1,D,core,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@90
+1,D,core,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+1,D,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,D,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+1,D,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,10,a1@0,a1@8
+1,D,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+1,D,core,S15,webhook_harm,op-1,2,2,1,1,contract,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,1,0,0,0,1,1,7,a1@0 a2@4,a2@6 a1@12!
+1,D+I,optional,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,D+I,optional,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+1,D+I,optional,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+1,D+I,optional,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+1,D+I,optional,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,20,a1@0,a1@2
+1,D+I,optional,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,16,a1@0,a1@15
+1,D+I,optional,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+1,D+I,optional,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,8,a1@0,a1@2
+1,D+I,optional,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+1,D+I,optional,S09,no_confirmation,op-1,0,0,0,0,,0,1,0,0,unresolved,0,0,0,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,
+1,D+I,optional,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@90
+1,D+I,optional,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+1,D+I,optional,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,D+I,optional,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+1,D+I,optional,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,10,a1@0,a1@8
+1,D+I,optional,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+1,D+I,optional,S15,webhook_harm,op-1,2,2,1,1,contract,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,1,0,0,0,1,1,7,a1@0 a2@4,a2@6 a1@12!
+1,ORACLE-S,reference,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,ORACLE-S,reference,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+1,ORACLE-S,reference,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,ORACLE-S,reference,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-S,reference,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-S,reference,S05,pending,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7 a1@15
+1,ORACLE-S,reference,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,ORACLE-S,reference,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-S,reference,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-S,reference,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,ORACLE-S,reference,S10,pending,op-1,1,2,1,1,policy,0,0,1,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7 a1@90
+1,ORACLE-S,reference,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-S,reference,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,ORACLE-S,reference,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,ORACLE-S,reference,S13,webhook_harm,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,5,a1@0 a2@3,a2@5 a1@8
+1,ORACLE-S,reference,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+1,ORACLE-S,reference,S15,webhook_harm,op-1,3,3,2,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,0,1,0,0,0,7,a1@0 a2@4 a3@5,a2@6 a3@7 a1@12!
+1,ORACLE-O,reference,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,ORACLE-O,reference,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+1,ORACLE-O,reference,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,ORACLE-O,reference,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-O,reference,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-O,reference,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,15,a1@0,a1@15
+1,ORACLE-O,reference,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,ORACLE-O,reference,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-O,reference,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-O,reference,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+1,ORACLE-O,reference,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,,a1@0,a1@90
+1,ORACLE-O,reference,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+1,ORACLE-O,reference,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+1,ORACLE-O,reference,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+1,ORACLE-O,reference,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,10,a1@0,a1@8
+1,ORACLE-O,reference,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+1,ORACLE-O,reference,S15,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,14,a1@0,a1@12!
+2,A,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,A,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+2,A,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,A,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,7,a1@0 a2@5,a1@2
+2,A,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,7,a1@0 a2@5,a1@2
+2,A,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,3,2,0,0,2,0,0,0,16,a1@0 a2@5 a3@7,a1@15
+2,A,core,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,3,2,0,0,2,1,0,0,8,a1@0 a2@5 a3@30,a2@7
+2,A,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,7,a1@0 a2@5,a1@2
+2,A,core,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,7,a1@0 a2@5,a1@2
+2,A,core,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,A,core,S10,pending,op-1,0,1,0,0,,1,0,1,0,failed,0,0,1,0,0,0,1,0,3,2,0,0,2,0,0,0,,a1@0 a2@5 a3@7,a1@90
+2,A,core,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,7,a1@0 a2@5,a1@2
+2,A,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,A,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,5,a1@0 a2@3,a1@2
+2,A,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,3,2,0,0,2,0,0,0,10,a1@0 a2@3 a3@5,a1@8
+2,A,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,1,0,0,4,a1@0 a2@12,a1@3
+2,A,core,S15,webhook_harm,op-1,2,2,1,1,contract,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,0,1,0,0,0,7,a1@0 a2@4 a3@5,a2@6 a1@12!
+2,B,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,B,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,6,a1@0 a2@3,a2@5
+2,B,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+2,B,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+2,B,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,8,a1@0 a2@6,a1@2
+2,B,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,3,2,0,0,2,0,3,0,16,a1@0 a2@6 a3@9,a1@15
+2,B,core,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,2,0,9,a1@0 a2@6,a2@8
+2,B,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,8,a1@0 a2@6,a1@2
+2,B,core,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,8,a1@0 a2@6,a1@2
+2,B,core,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,9,a1@0 a2@6,a2@8
+2,B,core,S10,pending,op-1,0,1,0,0,,1,0,1,0,failed,0,0,1,0,0,0,1,0,3,2,0,0,2,0,3,0,,a1@0 a2@6 a3@9,a1@90
+2,B,core,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,8,a1@0 a2@6,a1@2
+2,B,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,B,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+2,B,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,3,2,0,0,2,0,4,0,10,a1@0 a2@4 a3@6,a1@8
+2,B,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@3
+2,B,core,S15,webhook_harm,op-1,2,2,1,1,contract,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,0,1,0,2,0,8,a1@0 a2@5 a3@6,a2@7 a1@12!
+2,Bw,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,Bw,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,21,a1@0 a2@18,a2@20
+2,Bw,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,24,a1@0 a2@21,a2@23
+2,Bw,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,8,a1@0,a1@2
+2,Bw,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,20,a1@0,a1@2
+2,Bw,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,16,a1@0,a1@15
+2,Bw,core,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,2,0,24,a1@0 a2@21,a2@23
+2,Bw,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,8,a1@0,a1@2
+2,Bw,core,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,23,a1@0 a2@21,a1@2
+2,Bw,core,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,24,a1@0 a2@21,a2@23
+2,Bw,core,S10,pending,op-1,0,1,0,0,,1,0,1,0,failed,0,0,1,0,0,0,1,0,3,2,0,0,2,0,3,0,,a1@0 a2@21 a3@39,a1@90
+2,Bw,core,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,1,0,23,a1@0 a2@21,a1@2
+2,Bw,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,Bw,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,10,a1@0,a1@2
+2,Bw,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,10,a1@0,a1@8
+2,Bw,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@3
+2,Bw,core,S15,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,14,a1@0,a1@12!
+2,C,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,C,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+2,C,core,S02,auth_negative,op-1,0,0,0,0,,0,1,0,0,failed,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,,a1@0,
+2,C,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+2,C,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,20,a1@0,a1@2
+2,C,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,16,a1@0,a1@15
+2,C,core,S06,receipt_anomaly,op-1,0,0,0,0,,0,1,0,0,failed,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,,a1@0,
+2,C,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,8,a1@0,a1@2
+2,C,core,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+2,C,core,S09,no_confirmation,op-1,0,0,0,0,,0,1,0,0,unresolved,0,0,0,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,
+2,C,core,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@90
+2,C,core,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+2,C,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,C,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+2,C,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,10,a1@0,a1@8
+2,C,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+2,C,core,S15,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,14,a1@0,a1@12!
+2,D,core,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,D,core,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+2,D,core,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+2,D,core,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+2,D,core,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,20,a1@0,a1@2
+2,D,core,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,3,0,16,a1@0,a1@15
+2,D,core,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+2,D,core,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,8,a1@0,a1@2
+2,D,core,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+2,D,core,S09,no_confirmation,op-1,0,0,0,0,,0,1,0,0,unresolved,0,0,0,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,
+2,D,core,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@90
+2,D,core,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,12,0,,a1@0,a1@2
+2,D,core,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,D,core,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+2,D,core,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,10,a1@0,a1@8
+2,D,core,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+2,D,core,S15,webhook_harm,op-1,2,2,1,1,contract,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,1,0,0,0,1,1,7,a1@0 a2@4,a2@6 a1@12!
+2,D+I,optional,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,D+I,optional,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+2,D+I,optional,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+2,D+I,optional,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,6,a1@0,a1@2
+2,D+I,optional,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,1,0,0,1,0,8,a1@0 a2@6,a1@2
+2,D+I,optional,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,1,0,0,3,0,16,a1@0 a2@6,a1@15
+2,D+I,optional,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,1,0,9,a1@0 a2@6,a2@8
+2,D+I,optional,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,1,0,0,1,0,8,a1@0 a2@6,a1@2
+2,D+I,optional,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,1,0,0,1,0,8,a1@0 a2@6,a1@2
+2,D+I,optional,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,1,0,0,1,0,9,a1@0 a2@6,a2@8
+2,D+I,optional,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,2,1,0,1,0,0,12,0,,a1@0 a2@6,a1@90
+2,D+I,optional,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,1,0,0,1,0,8,a1@0 a2@6,a1@2
+2,D+I,optional,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,D+I,optional,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,4,a1@0,a1@2
+2,D+I,optional,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,1,0,0,1,0,10,a1@0 a2@6,a1@8
+2,D+I,optional,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+2,D+I,optional,S15,webhook_harm,op-1,2,2,1,1,contract,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,1,0,0,1,1,7,a1@0 a2@4 a3@6,a2@6 a1@12!
+2,A-fk,ablation,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,A-fk,ablation,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+2,A-fk,ablation,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,A-fk,ablation,S03,lost_ack,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+2,A-fk,ablation,S04,lost_ack,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+2,A-fk,ablation,S05,pending,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7 a1@15
+2,A-fk,ablation,S06,receipt_anomaly,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,0,0,2,1,0,0,8,a1@0 a2@5 a3@30,a2@7 a3@32
+2,A-fk,ablation,S07,receipt_anomaly,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+2,A-fk,ablation,S08,no_confirmation,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+2,A-fk,ablation,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,A-fk,ablation,S10,pending,op-1,1,2,1,1,policy,0,0,1,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7 a1@90
+2,A-fk,ablation,S11,distinct_ops,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a1@2 a2@7
+2,A-fk,ablation,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,A-fk,ablation,S12,lost_ack_error,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,0,0,0,6,a1@0 a2@3,a1@2 a2@5
+2,A-fk,ablation,S13,webhook_harm,op-1,3,3,2,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,0,0,2,0,0,0,6,a1@0 a2@3 a3@5,a2@5 a3@7 a1@8
+2,A-fk,ablation,S14,webhook_harm,op-1,2,2,1,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,2,1,0,0,1,1,0,0,4,a1@0 a2@12,a1@3 a2@14
+2,A-fk,ablation,S15,webhook_harm,op-1,3,3,2,1,policy,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,0,1,0,0,0,7,a1@0 a2@4 a3@5,a2@6 a3@7 a1@12!
+2,ORACLE-S,reference,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,ORACLE-S,reference,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+2,ORACLE-S,reference,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,ORACLE-S,reference,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-S,reference,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-S,reference,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,3,2,0,0,2,0,0,0,15,a1@0 a2@5 a3@7,a1@15
+2,ORACLE-S,reference,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,ORACLE-S,reference,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-S,reference,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-S,reference,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,ORACLE-S,reference,S10,pending,op-1,0,1,0,0,,1,0,1,0,failed,0,0,1,0,0,0,1,0,3,2,0,0,2,0,0,0,,a1@0 a2@5 a3@7,a1@90
+2,ORACLE-S,reference,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-S,reference,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,ORACLE-S,reference,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,ORACLE-S,reference,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,3,2,0,0,2,0,0,0,10,a1@0 a2@3 a3@5,a1@8
+2,ORACLE-S,reference,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+2,ORACLE-S,reference,S15,webhook_harm,op-1,2,2,1,1,contract,0,0,0,0,complete,1,0,0,1,0,0,0,0,3,2,1,0,1,0,0,0,7,a1@0 a2@4 a3@5,a2@6 a1@12!
+2,ORACLE-O,reference,S00,control,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,ORACLE-O,reference,S01,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,1,0,0,0,0,0,5,a1@0 a2@2,a2@4
+2,ORACLE-O,reference,S02,auth_negative,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,ORACLE-O,reference,S03,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-O,reference,S04,lost_ack,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-O,reference,S05,pending,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,15,a1@0,a1@15
+2,ORACLE-O,reference,S06,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,ORACLE-O,reference,S07,receipt_anomaly,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-O,reference,S08,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-O,reference,S09,no_confirmation,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,2,1,0,0,1,0,0,0,8,a1@0 a2@5,a2@7
+2,ORACLE-O,reference,S10,pending,op-1,0,1,0,0,,1,0,1,0,unresolved,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,,a1@0,a1@90
+2,ORACLE-O,reference,S11,distinct_ops,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,1,0,0,0,1,0,0,0,0,0,0,0,5,a1@0,a1@2
+2,ORACLE-O,reference,S11,distinct_ops,op-2,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@1,a1@3
+2,ORACLE-O,reference,S12,lost_ack_error,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,3,a1@0,a1@2
+2,ORACLE-O,reference,S13,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,10,a1@0,a1@8
+2,ORACLE-O,reference,S14,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,4,a1@0,a1@3
+2,ORACLE-O,reference,S15,webhook_harm,op-1,1,1,0,0,,1,0,0,0,complete,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,14,a1@0,a1@12!
