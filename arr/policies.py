@@ -88,8 +88,11 @@ class PolicyA(Policy):
 
     Matching is by op_key only (no payload or attempt correlation). Failure-named webhooks
     (`aborted`, `deferred`) are mapped to failure by name (naive mapping, design update §2.4).
-    Pre-freeze clarification C9: every failure signal is acted on whatever the current belief;
-    budget exhaustion sets `failed` only if the belief is not `complete`."""
+    Pre-freeze clarification C9: budget exhaustion sets `failed` only if the belief is not `complete`.
+    Revision v1.1 (study lead, post-freeze): once the belief is `complete`, request-path failure
+    signals (local timeouts; `error`, `in_progress`, `rejected` responses) are ignored, because a
+    client that has confirmed completion stops its own request path. Webhooks still apply 'last
+    terminal-looking event wins' unchanged (S06, S14). B and Bw inherit this."""
     name = "A"
     FAILURE_WEBHOOKS = ("aborted", "deferred")
     FAILURE_RESPONSES = ("error", "in_progress", "rejected")
@@ -115,10 +118,14 @@ class PolicyA(Policy):
             self._belief = "complete"
             return []
         if kind in self.FAILURE_RESPONSES:
+            if self._belief == "complete":
+                return []   # v1.1: request path stopped after confirmed completion
             return self.on_failure_signal(obs)
         return []   # `conflict` is not among A's signals
 
     def on_timeout(self, obs):
+        if self._belief == "complete":
+            return []   # v1.1: a stale local timer after confirmed completion is ignored
         return self.on_failure_signal(obs)
 
     def on_webhook(self, obs):

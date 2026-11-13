@@ -27,16 +27,19 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 
 from arr import constants as K  # noqa: E402
-from arr import metrics, predictions, report, scenarios, validate  # noqa: E402
+from arr import delta, metrics, predictions, report, scenarios, validate  # noqa: E402
 from arr.runner import run_cell  # noqa: E402
 
 FREEZE = os.path.join(ROOT, "FREEZE.json")
 NOTES = os.path.join(ROOT, "notes", "prediction_explanations.md")
+# Revision v1.1 delta: baseline = committed v1.0 results (git 924aef2), extracted into baselines/v1.0/.
+BASELINE = {"label": "v1.0", "commit": "924aef2", "dir": os.path.join(ROOT, "baselines", "v1.0"),
+            "new_label": "v1.1", "output": "revision_v1.1_delta.md"}
 
 
 # ------------------------------------------------------------------------------------- freeze
 def frozen_files():
-    pats = ["PROTOCOL.md", "scenarios/*.json", "run_sim.py", "arr/*.py", "tests/*.py"]
+    pats = ["PROTOCOL.md", "scenarios/*.json", "baselines/*/*", "run_sim.py", "arr/*.py", "tests/*.py"]
     out = []
     for pat in pats:
         out += sorted(os.path.relpath(p, ROOT).replace(os.sep, "/") for p in glob.glob(os.path.join(ROOT, pat)))
@@ -172,12 +175,18 @@ def collect(out):
     report.write_text(os.path.join(out, "grid.csv"), report.csv_text(grows, report.GRID_FIELDS))
     report.write_text(os.path.join(out, "grid_tables.md"),
                       report.grid_tables_md(grows, scenarios.load_json("grids.json")["grids"]))
-    report.write_text(os.path.join(out, "predictions_check.md"), predictions.predictions_md(preds, notes))
+    base_verdicts = delta.baseline_verdicts(BASELINE["dir"])
+    report.write_text(os.path.join(out, "predictions_check.md"),
+                      predictions.predictions_md(preds, notes, base_verdicts, BASELINE["label"]))
     report.write_text(os.path.join(out, "worked_traces.md"), report.worked_traces_md(cell_index, rows))
     ties = [dict(contract=cl["contract"], policy=cl["policy"], scenario=cl["scenario"], t=x["t"], phase=x["phase"],
                  op=x["op"], order=" > ".join(x["order"])) for cl in cells for x in cl["sim"].ties]
     report.write_text(os.path.join(out, "ties.csv"),
                       report.csv_text(ties, ["contract", "policy", "scenario", "t", "phase", "op", "order"]))
+    if os.path.isdir(BASELINE["dir"]):
+        report.write_text(os.path.join(out, BASELINE["output"]),
+                          delta.delta_md(BASELINE["dir"], out, BASELINE["label"], BASELINE["new_label"],
+                                         BASELINE["commit"]))
     report.write_text(os.path.join(out, "validation.json"), json.dumps(checks, indent=2) + "\n")
     run_info = {
         "command": "python3 run_sim.py",

@@ -16,4 +16,5 @@ Every other prediction matches. Three of the matches depend on implementation cl
 - **P06, P16 and P17 (A and B).** These rely on clarification C9, the literal reading of A and B: failure signals are acted on whatever the current belief.
   - In the core matrix this reading changes no outcome. A scan of the traces finds no timeout, `error`, `in_progress`, `rejected` or `not_found` reaching A, B or Bw while their belief is `complete`.
   - A's two dispatches after completion (S06 at t = 30, S14 at t = 12) are triggered by failure-named webhooks. Those retries are behaviour that §3 specifies ("last terminal-looking event wins"), not a consequence of C9.
-  - The reading does matter in the grids: under contract 1, 24 of A's and 26 of B's grid duplicates follow a retry made after a webhook had already confirmed completion. See `results/grid_tables.md` and the `retries_after_complete` column.
+  - The reading did matter in the v1.0 grids: under contract 1, 24 of A's and 26 of B's grid duplicates followed a retry made after a webhook had already confirmed completion.
+  - Revision v1.1 (study lead) makes A, B and Bw ignore request-path failure signals once `complete`; see PROTOCOL.md Revisions and `results/revision_v1.1_delta.md`. The predictions named above do not depend on that revision.
