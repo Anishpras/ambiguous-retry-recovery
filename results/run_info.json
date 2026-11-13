@@ -37,8 +37,8 @@
   "fixture_version": "1.0.0",
   "freeze": {
     "frozen": true,
-    "frozen_at_utc": "2026-11-13T15:37:10+00:00",
-    "label": "v1.2",
+    "frozen_at_utc": "2026-11-13T15:41:57+00:00",
+    "label": "v1.2.1",
     "matches": true,
     "mismatched": [],
     "not_covered": []
@@ -131,12 +131,12 @@
     "operations_grid": 2040
   },
   "sha256": {
-    "PROTOCOL.md": "0908e6f172e74faf277e7c2446ef89ab160d2c86ec01834b7cc11f5c36f46c82",
+    "PROTOCOL.md": "1af2d2d18681203a8a1a390692dd912b078c8822ee64be7f575054fa2fdda8f4",
     "arr/__init__.py": "59eb8195dc04299db1b6b77e924c19c31d35b3ce7da86e9058e61ca2b5d85728",
     "arr/client.py": "3b5911b7dd574e08e4cfe9abffe53f374df0e77b33fd52e49d5c729eaef68c4f",
     "arr/constants.py": "9d26d1de66170ad3c46322901ca5e330c20b06168d62dc4a111d11eac75182d9",
     "arr/delta.py": "1245104772c13b0ffbe7093e0d093663ddccb51f86b3f28979d1fddfacad36a3",
-    "arr/exploratory.py": "18b37503b5b1b76210c07325049f88482bae9403ab0694feb40423aff73dc0d6",
+    "arr/exploratory.py": "b8e47e950fcf0c3eb8a766036443e73df6667ad35d1f7cd3f4e5c6e0a8be0f83",
     "arr/ids.py": "762bebeeb846de64ea9270ff41a2cfaedafd5787565dc1e7049951fab059f20b",
     "arr/metrics.py": "8b3c23dfe07a046e95f8db4e1c968a10cace40fe050292a6a03e48bcab7d752b",
     "arr/options.py": "ba72c832898d5091c38e55c03f8cccb117258b0a2b7d5c2decfb1be7040e290b",
@@ -147,7 +147,7 @@
     "arr/registry.py": "9f43b451086dbf6879b51f8d53292581fc0f7e51c592cf489c3b36345d24e026",
     "arr/report.py": "9255f98dbb2bc9c910738ef05821a2480d15718b5b9d58e9323b0cd178a63e61",
     "arr/runner.py": "4a44bceba3a010edf963bbd6a00338a34944937b62d28b176886b857bb82e1fa",
-    "arr/scenarios.py": "a66f97a9924823a85f98ca1412311c3aebf183f64737249ab7919c94f3299ddd",
+    "arr/scenarios.py": "13ad86d8ff2f7755156b6bc911427c527608349151733db328b97b963f18193e",
     "arr/sim.py": "94f9b818b0236a1a4f1e0fa0a2132b2a85ef91f959b52d77a010c4bf7f37e825",
     "arr/validate.py": "98bcf7134e9302c0811bb541480dd5aa85ad88c0a7c8c005b71308f2320d8baa",
     "baselines/v1.0/by_family.csv": "97cf2359067cc8012907647b9cfdff37218509a2a45f0ded2c00c935dd1b7597",
@@ -198,7 +198,8 @@
   },
   "study_version": "v1.2",
   "unfrozen_inputs_sha256": {
-    "notes/prediction_explanations.md": "4e3237521744d1dc2a3d9c267caaeb1d8daf890e273f2272e9ba00f52a065eef"
+    "notes/prediction_explanations.md": "4e3237521744d1dc2a3d9c267caaeb1d8daf890e273f2272e9ba00f52a065eef",
+    "notes/sensitivity_conclusions.md": "ea402863bc9240613cd5eb218ca0e0b2ef596bb2cdc12588748a7ff23879e3bf"
   },
   "validation_all_ok": true
 }

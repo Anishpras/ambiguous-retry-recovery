@@ -26,15 +26,17 @@ For every operation whose belief at H is `unresolved`, the attempts the client c
 | grid | D+I (optional) | correlated positive after H / longer horizon | 12 |
 | grid | D+I (optional) | terminal negative or in-flight bound | 6 |
 | grid | ORACLE-O (outcome-oracle reference) | correlated positive after H / longer horizon | 12 |
-| persistent_fault | Bw | correlated positive | 4 |
-| persistent_fault | Bw | in-flight time bound | 4 |
+| persistent_fault | Bw | correlated positive | 6 |
+| persistent_fault | Bw | in-flight time bound | 2 |
+| persistent_fault | Bw | lost reply of a deduplicated attempt | 2 |
 | persistent_fault | Bw | terminal negative or in-flight bound | 6 |
 | persistent_fault | C | correlated positive | 2 |
 | persistent_fault | C | terminal negative or in-flight bound | 2 |
 | persistent_fault | D | correlated positive | 2 |
 | persistent_fault | D | terminal negative or in-flight bound | 2 |
-| persistent_fault | D+I (optional) | correlated positive | 2 |
-| persistent_fault | D+I (optional) | in-flight time bound | 3 |
+| persistent_fault | D+I (optional) | correlated positive | 4 |
+| persistent_fault | D+I (optional) | lost reply of a deduplicated attempt | 3 |
+| persistent_fault | D+I (optional) | terminal negative | 1 |
 | persistent_fault | D+I (optional) | terminal negative or in-flight bound | 4 |
 
 Core matrix, every unresolved operation:
