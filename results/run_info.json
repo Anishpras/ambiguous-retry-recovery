@@ -14,11 +14,31 @@
     1,
     2
   ],
+  "default_options": {
+    "abort_record": "release",
+    "bw_skip_read_if_complete": true,
+    "check_payload": true,
+    "dedup_record_at": "acceptance",
+    "dedup_window": 1000,
+    "dedupe_event_ids": true,
+    "deferred_is_progress": false,
+    "horizon": 60,
+    "ignore_failure_webhooks_once_complete": false,
+    "ignore_status_replies_once_complete": true,
+    "in_progress_is_wait": false,
+    "reread_on_pending": false,
+    "retry_fault": "nominal",
+    "status_lists_pending": false,
+    "use_provider_seq": true,
+    "use_status": true,
+    "use_webhooks": true,
+    "wait_tau": 15
+  },
   "fixture_version": "1.0.0",
   "freeze": {
     "frozen": true,
-    "frozen_at_utc": "2026-11-13T15:10:20+00:00",
-    "label": "v1.1.1",
+    "frozen_at_utc": "2026-11-13T15:37:10+00:00",
+    "label": "v1.2",
     "matches": true,
     "mismatched": [],
     "not_covered": []
@@ -30,12 +50,14 @@
         1,
         2
       ],
+      "label": "A",
       "role": "core"
     },
     "A-fk": {
       "contracts": [
         2
       ],
+      "label": "A-fk (ablation)",
       "role": "ablation"
     },
     "B": {
@@ -43,6 +65,7 @@
         1,
         2
       ],
+      "label": "B",
       "role": "core"
     },
     "Bw": {
@@ -50,6 +73,7 @@
         1,
         2
       ],
+      "label": "Bw",
       "role": "core"
     },
     "C": {
@@ -57,6 +81,7 @@
         1,
         2
       ],
+      "label": "C",
       "role": "core"
     },
     "D": {
@@ -64,6 +89,7 @@
         1,
         2
       ],
+      "label": "D",
       "role": "core"
     },
     "D+I": {
@@ -71,6 +97,7 @@
         1,
         2
       ],
+      "label": "D+I (optional)",
       "role": "optional"
     },
     "ORACLE-O": {
@@ -78,6 +105,7 @@
         1,
         2
       ],
+      "label": "ORACLE-O (outcome-oracle reference)",
       "role": "reference"
     },
     "ORACLE-S": {
@@ -85,13 +113,14 @@
         1,
         2
       ],
-      "role": "reference"
+      "label": "ORACLE-S (state-probe reference, not a ceiling)",
+      "role": "state-probe reference"
     }
   },
-  "prediction_notes_sha256": "4e3237521744d1dc2a3d9c267caaeb1d8daf890e273f2272e9ba00f52a065eef",
   "predictions": {
     "match": 37,
-    "total": 38
+    "total": 38,
+    "vacuous": 1
   },
   "python_implementation": "CPython",
   "python_version": "3.13.7",
@@ -102,33 +131,42 @@
     "operations_grid": 2040
   },
   "sha256": {
-    "PROTOCOL.md": "aee1527341cf26bf6e9120a73005a13580b0cd15656d6fe6dca2e679caeb21b8",
+    "PROTOCOL.md": "0908e6f172e74faf277e7c2446ef89ab160d2c86ec01834b7cc11f5c36f46c82",
     "arr/__init__.py": "59eb8195dc04299db1b6b77e924c19c31d35b3ce7da86e9058e61ca2b5d85728",
-    "arr/client.py": "f0fe3e55510a5acd4499f75909b4959d1881da3ca76eae9f5467402f08b0ba15",
-    "arr/constants.py": "17a5812ec94786684739ae0b53d850349cc5eea042e926fc0b156ae51a0fa2e0",
-    "arr/delta.py": "7ef8e70683536072df3cc397c3449636c9d9a446672d2089417f641e88a0c3dd",
-    "arr/ids.py": "694e72018b4e13d71b22de5c04729442236c4185397192a1b47426f269727e48",
-    "arr/metrics.py": "b15dda3f735883e9af2237bbbb8e92df084f71fe502193d2a84a280bc8558a7f",
-    "arr/policies.py": "3bf283d70667d06b488c9b94922431ddd30297349ace19bf76f296838f95d9f4",
-    "arr/predictions.py": "860ec4a0e680f281327d3432ae2e52cc01f000d0340067ca3c2229ad5168843d",
-    "arr/provider.py": "b229a9377957d6f1e71f103d6c93ed326871f05470e6231bf9d044dbc6364543",
-    "arr/references.py": "80064586f3bee581bda5eab994948ea8bc9482c3b88f59c675ad9fc3a466befa",
-    "arr/report.py": "e484292055a2d4a81407ac530f249a3219ae1f4d62656575a0630b528c2f0343",
-    "arr/runner.py": "c81ac485968233b04a51c3e9cfa9790a3e6fddadf84caef3958497bfb965a3fb",
-    "arr/scenarios.py": "b6314f9e4346052ea1d87f90c2ec80d0e0f9e9f16aeb4c376edf0f337889cc11",
-    "arr/sim.py": "c8014834052f4b74bcc77dde42e448af4add5ca7298500136bf25e44eba973fa",
-    "arr/validate.py": "114a7ba050c5463387c97757523e3d88f299a596f152214e60c170f5bde6796a",
+    "arr/client.py": "3b5911b7dd574e08e4cfe9abffe53f374df0e77b33fd52e49d5c729eaef68c4f",
+    "arr/constants.py": "9d26d1de66170ad3c46322901ca5e330c20b06168d62dc4a111d11eac75182d9",
+    "arr/delta.py": "1245104772c13b0ffbe7093e0d093663ddccb51f86b3f28979d1fddfacad36a3",
+    "arr/exploratory.py": "18b37503b5b1b76210c07325049f88482bae9403ab0694feb40423aff73dc0d6",
+    "arr/ids.py": "762bebeeb846de64ea9270ff41a2cfaedafd5787565dc1e7049951fab059f20b",
+    "arr/metrics.py": "8b3c23dfe07a046e95f8db4e1c968a10cace40fe050292a6a03e48bcab7d752b",
+    "arr/options.py": "ba72c832898d5091c38e55c03f8cccb117258b0a2b7d5c2decfb1be7040e290b",
+    "arr/policies.py": "7de89ee70c15e3be31513352a37aa34e639b3a07dd2d138c73ea69c0fe49156a",
+    "arr/predictions.py": "409dee2a06e2467df8c5c2bb524e7bf30ed9a0a17ba7623c75cff0d85575741e",
+    "arr/provider.py": "d1934265488a48526d6ef6e3fe37d04cd71ff665afd88ea6d03a8e91c80f9b2d",
+    "arr/references.py": "d1c250cff23c51db5b74c7d5f40786ff79a6b319ba0bbd9b4440ba1d6a638c45",
+    "arr/registry.py": "9f43b451086dbf6879b51f8d53292581fc0f7e51c592cf489c3b36345d24e026",
+    "arr/report.py": "9255f98dbb2bc9c910738ef05821a2480d15718b5b9d58e9323b0cd178a63e61",
+    "arr/runner.py": "4a44bceba3a010edf963bbd6a00338a34944937b62d28b176886b857bb82e1fa",
+    "arr/scenarios.py": "a66f97a9924823a85f98ca1412311c3aebf183f64737249ab7919c94f3299ddd",
+    "arr/sim.py": "94f9b818b0236a1a4f1e0fa0a2132b2a85ef91f959b52d77a010c4bf7f37e825",
+    "arr/validate.py": "98bcf7134e9302c0811bb541480dd5aa85ad88c0a7c8c005b71308f2320d8baa",
     "baselines/v1.0/by_family.csv": "97cf2359067cc8012907647b9cfdff37218509a2a45f0ded2c00c935dd1b7597",
     "baselines/v1.0/by_policy.csv": "9a2d4aa0ed065677836671b79c4a68156ce7b0ddd07a07acf9b7d352e543170c",
     "baselines/v1.0/grid.csv": "5df1784205b2b27a0b9762182e012efc58084553f2fa45937ca8b5b62cb896cf",
     "baselines/v1.0/predictions_check.md": "32e93f5e765a2e985ae7024b3d7cfeda91a960985ff6a4942949606a1a2170a8",
     "baselines/v1.0/summary.csv": "970618fad41f069ebcfe8a3904cce0da7520a9a59853a7182086d961722b9a18",
+    "baselines/v1.1.1/by_family.csv": "97cf2359067cc8012907647b9cfdff37218509a2a45f0ded2c00c935dd1b7597",
+    "baselines/v1.1.1/by_policy.csv": "9a2d4aa0ed065677836671b79c4a68156ce7b0ddd07a07acf9b7d352e543170c",
+    "baselines/v1.1.1/grid.csv": "62d19bf8222f4a5692900b31a4d95842bc8c36d998d517260a4ced548586ebf6",
+    "baselines/v1.1.1/predictions_check.md": "f5705f8f930a509a4e67bb82f483a8c2a26a97ef2a640eb17cd2ae2578462cd0",
+    "baselines/v1.1.1/summary.csv": "970618fad41f069ebcfe8a3904cce0da7520a9a59853a7182086d961722b9a18",
     "baselines/v1.1/by_family.csv": "97cf2359067cc8012907647b9cfdff37218509a2a45f0ded2c00c935dd1b7597",
     "baselines/v1.1/by_policy.csv": "9a2d4aa0ed065677836671b79c4a68156ce7b0ddd07a07acf9b7d352e543170c",
     "baselines/v1.1/grid.csv": "299d9013c9567b41ae11edbfdab7570f7ef60becd66c690d4b8800f321f3c268",
     "baselines/v1.1/predictions_check.md": "05f13ec41f24f9c518cfefe722873cf889dec9a4ae8f959fa23df764cabc1046",
     "baselines/v1.1/summary.csv": "970618fad41f069ebcfe8a3904cce0da7520a9a59853a7182086d961722b9a18",
-    "run_sim.py": "ec597cc461374bfee942e87e7dd96e6a851f0ab475a1eab3b718220b0d2c5843",
+    "docs/monotone-evidence.md": "6c99ee7d9ea1c3a38a5cd3e13604e272289c2fed38f43fcf7505f5aa6676343d",
+    "run_sim.py": "94ed70e67adeee6447e575ec55cfa554e5f6ebb6dcb52d5148ce23e61a82f08a",
     "scenarios/S00.json": "ae7f0b8a555058331195c41fa9518131a39e994b09afb2516465fb88d9f7a003",
     "scenarios/S01.json": "82d36fbe8264636cec223d625468bcc1819d3d2d210f67c09bf79bac17038b64",
     "scenarios/S02.json": "08383781b08b4a7044ef6b6448813a83501ebb9f2a4ffe351c4dfa719c28bd57",
@@ -145,13 +183,22 @@
     "scenarios/S13.json": "71c92ffef586f9af124a75245b90298d65fbfd1db7087ed6479733883c5c588a",
     "scenarios/S14.json": "ecb34983e62058bda7d05f803ed9a68fe5a59ac0f8065aaa35893495dd0f771f",
     "scenarios/S15.json": "d2267ee00a4c92d29a5acc0b9a976a0a25c1cf4626468fa70f3cd7cff887a533",
+    "scenarios/exploratory/PF1.json": "e86dd1b8171a826c4b6ab9268a096488ef1f18fa061f788467986dca3215eae1",
+    "scenarios/exploratory/PF2.json": "f3ee5cbb74e68ec5cb4346c4cc623fa87386c8094a740a9793b450f869331eca",
+    "scenarios/exploratory/PF3.json": "2b1ff677e4132236832f7fbb8ea4809beb20511493a5940e4613ac0d09417f2f",
+    "scenarios/exploratory/PF4.json": "0826b0ac6c87478393b697d175031a990b1e1b94a1e7d0032bd0db57ede618ed",
     "scenarios/grids.json": "d78cb7f258da2447747d5dabfabddbedad9988d42378bc79258743bdebbe1630",
     "scenarios/matrix.json": "b6ed49fec87c4d9532789230784c3268e7f390534aaf6fe51413cc841d868fe1",
     "scenarios/sanity_labels.json": "2569e907018306bc878ea82497c341b5d179a907e38657566efb3fa39f9509c4",
     "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "tests/test_mutations.py": "800f4b588bb5e27c05b4ae54179eded5570dda43db9f426dfe888204e203f09a",
-    "tests/test_revision_v1_1.py": "6bcb9f03c5d53e5ce7514aadfd507b6290718560f4c9e70d39e9706587dc6326",
-    "tests/test_rules.py": "9bfc5795f6e00c3da93a9d369fdefea5ae278910ac98ec931a67419f3d71d5dc"
+    "tests/test_mutations.py": "e23d88ce64d049bd13c9d7af1718839943fba9749e2bbb53b33c5cd383c5236a",
+    "tests/test_revision_v1_1.py": "9632dcd111efc25eac82af3eb48990153bf0d050b1e7392720d7dd2ebd26ded7",
+    "tests/test_rules.py": "9bfc5795f6e00c3da93a9d369fdefea5ae278910ac98ec931a67419f3d71d5dc",
+    "tests/test_v1_2.py": "893fdf099ac49031e2761810cb39b313dc98e5dd458ca0307d0733771411ed55"
+  },
+  "study_version": "v1.2",
+  "unfrozen_inputs_sha256": {
+    "notes/prediction_explanations.md": "4e3237521744d1dc2a3d9c267caaeb1d8daf890e273f2272e9ba00f52a065eef"
   },
   "validation_all_ok": true
 }

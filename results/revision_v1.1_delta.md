@@ -167,7 +167,7 @@ No value changed.
 
 ## v1.1 -> v1.1.1
 
-Old: committed v1.1 results (git 622e1f1, `baselines/v1.1/`). New: this run (v1.1.1). Rows are keyed as shown; a cell reads `field: old -> new`. Unchanged rows are omitted.
+Old: committed v1.1 results (git 622e1f1, `baselines/v1.1/`). New: committed v1.1.1 results (git b95a667, `baselines/v1.1.1/`). Rows are keyed as shown; a cell reads `field: old -> new`. Unchanged rows are omitted.
 
 | file compared | old sha256 |
 |---|---|

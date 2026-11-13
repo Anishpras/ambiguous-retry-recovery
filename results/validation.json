@@ -52,7 +52,7 @@
   {
     "check": "V2_seq_vs_delivery_order_and_duplicate_event_ids",
     "ok": true,
-    "detail": "[(8, 'committed', 212, 'ev-e0307a811cf1'), (9, 'committed', 212, 'ev-e0307a811cf1'), (12, 'processing', 110, 'ev-8457bb23a901')]"
+    "detail": "[(8, 'committed', 2000, 'ev-e0307a811cf1'), (9, 'committed', 2000, 'ev-e0307a811cf1'), (12, 'processing', 1000, 'ev-8457bb23a901')]"
   },
   {
     "check": "V2_deferred_not_terminal_and_violation_only_in_S15",
@@ -68,6 +68,16 @@
     "check": "V2_provider_seq_increases_in_emission_order",
     "ok": true,
     "detail": "[]"
+  },
+  {
+    "check": "V2_provider_seq_monotone_with_delayed_arrival",
+    "ok": true,
+    "detail": "[(11, 11000), (11, 11001), (12, 12000)]"
+  },
+  {
+    "check": "V2_repeat_emission_distinct_event_id",
+    "ok": true,
+    "detail": "[(3, 'ev-ac85340b7a4f'), (4, 'ev-ac85340b7a4f'), (5, 'ev-8afddeb7a9c8'), (6, 'ev-8afddeb7a9c8')]"
   },
   {
     "check": "V3_C_older_receipt_cannot_overturn_commit",
@@ -165,6 +175,11 @@
     "detail": "D dispatches=2 C dispatches=1 C belief=failed"
   },
   {
+    "check": "V3_DI_resend_after_error_and_rearmed_per_attempt",
+    "ok": true,
+    "detail": "dispatches after error+poll=2, after a2 timeout+poll=3"
+  },
+  {
     "check": "V3_DI_in_progress_keeps_waiting",
     "ok": true,
     "detail": "after in_progress=(2, 'unresolved') final=complete"
@@ -182,17 +197,17 @@
   {
     "check": "V4_S08_S09_identical_A",
     "ok": true,
-    "detail": "1053 bytes"
+    "detail": "1054 bytes"
   },
   {
     "check": "V4_S08_S09_identical_B",
     "ok": true,
-    "detail": "1179 bytes"
+    "detail": "1180 bytes"
   },
   {
     "check": "V4_S08_S09_identical_Bw",
     "ok": true,
-    "detail": "1287 bytes"
+    "detail": "1288 bytes"
   },
   {
     "check": "V4_S08_S09_identical_C",
@@ -212,7 +227,7 @@
   {
     "check": "V4_S08_S09_identical_A-fk",
     "ok": true,
-    "detail": "1071 bytes"
+    "detail": "1072 bytes"
   },
   {
     "check": "V4_effect_ids_opaque_format",
@@ -227,7 +242,7 @@
   {
     "check": "unit_and_mutation_tests",
     "ok": true,
-    "detail": "ran=17 failures=0 errors=0"
+    "detail": "ran=25 failures=0 errors=0"
   },
   {
     "check": "V4_matrix_S08_S09_identical_A",

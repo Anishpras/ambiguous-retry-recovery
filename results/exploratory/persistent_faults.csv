@@ -1,0 +1,69 @@
+contract,policy,scenario,effects_H,effects_F,duplicate,belief_H,false_failure,false_complete,unresolved,dispatches,dispatch_times,commits
+1,A,PF1,3,3,1,failed,1,0,0,3,a1@0 a2@5 a3@10,a1@2 a2@7 a3@12
+2,A,PF1,1,1,0,failed,1,0,0,3,a1@0 a2@5 a3@10,a1@2
+1,B,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,B,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,Bw,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,Bw,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,C,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,C,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,D,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,D,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,D+I,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,D+I,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,A-fk,PF1,3,3,1,failed,1,0,0,3,a1@0 a2@5 a3@10,a1@2 a2@7 a3@12
+1,ORACLE-S,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,ORACLE-S,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,ORACLE-O,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,ORACLE-O,PF1,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,A,PF2,3,3,1,failed,1,0,0,3,a1@0 a2@5 a3@10,a1@2 a2@7 a3@12
+2,A,PF2,1,1,0,failed,1,0,0,3,a1@0 a2@5 a3@10,a1@2
+1,B,PF2,3,3,1,failed,1,0,0,3,a1@0 a2@6 a3@12,a1@2 a2@8 a3@14
+2,B,PF2,1,1,0,failed,1,0,0,3,a1@0 a2@6 a3@12,a1@2
+1,Bw,PF2,3,3,1,unresolved,0,0,1,3,a1@0 a2@21 a3@42,a1@2 a2@23 a3@44
+2,Bw,PF2,1,1,0,unresolved,0,0,1,3,a1@0 a2@21 a3@42,a1@2
+1,C,PF2,1,1,0,unresolved,0,0,1,1,a1@0,a1@2
+2,C,PF2,1,1,0,unresolved,0,0,1,1,a1@0,a1@2
+1,D,PF2,1,1,0,unresolved,0,0,1,1,a1@0,a1@2
+2,D,PF2,1,1,0,unresolved,0,0,1,1,a1@0,a1@2
+1,D+I,PF2,1,1,0,unresolved,0,0,1,1,a1@0,a1@2
+2,D+I,PF2,1,1,0,unresolved,0,0,1,3,a1@0 a2@6 a3@16,a1@2
+2,A-fk,PF2,3,3,1,failed,1,0,0,3,a1@0 a2@5 a3@10,a1@2 a2@7 a3@12
+1,ORACLE-S,PF2,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,ORACLE-S,PF2,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,ORACLE-O,PF2,1,1,0,complete,0,0,0,1,a1@0,a1@2
+2,ORACLE-O,PF2,1,1,0,complete,0,0,0,1,a1@0,a1@2
+1,A,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+2,A,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+1,B,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@6 a3@12,
+2,B,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@6 a3@12,
+1,Bw,PF3,0,0,0,unresolved,0,0,1,3,a1@0 a2@21 a3@42,
+2,Bw,PF3,0,0,0,unresolved,0,0,1,3,a1@0 a2@21 a3@42,
+1,C,PF3,0,0,0,unresolved,0,0,1,1,a1@0,
+2,C,PF3,0,0,0,unresolved,0,0,1,1,a1@0,
+1,D,PF3,0,0,0,unresolved,0,0,1,1,a1@0,
+2,D,PF3,0,0,0,unresolved,0,0,1,1,a1@0,
+1,D+I,PF3,0,0,0,unresolved,0,0,1,1,a1@0,
+2,D+I,PF3,0,0,0,unresolved,0,0,1,3,a1@0 a2@6 a3@16,
+2,A-fk,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+1,ORACLE-S,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+2,ORACLE-S,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+1,ORACLE-O,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+2,ORACLE-O,PF3,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+1,A,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@5,
+2,A,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@5,
+1,B,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@6 a3@6,
+2,B,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@6 a3@6,
+1,Bw,PF4,0,0,0,unresolved,0,0,1,3,a1@0 a2@21 a3@42,
+2,Bw,PF4,0,0,0,unresolved,0,0,1,3,a1@0 a2@21 a3@42,
+1,C,PF4,0,0,0,failed,0,0,0,1,a1@0,
+2,C,PF4,0,0,0,failed,0,0,0,1,a1@0,
+1,D,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+2,D,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+1,D+I,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+2,D+I,PF4,0,0,0,unresolved,0,0,1,3,a1@0 a2@5 a3@6,
+2,A-fk,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@5,
+1,ORACLE-S,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+2,ORACLE-S,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+1,ORACLE-O,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,
+2,ORACLE-O,PF4,0,0,0,failed,0,0,0,3,a1@0 a2@5 a3@10,

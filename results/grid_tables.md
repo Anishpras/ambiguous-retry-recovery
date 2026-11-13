@@ -1,6 +1,6 @@
 # Secondary grid (PROTOCOL.md §4.3)
 
-Deterministic timing boundaries, not rate estimates. Cell code = effects at F + belief at H (C complete, F failed, U unresolved); `2C` is a duplicate believed complete, `1U` a correct effect left unresolved, `1F` a false failure. Later attempts follow the nominal rule. References (ORACLE-S, ORACLE-O) read hidden state. A-fk runs under contract 2 only.
+Deterministic timing boundaries, not rate estimates. Cell code = effects at F + belief at H (C complete, F failed, U unresolved); `2C` is a duplicate believed complete, `1U` a correct effect left unresolved, `1F` a false failure. Later attempts follow the nominal rule. References (ORACLE-S, a state probe and not a ceiling; ORACLE-O) read hidden state. A-fk runs under contract 2 only. TTC counts certified, exactly-once cells only (H2).
 
 ## Duplicate thresholds
 
@@ -16,8 +16,8 @@ G1: for each webhook delay W, the smallest status lag L at which the policy dupl
 | C | - | - | - | - | - | - | - | - |
 | D | - | - | - | - | - | - | - | - |
 | D+I (optional) | - | - | - | - | - | - | - | - |
-| ORACLE-S (reference) | - | - | - | - | - | - | - | - |
-| ORACLE-O (reference) | - | - | - | - | - | - | - | - |
+| ORACLE-S (state-probe reference, not a ceiling) | - | - | - | - | - | - | - | - |
+| ORACLE-O (outcome-oracle reference) | - | - | - | - | - | - | - | - |
 
 ### G1, contract 2
 
@@ -30,8 +30,8 @@ G1: for each webhook delay W, the smallest status lag L at which the policy dupl
 | D | - | - | - | - | - | - | - | - |
 | D+I (optional) | - | - | - | - | - | - | - | - |
 | A-fk (ablation) | - | - | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
-| ORACLE-S (reference) | - | - | - | - | - | - | - | - |
-| ORACLE-O (reference) | - | - | - | - | - | - | - | - |
+| ORACLE-S (state-probe reference, not a ceiling) | - | - | - | - | - | - | - | - |
+| ORACLE-O (outcome-oracle reference) | - | - | - | - | - | - | - | - |
 
 G2: for each commit delay E, the smallest status lag L at which the policy duplicates.
 
@@ -45,8 +45,8 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | C | - | - | - | - | - | - | - |
 | D | - | - | - | - | - | - | - |
 | D+I (optional) | - | - | - | - | - | - | - |
-| ORACLE-S (reference) | - | - | 0+ | 0+ | 0+ | 0+ | 0+ |
-| ORACLE-O (reference) | - | - | - | - | - | - | - |
+| ORACLE-S (state-probe reference, not a ceiling) | - | - | 0+ | 0+ | 0+ | 0+ | 0+ |
+| ORACLE-O (outcome-oracle reference) | - | - | - | - | - | - | - |
 
 ### G2, contract 2
 
@@ -59,55 +59,55 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | D | - | - | - | - | - | - | - |
 | D+I (optional) | - | - | - | - | - | - | - |
 | A-fk (ablation) | - | 0+ | 0+ | 0+ | 0+ | 0+ | 0+ |
-| ORACLE-S (reference) | - | - | - | - | - | - | - |
-| ORACLE-O (reference) | - | - | - | - | - | - | - |
+| ORACLE-S (state-probe reference, not a ceiling) | - | - | - | - | - | - | - |
+| ORACLE-O (outcome-oracle reference) | - | - | - | - | - | - | - |
 
 ## Summary counts per grid
 
 | grid | contract | policy | duplicates | certified & exactly once | unresolved at H | false failure | retries after confirmed completion | TTC median (coverage) |
 |---|---|---|---|---|---|---|---|---|
-| G1 | 1 | A | 54/72 | 18/72 | 0/72 | 0/72 | 0 | 8 (72/72) |
-| G1 | 1 | B | 30/72 | 42/72 | 0/72 | 0/72 | 0 | 6 (72/72) |
-| G1 | 1 | Bw | 9/72 | 63/72 | 0/72 | 0/72 | 0 | 14 (72/72) |
+| G1 | 1 | A | 54/72 | 18/72 | 0/72 | 0/72 | 0 | 3.5 (18/72) |
+| G1 | 1 | B | 30/72 | 42/72 | 0/72 | 0/72 | 0 | 6 (42/72) |
+| G1 | 1 | Bw | 9/72 | 63/72 | 0/72 | 0/72 | 0 | 10 (63/72) |
 | G1 | 1 | C | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 1 | D | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 1 | D+I (optional) | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
-| G1 | 1 | ORACLE-S (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
-| G1 | 1 | ORACLE-O (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
+| G1 | 1 | ORACLE-S (state-probe reference, not a ceiling) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
+| G1 | 1 | ORACLE-O (outcome-oracle reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
 | G1 | 2 | A | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 7 (72/72) |
 | G1 | 2 | B | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 6 (72/72) |
 | G1 | 2 | Bw | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 14 (72/72) |
 | G1 | 2 | C | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 2 | D | 0/72 | 68/72 | 4/72 | 0/72 | 0 | 6 (68/72) |
 | G1 | 2 | D+I (optional) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 6 (72/72) |
-| G1 | 2 | A-fk (ablation) | 54/72 | 18/72 | 0/72 | 0/72 | 0 | 8 (72/72) |
-| G1 | 2 | ORACLE-S (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
-| G1 | 2 | ORACLE-O (reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
-| G2 | 1 | A | 36/42 | 6/42 | 0/42 | 0/42 | 0 | 8 (42/42) |
-| G2 | 1 | B | 30/42 | 12/42 | 0/42 | 0/42 | 0 | 9 (42/42) |
-| G2 | 1 | Bw | 18/42 | 24/42 | 0/42 | 0/42 | 0 | 15 (42/42) |
+| G1 | 2 | A-fk (ablation) | 54/72 | 18/72 | 0/72 | 0/72 | 0 | 3.5 (18/72) |
+| G1 | 2 | ORACLE-S (state-probe reference, not a ceiling) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
+| G1 | 2 | ORACLE-O (outcome-oracle reference) | 0/72 | 72/72 | 0/72 | 0/72 | 0 | 5 (72/72) |
+| G2 | 1 | A | 36/42 | 6/42 | 0/42 | 0/42 | 0 | 4 (6/42) |
+| G2 | 1 | B | 30/42 | 12/42 | 0/42 | 0/42 | 0 | 5 (12/42) |
+| G2 | 1 | Bw | 18/42 | 24/42 | 0/42 | 0/42 | 0 | 7.5 (24/42) |
 | G2 | 1 | C | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 1 | D | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 1 | D+I (optional) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
-| G2 | 1 | ORACLE-S (reference) | 30/42 | 12/42 | 0/42 | 0/42 | 0 | 8 (42/42) |
-| G2 | 1 | ORACLE-O (reference) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
+| G2 | 1 | ORACLE-S (state-probe reference, not a ceiling) | 30/42 | 12/42 | 0/42 | 0/42 | 0 | 4.5 (12/42) |
+| G2 | 1 | ORACLE-O (outcome-oracle reference) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 2 | A | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 12 (36/42) |
 | G2 | 2 | B | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 11.5 (36/42) |
 | G2 | 2 | Bw | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 12 (36/42) |
 | G2 | 2 | C | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 2 | D | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G2 | 2 | D+I (optional) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 11.5 (36/42) |
-| G2 | 2 | A-fk (ablation) | 36/42 | 6/42 | 0/42 | 0/42 | 0 | 8 (42/42) |
-| G2 | 2 | ORACLE-S (reference) | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 11 (36/42) |
-| G2 | 2 | ORACLE-O (reference) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
+| G2 | 2 | A-fk (ablation) | 36/42 | 6/42 | 0/42 | 0/42 | 0 | 4 (6/42) |
+| G2 | 2 | ORACLE-S (state-probe reference, not a ceiling) | 0/42 | 36/42 | 0/42 | 6/42 | 0 | 11 (36/42) |
+| G2 | 2 | ORACLE-O (outcome-oracle reference) | 0/42 | 36/42 | 6/42 | 0/42 | 0 | 12 (36/42) |
 | G3 | 1 | A | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
 | G3 | 1 | B | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 9 (6/6) |
 | G3 | 1 | Bw | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 24 (6/6) |
 | G3 | 1 | C | 0/6 | 0/6 | 6/6 | 0/6 | 0 | - (0/6) |
 | G3 | 1 | D | 0/6 | 0/6 | 6/6 | 0/6 | 0 | - (0/6) |
 | G3 | 1 | D+I (optional) | 0/6 | 0/6 | 6/6 | 0/6 | 0 | - (0/6) |
-| G3 | 1 | ORACLE-S (reference) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
-| G3 | 1 | ORACLE-O (reference) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
+| G3 | 1 | ORACLE-S (state-probe reference, not a ceiling) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
+| G3 | 1 | ORACLE-O (outcome-oracle reference) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
 | G3 | 2 | A | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
 | G3 | 2 | B | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 9 (6/6) |
 | G3 | 2 | Bw | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 24 (6/6) |
@@ -115,8 +115,8 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | G3 | 2 | D | 0/6 | 0/6 | 6/6 | 0/6 | 0 | - (0/6) |
 | G3 | 2 | D+I (optional) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 9 (6/6) |
 | G3 | 2 | A-fk (ablation) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
-| G3 | 2 | ORACLE-S (reference) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
-| G3 | 2 | ORACLE-O (reference) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
+| G3 | 2 | ORACLE-S (state-probe reference, not a ceiling) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
+| G3 | 2 | ORACLE-O (outcome-oracle reference) | 0/6 | 6/6 | 0/6 | 0/6 | 0 | 8 (6/6) |
 
 ## G1 cells (rows L, columns W)
 
@@ -204,7 +204,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 64 | 1C | 1C | 1C | 1C | 1C | 1C | 1U | 1U |
 | never | 1C | 1C | 1C | 1C | 1C | 1C | 1U | 1U |
 
-### G1, contract 1, ORACLE-S (reference)
+### G1, contract 1, ORACLE-S (state-probe reference, not a ceiling)
 
 | L \ W | 1 | 2 | 4 | 8 | 16 | 32 | 64 | lost |
 |---|---|---|---|---|---|---|---|---|
@@ -218,7 +218,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 64 | 1C | 1C | 1C | 1C | 1C | 1C | 1C | 1C |
 | never | 1C | 1C | 1C | 1C | 1C | 1C | 1C | 1C |
 
-### G1, contract 1, ORACLE-O (reference)
+### G1, contract 1, ORACLE-O (outcome-oracle reference)
 
 | L \ W | 1 | 2 | 4 | 8 | 16 | 32 | 64 | lost |
 |---|---|---|---|---|---|---|---|---|
@@ -330,7 +330,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 64 | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
 | never | 1C | 1C | 2C | 2C | 2C | 2C | 2C | 2C |
 
-### G1, contract 2, ORACLE-S (reference)
+### G1, contract 2, ORACLE-S (state-probe reference, not a ceiling)
 
 | L \ W | 1 | 2 | 4 | 8 | 16 | 32 | 64 | lost |
 |---|---|---|---|---|---|---|---|---|
@@ -344,7 +344,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 64 | 1C | 1C | 1C | 1C | 1C | 1C | 1C | 1C |
 | never | 1C | 1C | 1C | 1C | 1C | 1C | 1C | 1C |
 
-### G1, contract 2, ORACLE-O (reference)
+### G1, contract 2, ORACLE-O (outcome-oracle reference)
 
 | L \ W | 1 | 2 | 4 | 8 | 16 | 32 | 64 | lost |
 |---|---|---|---|---|---|---|---|---|
@@ -432,7 +432,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 48 | 1C | 1C | 1C | 1C | 1C | 1C |
 | 96 | 1U | 1U | 1U | 1U | 1U | 1U |
 
-### G2, contract 1, ORACLE-S (reference)
+### G2, contract 1, ORACLE-S (state-probe reference, not a ceiling)
 
 | E \ L | 0 | 1 | 4 | 16 | 64 | never |
 |---|---|---|---|---|---|---|
@@ -444,7 +444,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 48 | 2C | 2C | 2C | 2C | 2C | 2C |
 | 96 | 2C | 2C | 2C | 2C | 2C | 2C |
 
-### G2, contract 1, ORACLE-O (reference)
+### G2, contract 1, ORACLE-O (outcome-oracle reference)
 
 | E \ L | 0 | 1 | 4 | 16 | 64 | never |
 |---|---|---|---|---|---|---|
@@ -540,7 +540,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 48 | 2C | 2C | 2C | 2C | 2C | 2C |
 | 96 | 2C | 2C | 2C | 2C | 2C | 2C |
 
-### G2, contract 2, ORACLE-S (reference)
+### G2, contract 2, ORACLE-S (state-probe reference, not a ceiling)
 
 | E \ L | 0 | 1 | 4 | 16 | 64 | never |
 |---|---|---|---|---|---|---|
@@ -552,7 +552,7 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 48 | 1C | 1C | 1C | 1C | 1C | 1C |
 | 96 | 1F | 1F | 1F | 1F | 1F | 1F |
 
-### G2, contract 2, ORACLE-O (reference)
+### G2, contract 2, ORACLE-O (outcome-oracle reference)
 
 | E \ L | 0 | 1 | 4 | 16 | 64 | never |
 |---|---|---|---|---|---|---|
@@ -574,8 +574,8 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 1 | C | 0U | 0U | 0U | 0U | 0U | 0U |
 | 1 | D | 0U | 0U | 0U | 0U | 0U | 0U |
 | 1 | D+I (optional) | 0U | 0U | 0U | 0U | 0U | 0U |
-| 1 | ORACLE-S (reference) | 1C | 1C | 1C | 1C | 1C | 1C |
-| 1 | ORACLE-O (reference) | 1C | 1C | 1C | 1C | 1C | 1C |
+| 1 | ORACLE-S (state-probe reference, not a ceiling) | 1C | 1C | 1C | 1C | 1C | 1C |
+| 1 | ORACLE-O (outcome-oracle reference) | 1C | 1C | 1C | 1C | 1C | 1C |
 | 2 | A | 1C | 1C | 1C | 1C | 1C | 1C |
 | 2 | B | 1C | 1C | 1C | 1C | 1C | 1C |
 | 2 | Bw | 1C | 1C | 1C | 1C | 1C | 1C |
@@ -583,8 +583,8 @@ G2: for each commit delay E, the smallest status lag L at which the policy dupli
 | 2 | D | 0U | 0U | 0U | 0U | 0U | 0U |
 | 2 | D+I (optional) | 1C | 1C | 1C | 1C | 1C | 1C |
 | 2 | A-fk (ablation) | 1C | 1C | 1C | 1C | 1C | 1C |
-| 2 | ORACLE-S (reference) | 1C | 1C | 1C | 1C | 1C | 1C |
-| 2 | ORACLE-O (reference) | 1C | 1C | 1C | 1C | 1C | 1C |
+| 2 | ORACLE-S (state-probe reference, not a ceiling) | 1C | 1C | 1C | 1C | 1C | 1C |
+| 2 | ORACLE-O (outcome-oracle reference) | 1C | 1C | 1C | 1C | 1C | 1C |
 
 ## Time to confirmed completion in G1, contract 1 (C and D; ticks from start, `-` = not confirmed by H)
 

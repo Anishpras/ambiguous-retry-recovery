@@ -14,11 +14,11 @@
 {"details":{"attempt_id":"op-1#a2","dedup_record":true},"event":"arrival_accepted","n":7,"op":"op-1","phase":1,"t":4,"visible":false,"who":"provider"}
 {"details":{"attempt_id":"op-1#a2","effect_id":"3312b063a674"},"event":"commit","n":9,"op":"op-1","phase":1,"t":5,"visible":false,"who":"provider"}
 {"details":{"attempt_id":"op-1#a2","commit_time":5,"effect_id":"3312b063a674","violation":false},"event":"ledger_entry","n":9,"op":"op-1","phase":1,"t":5,"visible":false,"who":"scorer"}
-{"details":{"attempt_id":"op-1#a2","deliveries":[7],"event":"committed","event_id":"ev-d426b08e10ac","provider_seq":522},"event":"webhook_emitted","n":9,"op":"op-1","phase":1,"t":5,"visible":false,"who":"provider"}
+{"details":{"attempt_id":"op-1#a2","deliveries":[7],"event":"committed","event_id":"ev-d426b08e10ac","provider_seq":5000},"event":"webhook_emitted","n":9,"op":"op-1","phase":1,"t":5,"visible":false,"who":"provider"}
 {"details":{"arrives_at":6,"attempt_id":"op-1#a2","kind":"ok"},"event":"response_sent","n":9,"op":"op-1","phase":1,"t":5,"visible":false,"who":"provider"}
 {"details":{"attempt_id":"op-1#a1"},"event":"timeout_suppressed","n":4,"op":"op-1","phase":3,"t":5,"visible":false,"who":"runtime"}
 {"details":{"obs":{"attempt_id":"op-1#a2","effect_id":"3312b063a674","kind":"ok","op_key":"op-1","payload_hash":"fe23b698518f2dfb5d16736096c6f4afca633d4d7d52e64e93710a335f14adfe","t":6,"type":"response"}},"event":"observe","n":11,"op":"op-1","phase":2,"t":6,"visible":true,"who":"client"}
 {"details":{"belief":"complete"},"event":"belief","n":11,"op":"op-1","phase":2,"t":6,"visible":true,"who":"client"}
-{"details":{"obs":{"attempt_id":"op-1#a2","effect_id":"3312b063a674","event":"committed","event_id":"ev-d426b08e10ac","op_key":"op-1","payload_hash":"fe23b698518f2dfb5d16736096c6f4afca633d4d7d52e64e93710a335f14adfe","provider_seq":522,"t":7,"type":"webhook"}},"event":"observe","n":10,"op":"op-1","phase":2,"t":7,"visible":true,"who":"client"}
+{"details":{"obs":{"attempt_id":"op-1#a2","effect_id":"3312b063a674","event":"committed","event_id":"ev-d426b08e10ac","op_key":"op-1","payload_hash":"fe23b698518f2dfb5d16736096c6f4afca633d4d7d52e64e93710a335f14adfe","provider_seq":5000,"t":7,"type":"webhook"}},"event":"observe","n":10,"op":"op-1","phase":2,"t":7,"visible":true,"who":"client"}
 {"details":{"attempt_id":"op-1#a2"},"event":"timeout_suppressed","n":8,"op":"op-1","phase":3,"t":8,"visible":false,"who":"runtime"}
 {"details":{"belief":"complete","conflicts":0},"event":"horizon","n":2,"op":"op-1","phase":4,"t":60,"visible":true,"who":"client"}

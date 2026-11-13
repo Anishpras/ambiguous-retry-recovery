@@ -1,0 +1,443 @@
+row,options,policy,contract,scope,N,duplicate,exactly_once,unresolved,false_failure,false_complete
+baseline,,A,1,core,17,12,5,0,0,0
+baseline,,A,1,grid,120,90,30,0,0,0
+baseline,,A,2,core,17,1,16,0,1,0
+baseline,,A,2,grid,120,0,120,0,6,0
+baseline,,B,1,core,17,8,9,0,0,0
+baseline,,B,1,grid,120,60,60,0,0,0
+baseline,,B,2,core,17,1,16,0,1,0
+baseline,,B,2,grid,120,0,120,0,6,0
+baseline,,Bw,1,core,17,3,14,0,0,0
+baseline,,Bw,1,grid,120,27,93,0,0,0
+baseline,,Bw,2,core,17,0,17,0,1,0
+baseline,,Bw,2,grid,120,0,120,0,6,0
+baseline,,C,1,core,17,0,14,4,0,0
+baseline,,C,1,grid,120,0,114,16,0,0
+baseline,,C,2,core,17,0,14,4,0,0
+baseline,,C,2,grid,120,0,114,16,0,0
+baseline,,D,1,core,17,1,15,4,0,0
+baseline,,D,1,grid,120,0,114,16,0,0
+baseline,,D,2,core,17,1,15,4,0,0
+baseline,,D,2,grid,120,0,114,16,0,0
+baseline,,D+I,1,core,17,1,15,4,0,0
+baseline,,D+I,1,grid,120,0,114,16,0,0
+baseline,,D+I,2,core,17,1,16,1,0,0
+baseline,,D+I,2,grid,120,0,120,6,0,0
+baseline,,A-fk,2,core,17,12,5,0,0,0
+baseline,,A-fk,2,grid,120,90,30,0,0,0
+baseline,,ORACLE-S,1,core,17,4,13,0,0,0
+baseline,,ORACLE-S,1,grid,120,30,90,0,0,0
+baseline,,ORACLE-S,2,core,17,1,16,0,1,0
+baseline,,ORACLE-S,2,grid,120,0,120,0,6,0
+baseline,,ORACLE-O,1,core,17,0,17,1,0,0
+baseline,,ORACLE-O,1,grid,120,0,120,6,0,0
+baseline,,ORACLE-O,2,core,17,0,17,1,0,0
+baseline,,ORACLE-O,2,grid,120,0,120,6,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,A,1,core,17,12,5,0,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,A,1,grid,120,90,30,0,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,A,2,core,17,1,16,0,1,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,A,2,grid,120,0,120,0,6,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,B,1,core,17,5,12,1,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,B,1,grid,120,40,80,3,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,B,2,core,17,1,16,1,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,B,2,grid,120,0,120,3,3,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,Bw,1,core,17,2,15,1,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,Bw,1,grid,120,15,105,4,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,Bw,2,core,17,0,17,1,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,Bw,2,grid,120,0,120,4,2,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,C,1,core,17,0,14,4,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,C,1,grid,120,0,114,16,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,C,2,core,17,0,14,4,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,C,2,grid,120,0,114,16,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D,1,core,17,1,15,4,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D,1,grid,120,0,114,16,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D,2,core,17,1,15,4,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D,2,grid,120,0,114,16,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D+I,1,core,17,1,15,4,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D+I,1,grid,120,0,114,16,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D+I,2,core,17,1,16,1,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,D+I,2,grid,120,0,120,6,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,A-fk,2,core,17,12,5,0,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,A-fk,2,grid,120,90,30,0,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-S,1,core,17,4,13,0,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-S,1,grid,120,30,90,0,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-S,2,core,17,1,16,0,1,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-S,2,grid,120,0,120,0,6,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-O,1,core,17,0,17,1,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-O,1,grid,120,0,120,6,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-O,2,core,17,0,17,1,0,0
+status_lists_pending,reread_on_pending=True status_lists_pending=True,ORACLE-O,2,grid,120,0,120,6,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,A,1,core,17,10,7,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,A,1,grid,120,90,30,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,A,2,core,17,1,16,0,1,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,A,2,grid,120,0,120,0,6,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,B,1,core,17,8,9,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,B,1,grid,120,60,60,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,B,2,core,17,1,16,0,1,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,B,2,grid,120,0,120,0,6,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,Bw,1,core,17,3,14,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,Bw,1,grid,120,27,93,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,Bw,2,core,17,0,17,0,1,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,Bw,2,grid,120,0,120,0,6,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,C,1,core,17,0,14,4,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,C,1,grid,120,0,114,16,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,C,2,core,17,0,14,4,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,C,2,grid,120,0,114,16,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D,1,core,17,1,15,4,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D,1,grid,120,0,114,16,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D,2,core,17,1,15,4,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D,2,grid,120,0,114,16,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D+I,1,core,17,1,15,4,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D+I,1,grid,120,0,114,16,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D+I,2,core,17,1,16,1,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,D+I,2,grid,120,0,120,6,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,A-fk,2,core,17,10,7,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,A-fk,2,grid,120,90,30,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-S,1,core,17,4,13,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-S,1,grid,120,30,90,0,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-S,2,core,17,1,16,0,1,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-S,2,grid,120,0,120,0,6,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-O,1,core,17,0,17,1,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-O,1,grid,120,0,120,6,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-O,2,core,17,0,17,1,0,0
+webhooks_not_by_name,deferred_is_progress=True ignore_failure_webhooks_once_complete=True,ORACLE-O,2,grid,120,0,120,6,0,0
+bw_without_C15,bw_skip_read_if_complete=False,A,1,core,17,12,5,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,A,1,grid,120,90,30,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,A,2,core,17,1,16,0,1,0
+bw_without_C15,bw_skip_read_if_complete=False,A,2,grid,120,0,120,0,6,0
+bw_without_C15,bw_skip_read_if_complete=False,B,1,core,17,8,9,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,B,1,grid,120,60,60,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,B,2,core,17,1,16,0,1,0
+bw_without_C15,bw_skip_read_if_complete=False,B,2,grid,120,0,120,0,6,0
+bw_without_C15,bw_skip_read_if_complete=False,Bw,1,core,17,3,14,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,Bw,1,grid,120,27,93,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,Bw,2,core,17,0,17,0,1,0
+bw_without_C15,bw_skip_read_if_complete=False,Bw,2,grid,120,0,120,0,6,0
+bw_without_C15,bw_skip_read_if_complete=False,C,1,core,17,0,14,4,0,0
+bw_without_C15,bw_skip_read_if_complete=False,C,1,grid,120,0,114,16,0,0
+bw_without_C15,bw_skip_read_if_complete=False,C,2,core,17,0,14,4,0,0
+bw_without_C15,bw_skip_read_if_complete=False,C,2,grid,120,0,114,16,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D,1,core,17,1,15,4,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D,1,grid,120,0,114,16,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D,2,core,17,1,15,4,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D,2,grid,120,0,114,16,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D+I,1,core,17,1,15,4,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D+I,1,grid,120,0,114,16,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D+I,2,core,17,1,16,1,0,0
+bw_without_C15,bw_skip_read_if_complete=False,D+I,2,grid,120,0,120,6,0,0
+bw_without_C15,bw_skip_read_if_complete=False,A-fk,2,core,17,12,5,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,A-fk,2,grid,120,90,30,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-S,1,core,17,4,13,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-S,1,grid,120,30,90,0,0,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-S,2,core,17,1,16,0,1,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-S,2,grid,120,0,120,0,6,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-O,1,core,17,0,17,1,0,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-O,1,grid,120,0,120,6,0,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-O,2,core,17,0,17,1,0,0
+bw_without_C15,bw_skip_read_if_complete=False,ORACLE-O,2,grid,120,0,120,6,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,A,1,core,17,12,5,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,A,1,grid,120,90,30,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,A,2,core,17,1,16,0,1,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,A,2,grid,120,0,120,0,6,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,B,1,core,17,8,9,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,B,1,grid,120,70,50,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,B,2,core,17,1,16,0,1,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,B,2,grid,120,0,120,0,6,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,Bw,1,core,17,5,12,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,Bw,1,grid,120,44,76,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,Bw,2,core,17,0,17,0,1,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,Bw,2,grid,120,0,120,0,6,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,C,1,core,17,0,14,4,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,C,1,grid,120,0,114,16,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,C,2,core,17,0,14,4,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,C,2,grid,120,0,114,16,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D,1,core,17,1,15,4,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D,1,grid,120,0,114,16,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D,2,core,17,1,15,4,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D,2,grid,120,0,114,16,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D+I,1,core,17,1,15,4,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D+I,1,grid,120,0,114,16,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D+I,2,core,17,1,16,1,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,D+I,2,grid,120,0,120,6,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,A-fk,2,core,17,12,5,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,A-fk,2,grid,120,90,30,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-S,1,core,17,4,13,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-S,1,grid,120,30,90,0,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-S,2,core,17,1,16,0,1,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-S,2,grid,120,0,120,0,6,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-O,1,core,17,0,17,1,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-O,1,grid,120,0,120,6,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-O,2,core,17,0,17,1,0,0
+bw_without_C15_or_reply_guard,bw_skip_read_if_complete=False ignore_status_replies_once_complete=False,ORACLE-O,2,grid,120,0,120,6,0,0
+tau_5,wait_tau=5,A,1,core,17,12,5,0,0,0
+tau_5,wait_tau=5,A,1,grid,120,90,30,0,0,0
+tau_5,wait_tau=5,A,2,core,17,1,16,0,1,0
+tau_5,wait_tau=5,A,2,grid,120,0,120,0,6,0
+tau_5,wait_tau=5,B,1,core,17,8,9,0,0,0
+tau_5,wait_tau=5,B,1,grid,120,60,60,0,0,0
+tau_5,wait_tau=5,B,2,core,17,1,16,0,1,0
+tau_5,wait_tau=5,B,2,grid,120,0,120,0,6,0
+tau_5,wait_tau=5,Bw,1,core,17,7,10,0,0,0
+tau_5,wait_tau=5,Bw,1,grid,120,40,80,0,0,0
+tau_5,wait_tau=5,Bw,2,core,17,1,16,0,1,0
+tau_5,wait_tau=5,Bw,2,grid,120,0,120,0,6,0
+tau_5,wait_tau=5,C,1,core,17,0,14,4,0,0
+tau_5,wait_tau=5,C,1,grid,120,0,114,16,0,0
+tau_5,wait_tau=5,C,2,core,17,0,14,4,0,0
+tau_5,wait_tau=5,C,2,grid,120,0,114,16,0,0
+tau_5,wait_tau=5,D,1,core,17,1,15,4,0,0
+tau_5,wait_tau=5,D,1,grid,120,0,114,16,0,0
+tau_5,wait_tau=5,D,2,core,17,1,15,4,0,0
+tau_5,wait_tau=5,D,2,grid,120,0,114,16,0,0
+tau_5,wait_tau=5,D+I,1,core,17,1,15,4,0,0
+tau_5,wait_tau=5,D+I,1,grid,120,0,114,16,0,0
+tau_5,wait_tau=5,D+I,2,core,17,1,16,1,0,0
+tau_5,wait_tau=5,D+I,2,grid,120,0,120,6,0,0
+tau_5,wait_tau=5,A-fk,2,core,17,12,5,0,0,0
+tau_5,wait_tau=5,A-fk,2,grid,120,90,30,0,0,0
+tau_5,wait_tau=5,ORACLE-S,1,core,17,4,13,0,0,0
+tau_5,wait_tau=5,ORACLE-S,1,grid,120,30,90,0,0,0
+tau_5,wait_tau=5,ORACLE-S,2,core,17,1,16,0,1,0
+tau_5,wait_tau=5,ORACLE-S,2,grid,120,0,120,0,6,0
+tau_5,wait_tau=5,ORACLE-O,1,core,17,0,17,1,0,0
+tau_5,wait_tau=5,ORACLE-O,1,grid,120,0,120,6,0,0
+tau_5,wait_tau=5,ORACLE-O,2,core,17,0,17,1,0,0
+tau_5,wait_tau=5,ORACLE-O,2,grid,120,0,120,6,0,0
+tau_10,wait_tau=10,A,1,core,17,12,5,0,0,0
+tau_10,wait_tau=10,A,1,grid,120,90,30,0,0,0
+tau_10,wait_tau=10,A,2,core,17,1,16,0,1,0
+tau_10,wait_tau=10,A,2,grid,120,0,120,0,6,0
+tau_10,wait_tau=10,B,1,core,17,8,9,0,0,0
+tau_10,wait_tau=10,B,1,grid,120,60,60,0,0,0
+tau_10,wait_tau=10,B,2,core,17,1,16,0,1,0
+tau_10,wait_tau=10,B,2,grid,120,0,120,0,6,0
+tau_10,wait_tau=10,Bw,1,core,17,4,13,0,0,0
+tau_10,wait_tau=10,Bw,1,grid,120,34,86,0,0,0
+tau_10,wait_tau=10,Bw,2,core,17,0,17,0,1,0
+tau_10,wait_tau=10,Bw,2,grid,120,0,120,0,6,0
+tau_10,wait_tau=10,C,1,core,17,0,14,4,0,0
+tau_10,wait_tau=10,C,1,grid,120,0,114,16,0,0
+tau_10,wait_tau=10,C,2,core,17,0,14,4,0,0
+tau_10,wait_tau=10,C,2,grid,120,0,114,16,0,0
+tau_10,wait_tau=10,D,1,core,17,1,15,4,0,0
+tau_10,wait_tau=10,D,1,grid,120,0,114,16,0,0
+tau_10,wait_tau=10,D,2,core,17,1,15,4,0,0
+tau_10,wait_tau=10,D,2,grid,120,0,114,16,0,0
+tau_10,wait_tau=10,D+I,1,core,17,1,15,4,0,0
+tau_10,wait_tau=10,D+I,1,grid,120,0,114,16,0,0
+tau_10,wait_tau=10,D+I,2,core,17,1,16,1,0,0
+tau_10,wait_tau=10,D+I,2,grid,120,0,120,6,0,0
+tau_10,wait_tau=10,A-fk,2,core,17,12,5,0,0,0
+tau_10,wait_tau=10,A-fk,2,grid,120,90,30,0,0,0
+tau_10,wait_tau=10,ORACLE-S,1,core,17,4,13,0,0,0
+tau_10,wait_tau=10,ORACLE-S,1,grid,120,30,90,0,0,0
+tau_10,wait_tau=10,ORACLE-S,2,core,17,1,16,0,1,0
+tau_10,wait_tau=10,ORACLE-S,2,grid,120,0,120,0,6,0
+tau_10,wait_tau=10,ORACLE-O,1,core,17,0,17,1,0,0
+tau_10,wait_tau=10,ORACLE-O,1,grid,120,0,120,6,0,0
+tau_10,wait_tau=10,ORACLE-O,2,core,17,0,17,1,0,0
+tau_10,wait_tau=10,ORACLE-O,2,grid,120,0,120,6,0,0
+tau_20,wait_tau=20,A,1,core,17,12,5,0,0,0
+tau_20,wait_tau=20,A,1,grid,120,90,30,0,0,0
+tau_20,wait_tau=20,A,2,core,17,1,16,0,1,0
+tau_20,wait_tau=20,A,2,grid,120,0,120,0,6,0
+tau_20,wait_tau=20,B,1,core,17,8,9,0,0,0
+tau_20,wait_tau=20,B,1,grid,120,60,60,0,0,0
+tau_20,wait_tau=20,B,2,core,17,1,16,0,1,0
+tau_20,wait_tau=20,B,2,grid,120,0,120,0,6,0
+tau_20,wait_tau=20,Bw,1,core,17,3,14,0,0,0
+tau_20,wait_tau=20,Bw,1,grid,120,26,94,0,0,0
+tau_20,wait_tau=20,Bw,2,core,17,0,17,1,0,0
+tau_20,wait_tau=20,Bw,2,grid,120,0,120,6,0,0
+tau_20,wait_tau=20,C,1,core,17,0,14,4,0,0
+tau_20,wait_tau=20,C,1,grid,120,0,114,16,0,0
+tau_20,wait_tau=20,C,2,core,17,0,14,4,0,0
+tau_20,wait_tau=20,C,2,grid,120,0,114,16,0,0
+tau_20,wait_tau=20,D,1,core,17,1,15,4,0,0
+tau_20,wait_tau=20,D,1,grid,120,0,114,16,0,0
+tau_20,wait_tau=20,D,2,core,17,1,15,4,0,0
+tau_20,wait_tau=20,D,2,grid,120,0,114,16,0,0
+tau_20,wait_tau=20,D+I,1,core,17,1,15,4,0,0
+tau_20,wait_tau=20,D+I,1,grid,120,0,114,16,0,0
+tau_20,wait_tau=20,D+I,2,core,17,1,16,1,0,0
+tau_20,wait_tau=20,D+I,2,grid,120,0,120,6,0,0
+tau_20,wait_tau=20,A-fk,2,core,17,12,5,0,0,0
+tau_20,wait_tau=20,A-fk,2,grid,120,90,30,0,0,0
+tau_20,wait_tau=20,ORACLE-S,1,core,17,4,13,0,0,0
+tau_20,wait_tau=20,ORACLE-S,1,grid,120,30,90,0,0,0
+tau_20,wait_tau=20,ORACLE-S,2,core,17,1,16,0,1,0
+tau_20,wait_tau=20,ORACLE-S,2,grid,120,0,120,0,6,0
+tau_20,wait_tau=20,ORACLE-O,1,core,17,0,17,1,0,0
+tau_20,wait_tau=20,ORACLE-O,1,grid,120,0,120,6,0,0
+tau_20,wait_tau=20,ORACLE-O,2,core,17,0,17,1,0,0
+tau_20,wait_tau=20,ORACLE-O,2,grid,120,0,120,6,0,0
+tau_30,wait_tau=30,A,1,core,17,12,5,0,0,0
+tau_30,wait_tau=30,A,1,grid,120,90,30,0,0,0
+tau_30,wait_tau=30,A,2,core,17,1,16,0,1,0
+tau_30,wait_tau=30,A,2,grid,120,0,120,0,6,0
+tau_30,wait_tau=30,B,1,core,17,8,9,0,0,0
+tau_30,wait_tau=30,B,1,grid,120,60,60,0,0,0
+tau_30,wait_tau=30,B,2,core,17,1,16,0,1,0
+tau_30,wait_tau=30,B,2,grid,120,0,120,0,6,0
+tau_30,wait_tau=30,Bw,1,core,17,3,14,0,0,0
+tau_30,wait_tau=30,Bw,1,grid,120,16,104,0,0,0
+tau_30,wait_tau=30,Bw,2,core,17,0,17,1,0,0
+tau_30,wait_tau=30,Bw,2,grid,120,0,120,6,0,0
+tau_30,wait_tau=30,C,1,core,17,0,14,4,0,0
+tau_30,wait_tau=30,C,1,grid,120,0,114,16,0,0
+tau_30,wait_tau=30,C,2,core,17,0,14,4,0,0
+tau_30,wait_tau=30,C,2,grid,120,0,114,16,0,0
+tau_30,wait_tau=30,D,1,core,17,1,15,4,0,0
+tau_30,wait_tau=30,D,1,grid,120,0,114,16,0,0
+tau_30,wait_tau=30,D,2,core,17,1,15,4,0,0
+tau_30,wait_tau=30,D,2,grid,120,0,114,16,0,0
+tau_30,wait_tau=30,D+I,1,core,17,1,15,4,0,0
+tau_30,wait_tau=30,D+I,1,grid,120,0,114,16,0,0
+tau_30,wait_tau=30,D+I,2,core,17,1,16,1,0,0
+tau_30,wait_tau=30,D+I,2,grid,120,0,120,6,0,0
+tau_30,wait_tau=30,A-fk,2,core,17,12,5,0,0,0
+tau_30,wait_tau=30,A-fk,2,grid,120,90,30,0,0,0
+tau_30,wait_tau=30,ORACLE-S,1,core,17,4,13,0,0,0
+tau_30,wait_tau=30,ORACLE-S,1,grid,120,30,90,0,0,0
+tau_30,wait_tau=30,ORACLE-S,2,core,17,1,16,0,1,0
+tau_30,wait_tau=30,ORACLE-S,2,grid,120,0,120,0,6,0
+tau_30,wait_tau=30,ORACLE-O,1,core,17,0,17,1,0,0
+tau_30,wait_tau=30,ORACLE-O,1,grid,120,0,120,6,0,0
+tau_30,wait_tau=30,ORACLE-O,2,core,17,0,17,1,0,0
+tau_30,wait_tau=30,ORACLE-O,2,grid,120,0,120,6,0,0
+in_progress_is_wait,in_progress_is_wait=True,A,1,core,17,12,5,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,A,1,grid,120,90,30,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,A,2,core,17,1,16,1,0,0
+in_progress_is_wait,in_progress_is_wait=True,A,2,grid,120,0,120,6,0,0
+in_progress_is_wait,in_progress_is_wait=True,B,1,core,17,8,9,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,B,1,grid,120,60,60,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,B,2,core,17,1,16,1,0,0
+in_progress_is_wait,in_progress_is_wait=True,B,2,grid,120,0,120,6,0,0
+in_progress_is_wait,in_progress_is_wait=True,Bw,1,core,17,3,14,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,Bw,1,grid,120,27,93,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,Bw,2,core,17,0,17,1,0,0
+in_progress_is_wait,in_progress_is_wait=True,Bw,2,grid,120,0,120,6,0,0
+in_progress_is_wait,in_progress_is_wait=True,C,1,core,17,0,14,4,0,0
+in_progress_is_wait,in_progress_is_wait=True,C,1,grid,120,0,114,16,0,0
+in_progress_is_wait,in_progress_is_wait=True,C,2,core,17,0,14,4,0,0
+in_progress_is_wait,in_progress_is_wait=True,C,2,grid,120,0,114,16,0,0
+in_progress_is_wait,in_progress_is_wait=True,D,1,core,17,1,15,4,0,0
+in_progress_is_wait,in_progress_is_wait=True,D,1,grid,120,0,114,16,0,0
+in_progress_is_wait,in_progress_is_wait=True,D,2,core,17,1,15,4,0,0
+in_progress_is_wait,in_progress_is_wait=True,D,2,grid,120,0,114,16,0,0
+in_progress_is_wait,in_progress_is_wait=True,D+I,1,core,17,1,15,4,0,0
+in_progress_is_wait,in_progress_is_wait=True,D+I,1,grid,120,0,114,16,0,0
+in_progress_is_wait,in_progress_is_wait=True,D+I,2,core,17,1,16,1,0,0
+in_progress_is_wait,in_progress_is_wait=True,D+I,2,grid,120,0,120,6,0,0
+in_progress_is_wait,in_progress_is_wait=True,A-fk,2,core,17,12,5,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,A-fk,2,grid,120,90,30,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-S,1,core,17,4,13,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-S,1,grid,120,30,90,0,0,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-S,2,core,17,1,16,0,1,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-S,2,grid,120,0,120,0,6,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-O,1,core,17,0,17,1,0,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-O,1,grid,120,0,120,6,0,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-O,2,core,17,0,17,1,0,0
+in_progress_is_wait,in_progress_is_wait=True,ORACLE-O,2,grid,120,0,120,6,0,0
+abort_record_replays_failure,abort_record=replay_failure,A,1,core,17,12,5,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,A,1,grid,120,90,30,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,A,2,core,17,0,15,0,1,0
+abort_record_replays_failure,abort_record=replay_failure,A,2,grid,120,0,120,0,6,0
+abort_record_replays_failure,abort_record=replay_failure,B,1,core,17,8,9,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,B,1,grid,120,60,60,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,B,2,core,17,0,15,0,1,0
+abort_record_replays_failure,abort_record=replay_failure,B,2,grid,120,0,120,0,6,0
+abort_record_replays_failure,abort_record=replay_failure,Bw,1,core,17,3,14,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,Bw,1,grid,120,27,93,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,Bw,2,core,17,0,15,0,1,0
+abort_record_replays_failure,abort_record=replay_failure,Bw,2,grid,120,0,120,0,6,0
+abort_record_replays_failure,abort_record=replay_failure,C,1,core,17,0,14,4,0,0
+abort_record_replays_failure,abort_record=replay_failure,C,1,grid,120,0,114,16,0,0
+abort_record_replays_failure,abort_record=replay_failure,C,2,core,17,0,14,4,0,0
+abort_record_replays_failure,abort_record=replay_failure,C,2,grid,120,0,114,16,0,0
+abort_record_replays_failure,abort_record=replay_failure,D,1,core,17,1,15,4,0,0
+abort_record_replays_failure,abort_record=replay_failure,D,1,grid,120,0,114,16,0,0
+abort_record_replays_failure,abort_record=replay_failure,D,2,core,17,0,14,4,0,0
+abort_record_replays_failure,abort_record=replay_failure,D,2,grid,120,0,114,16,0,0
+abort_record_replays_failure,abort_record=replay_failure,D+I,1,core,17,1,15,4,0,0
+abort_record_replays_failure,abort_record=replay_failure,D+I,1,grid,120,0,114,16,0,0
+abort_record_replays_failure,abort_record=replay_failure,D+I,2,core,17,0,15,1,0,0
+abort_record_replays_failure,abort_record=replay_failure,D+I,2,grid,120,0,120,6,0,0
+abort_record_replays_failure,abort_record=replay_failure,A-fk,2,core,17,12,5,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,A-fk,2,grid,120,90,30,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-S,1,core,17,4,13,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-S,1,grid,120,30,90,0,0,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-S,2,core,17,0,15,0,1,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-S,2,grid,120,0,120,0,6,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-O,1,core,17,0,17,1,0,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-O,1,grid,120,0,120,6,0,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-O,2,core,17,0,15,1,0,0
+abort_record_replays_failure,abort_record=replay_failure,ORACLE-O,2,grid,120,0,120,6,0,0
+persistent_faults,retry_fault=copy_first,A,1,core,17,11,2,0,4,0
+persistent_faults,retry_fault=copy_first,A,1,grid,120,90,24,0,24,0
+persistent_faults,retry_fault=copy_first,A,2,core,17,1,12,0,3,0
+persistent_faults,retry_fault=copy_first,A,2,grid,120,0,114,0,24,0
+persistent_faults,retry_fault=copy_first,B,1,core,17,8,5,0,3,0
+persistent_faults,retry_fault=copy_first,B,1,grid,120,60,54,0,14,0
+persistent_faults,retry_fault=copy_first,B,2,core,17,1,12,0,3,0
+persistent_faults,retry_fault=copy_first,B,2,grid,120,0,114,0,14,0
+persistent_faults,retry_fault=copy_first,Bw,1,core,17,3,10,6,0,0
+persistent_faults,retry_fault=copy_first,Bw,1,grid,120,27,87,16,0,0
+persistent_faults,retry_fault=copy_first,Bw,2,core,17,0,13,6,0,0
+persistent_faults,retry_fault=copy_first,Bw,2,grid,120,0,114,16,0,0
+persistent_faults,retry_fault=copy_first,C,1,core,17,0,13,4,0,0
+persistent_faults,retry_fault=copy_first,C,1,grid,120,0,114,16,0,0
+persistent_faults,retry_fault=copy_first,C,2,core,17,0,13,4,0,0
+persistent_faults,retry_fault=copy_first,C,2,grid,120,0,114,16,0,0
+persistent_faults,retry_fault=copy_first,D,1,core,17,1,12,4,0,0
+persistent_faults,retry_fault=copy_first,D,1,grid,120,0,114,16,0,0
+persistent_faults,retry_fault=copy_first,D,2,core,17,1,12,4,0,0
+persistent_faults,retry_fault=copy_first,D,2,grid,120,0,114,16,0,0
+persistent_faults,retry_fault=copy_first,D+I,1,core,17,1,12,4,0,0
+persistent_faults,retry_fault=copy_first,D+I,1,grid,120,0,114,16,0,0
+persistent_faults,retry_fault=copy_first,D+I,2,core,17,1,12,4,0,0
+persistent_faults,retry_fault=copy_first,D+I,2,grid,120,0,114,16,0,0
+persistent_faults,retry_fault=copy_first,A-fk,2,core,17,11,2,0,4,0
+persistent_faults,retry_fault=copy_first,A-fk,2,grid,120,90,24,0,24,0
+persistent_faults,retry_fault=copy_first,ORACLE-S,1,core,17,4,9,0,1,0
+persistent_faults,retry_fault=copy_first,ORACLE-S,1,grid,120,30,84,0,6,0
+persistent_faults,retry_fault=copy_first,ORACLE-S,2,core,17,1,12,0,1,0
+persistent_faults,retry_fault=copy_first,ORACLE-S,2,grid,120,0,114,0,6,0
+persistent_faults,retry_fault=copy_first,ORACLE-O,1,core,17,0,13,1,0,0
+persistent_faults,retry_fault=copy_first,ORACLE-O,1,grid,120,0,114,6,0,0
+persistent_faults,retry_fault=copy_first,ORACLE-O,2,core,17,0,13,1,0,0
+persistent_faults,retry_fault=copy_first,ORACLE-O,2,grid,120,0,114,6,0,0
+horizon_120,horizon=120,A,1,core,17,12,5,0,0,0
+horizon_120,horizon=120,A,1,grid,120,90,30,0,0,0
+horizon_120,horizon=120,A,2,core,17,1,16,0,0,0
+horizon_120,horizon=120,A,2,grid,120,0,120,0,0,0
+horizon_120,horizon=120,B,1,core,17,8,9,0,0,0
+horizon_120,horizon=120,B,1,grid,120,60,60,0,0,0
+horizon_120,horizon=120,B,2,core,17,1,16,0,0,0
+horizon_120,horizon=120,B,2,grid,120,0,120,0,0,0
+horizon_120,horizon=120,Bw,1,core,17,3,14,0,0,0
+horizon_120,horizon=120,Bw,1,grid,120,27,93,0,0,0
+horizon_120,horizon=120,Bw,2,core,17,0,17,0,0,0
+horizon_120,horizon=120,Bw,2,grid,120,0,120,0,0,0
+horizon_120,horizon=120,C,1,core,17,0,14,3,0,0
+horizon_120,horizon=120,C,1,grid,120,0,114,7,0,0
+horizon_120,horizon=120,C,2,core,17,0,14,3,0,0
+horizon_120,horizon=120,C,2,grid,120,0,114,7,0,0
+horizon_120,horizon=120,D,1,core,17,1,15,3,0,0
+horizon_120,horizon=120,D,1,grid,120,0,114,7,0,0
+horizon_120,horizon=120,D,2,core,17,1,15,3,0,0
+horizon_120,horizon=120,D,2,grid,120,0,114,7,0,0
+horizon_120,horizon=120,D+I,1,core,17,1,15,3,0,0
+horizon_120,horizon=120,D+I,1,grid,120,0,114,7,0,0
+horizon_120,horizon=120,D+I,2,core,17,1,16,0,0,0
+horizon_120,horizon=120,D+I,2,grid,120,0,120,0,0,0
+horizon_120,horizon=120,A-fk,2,core,17,12,5,0,0,0
+horizon_120,horizon=120,A-fk,2,grid,120,90,30,0,0,0
+horizon_120,horizon=120,ORACLE-S,1,core,17,4,13,0,0,0
+horizon_120,horizon=120,ORACLE-S,1,grid,120,30,90,0,0,0
+horizon_120,horizon=120,ORACLE-S,2,core,17,1,16,0,0,0
+horizon_120,horizon=120,ORACLE-S,2,grid,120,0,120,0,0,0
+horizon_120,horizon=120,ORACLE-O,1,core,17,0,17,0,0,0
+horizon_120,horizon=120,ORACLE-O,1,grid,120,0,120,0,0,0
+horizon_120,horizon=120,ORACLE-O,2,core,17,0,17,0,0,0
+horizon_120,horizon=120,ORACLE-O,2,grid,120,0,120,0,0,0

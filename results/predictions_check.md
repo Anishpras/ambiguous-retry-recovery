@@ -2,7 +2,7 @@
 
 PROTOCOL.md §7 (original and design-update additions) and the §10 worked timeline, checked against the frozen run. Predictions were written by hand before any matrix run and are not adjusted. Original §7 predictions use their original scope (S00-S12; policies A, B, C, D, D+I).
 
-**37 of 38 predictions match.**
+**37 of 38 predictions match (1 vacuously).** The predictions are hand derivations from deterministic rules: a match shows the implementation agrees with the author's reading of the rules. It is a consistency check, not a confirmation rate, and the rows are not independent. The design-update predictions (U, T rows) are self-attested: git cannot show they preceded the code.
 
 | id | source | prediction | predicted | observed | verdict |
 |---|---|---|---|---|---|
@@ -31,7 +31,7 @@ PROTOCOL.md §7 (original and design-update additions) and the §10 worked timel
 | U03a | §7 design update | C1 B duplicates in S13-S15 | {S13, S15} | {S13, S15} | **MATCH** |
 | U03b | §7 design update | C1 B: S14 once, via its status read | 1 effect, status read, no retry | effects F=1, status reads 1, retries 0, belief complete | **MATCH** |
 | U04a | §7 design update | C1 Bw: S13, S14, S15 exactly once | effects 1, complete (each) | S13: effects F=1, belief complete; S14: effects F=1, belief complete; S15: effects F=1, belief complete | **MATCH** |
-| U04b | §7 design update | C1 Bw in S15 sees `committed` at t = 14 before its read | complete at 14, read after 14 | complete at 14; status reads at none (wait ended after completion) | **MATCH** |
+| U04b | §7 design update | C1 Bw in S15 sees `committed` at t = 14 before its read | complete at 14, read after 14 | complete at 14; status reads at none (wait ended after completion) | **MATCH (vacuous)** |
 | U05a | §7 design update | C1 C duplicates in S13-S15: none | none | none | **MATCH** |
 | U05b | §7 design update | C1 C: S13, S14, S15 once; S15 ends `complete` with one conflict | 1 effect each; S15 complete, 1 conflict | effects F [1, 1, 1]; S15 belief complete, conflicts 1 | **MATCH** |
 | U06a | §7 design update | C1 D duplicates in S13-S15 | {S15} | {S15} | **MATCH** |
@@ -45,15 +45,23 @@ PROTOCOL.md §7 (original and design-update additions) and the §10 worked timel
 | U10 | §7 design update | C2 D+I completes S13 once: in_progress, then `committed` at t = 10 | in_progress seen; complete at 10; 1 effect | in_progress seen True; complete at 10; effects F=1 | **MATCH** |
 | T01 | design update tie note | S04 under Bw: `committed` webhook and wait timer both at t = 20; webhook first | webhook (delivery) before timer; no read | order at t = 20: [(2, 'webhook'), (3, 'timer')]; status reads at t >= 20: 0 | **MATCH** |
 
+## Vacuous matches
+
+- **U04b.** Fix L1 (v1.2): Bw issues no status read at all in S15. It becomes complete at t = 14 and its wait (started at t = 4) ends at t = 19, so clarification C15 skips the read. The clause 'before its read' holds only because there is no read (the check is an all() over an empty list). The substantive part, exactly once and complete at t = 14, is checked by U04a and the 'complete at 14' half of this row.
+
 ## Match-status changes since v1.0
 
-None: every prediction has the same verdict as in the v1.0 run (38 predictions compared).
+Changed: U04b (MATCH -> MATCH (vacuous)).
 
 ## Match-status changes since v1.1
 
-None: every prediction has the same verdict as in the v1.1 run (38 predictions compared).
+Changed: U04b (MATCH -> MATCH (vacuous)).
 
-## Explanations of mismatches
+## Match-status changes since v1.1.1
+
+Changed: U04b (MATCH -> MATCH (vacuous)).
+
+## Explanations of mismatches (hand-written after the run; notes/prediction_explanations.md, not frozen)
 
 Written by the implementer after the v1.0 collection run. This file is interpretation, not code or fixtures, so it is not frozen; `run_sim.py` copies it into `results/predictions_check.md`.
 

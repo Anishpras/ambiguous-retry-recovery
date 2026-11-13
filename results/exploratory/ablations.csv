@@ -1,0 +1,419 @@
+policy,ablation,scope,contract,scenario,op,changes
+D,ignore_webhooks,core,1,S04,op-1,ttc_any_complete: 20 -> 36
+D,ignore_webhooks,core,1,S07,op-1,ttc_any_complete: 8 -> 36
+D,ignore_webhooks,core,1,S13,op-1,ttc_any_complete: 10 -> 11
+D,ignore_webhooks,core,1,S15,op-1,conflicts: 1 -> 0; ttc_any_complete: 7 -> 9
+D,ignore_webhooks,core,2,S04,op-1,ttc_any_complete: 20 -> 36
+D,ignore_webhooks,core,2,S07,op-1,ttc_any_complete: 8 -> 36
+D,ignore_webhooks,core,2,S13,op-1,ttc_any_complete: 10 -> 11
+D,ignore_webhooks,core,2,S15,op-1,conflicts: 1 -> 0; ttc_any_complete: 7 -> 9
+D,ignore_webhooks,grid,1,G1_L0_W1,op-1,ttc_any_complete: 3 -> 6
+D,ignore_webhooks,grid,1,G1_L0_W2,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,1,G1_L1_W1,op-1,ttc_any_complete: 3 -> 6
+D,ignore_webhooks,grid,1,G1_L1_W2,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,1,G1_L2_W1,op-1,ttc_any_complete: 3 -> 6
+D,ignore_webhooks,grid,1,G1_L2_W2,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,1,G1_L4_W1,op-1,ttc_any_complete: 3 -> 11
+D,ignore_webhooks,grid,1,G1_L4_W2,op-1,ttc_any_complete: 4 -> 11
+D,ignore_webhooks,grid,1,G1_L4_W4,op-1,ttc_any_complete: 6 -> 11
+D,ignore_webhooks,grid,1,G1_L4_W8,op-1,ttc_any_complete: 10 -> 11
+D,ignore_webhooks,grid,1,G1_L8_W1,op-1,ttc_any_complete: 3 -> 11
+D,ignore_webhooks,grid,1,G1_L8_W2,op-1,ttc_any_complete: 4 -> 11
+D,ignore_webhooks,grid,1,G1_L8_W4,op-1,ttc_any_complete: 6 -> 11
+D,ignore_webhooks,grid,1,G1_L8_W8,op-1,ttc_any_complete: 10 -> 11
+D,ignore_webhooks,grid,1,G1_L16_W1,op-1,ttc_any_complete: 3 -> 21
+D,ignore_webhooks,grid,1,G1_L16_W2,op-1,ttc_any_complete: 4 -> 21
+D,ignore_webhooks,grid,1,G1_L16_W4,op-1,ttc_any_complete: 6 -> 21
+D,ignore_webhooks,grid,1,G1_L16_W8,op-1,ttc_any_complete: 10 -> 21
+D,ignore_webhooks,grid,1,G1_L16_W16,op-1,ttc_any_complete: 18 -> 21
+D,ignore_webhooks,grid,1,G1_L32_W1,op-1,ttc_any_complete: 3 -> 36
+D,ignore_webhooks,grid,1,G1_L32_W2,op-1,ttc_any_complete: 4 -> 36
+D,ignore_webhooks,grid,1,G1_L32_W4,op-1,ttc_any_complete: 6 -> 36
+D,ignore_webhooks,grid,1,G1_L32_W8,op-1,ttc_any_complete: 10 -> 36
+D,ignore_webhooks,grid,1,G1_L32_W16,op-1,ttc_any_complete: 18 -> 36
+D,ignore_webhooks,grid,1,G1_L32_W32,op-1,ttc_any_complete: 34 -> 36
+D,ignore_webhooks,grid,1,G1_L64_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+D,ignore_webhooks,grid,1,G1_L64_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,1,G1_L64_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,1,G1_L64_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+D,ignore_webhooks,grid,1,G1_L64_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+D,ignore_webhooks,grid,1,G1_L64_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+D,ignore_webhooks,grid,1,G1_Lnever_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+D,ignore_webhooks,grid,1,G1_Lnever_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,1,G1_Lnever_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,1,G1_Lnever_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+D,ignore_webhooks,grid,1,G1_Lnever_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+D,ignore_webhooks,grid,1,G1_Lnever_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+D,ignore_webhooks,grid,1,G2_E1_L0,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,1,G2_E1_L1,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,1,G2_E1_L4,op-1,ttc_any_complete: 4 -> 11
+D,ignore_webhooks,grid,1,G2_E1_L16,op-1,ttc_any_complete: 4 -> 21
+D,ignore_webhooks,grid,1,G2_E1_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,1,G2_E1_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,1,G2_E3_L4,op-1,ttc_any_complete: 6 -> 11
+D,ignore_webhooks,grid,1,G2_E3_L16,op-1,ttc_any_complete: 6 -> 21
+D,ignore_webhooks,grid,1,G2_E3_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,1,G2_E3_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,1,G2_E6_L0,op-1,ttc_any_complete: 9 -> 11
+D,ignore_webhooks,grid,1,G2_E6_L1,op-1,ttc_any_complete: 9 -> 11
+D,ignore_webhooks,grid,1,G2_E6_L4,op-1,ttc_any_complete: 9 -> 16
+D,ignore_webhooks,grid,1,G2_E6_L16,op-1,ttc_any_complete: 9 -> 26
+D,ignore_webhooks,grid,1,G2_E6_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+D,ignore_webhooks,grid,1,G2_E6_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+D,ignore_webhooks,grid,1,G2_E12_L0,op-1,ttc_any_complete: 15 -> 16
+D,ignore_webhooks,grid,1,G2_E12_L1,op-1,ttc_any_complete: 15 -> 16
+D,ignore_webhooks,grid,1,G2_E12_L4,op-1,ttc_any_complete: 15 -> 21
+D,ignore_webhooks,grid,1,G2_E12_L16,op-1,ttc_any_complete: 15 -> 31
+D,ignore_webhooks,grid,1,G2_E12_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+D,ignore_webhooks,grid,1,G2_E12_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+D,ignore_webhooks,grid,1,G2_E24_L1,op-1,ttc_any_complete: 27 -> 31
+D,ignore_webhooks,grid,1,G2_E24_L4,op-1,ttc_any_complete: 27 -> 31
+D,ignore_webhooks,grid,1,G2_E24_L16,op-1,ttc_any_complete: 27 -> 46
+D,ignore_webhooks,grid,1,G2_E24_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+D,ignore_webhooks,grid,1,G2_E24_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+D,ignore_webhooks,grid,1,G2_E48_L4,op-1,ttc_any_complete: 51 -> 56
+D,ignore_webhooks,grid,1,G2_E48_L16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+D,ignore_webhooks,grid,1,G2_E48_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+D,ignore_webhooks,grid,1,G2_E48_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+D,ignore_webhooks,grid,2,G1_L0_W1,op-1,ttc_any_complete: 3 -> 6
+D,ignore_webhooks,grid,2,G1_L0_W2,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,2,G1_L1_W1,op-1,ttc_any_complete: 3 -> 6
+D,ignore_webhooks,grid,2,G1_L1_W2,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,2,G1_L2_W1,op-1,ttc_any_complete: 3 -> 6
+D,ignore_webhooks,grid,2,G1_L2_W2,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,2,G1_L4_W1,op-1,ttc_any_complete: 3 -> 11
+D,ignore_webhooks,grid,2,G1_L4_W2,op-1,ttc_any_complete: 4 -> 11
+D,ignore_webhooks,grid,2,G1_L4_W4,op-1,ttc_any_complete: 6 -> 11
+D,ignore_webhooks,grid,2,G1_L4_W8,op-1,ttc_any_complete: 10 -> 11
+D,ignore_webhooks,grid,2,G1_L8_W1,op-1,ttc_any_complete: 3 -> 11
+D,ignore_webhooks,grid,2,G1_L8_W2,op-1,ttc_any_complete: 4 -> 11
+D,ignore_webhooks,grid,2,G1_L8_W4,op-1,ttc_any_complete: 6 -> 11
+D,ignore_webhooks,grid,2,G1_L8_W8,op-1,ttc_any_complete: 10 -> 11
+D,ignore_webhooks,grid,2,G1_L16_W1,op-1,ttc_any_complete: 3 -> 21
+D,ignore_webhooks,grid,2,G1_L16_W2,op-1,ttc_any_complete: 4 -> 21
+D,ignore_webhooks,grid,2,G1_L16_W4,op-1,ttc_any_complete: 6 -> 21
+D,ignore_webhooks,grid,2,G1_L16_W8,op-1,ttc_any_complete: 10 -> 21
+D,ignore_webhooks,grid,2,G1_L16_W16,op-1,ttc_any_complete: 18 -> 21
+D,ignore_webhooks,grid,2,G1_L32_W1,op-1,ttc_any_complete: 3 -> 36
+D,ignore_webhooks,grid,2,G1_L32_W2,op-1,ttc_any_complete: 4 -> 36
+D,ignore_webhooks,grid,2,G1_L32_W4,op-1,ttc_any_complete: 6 -> 36
+D,ignore_webhooks,grid,2,G1_L32_W8,op-1,ttc_any_complete: 10 -> 36
+D,ignore_webhooks,grid,2,G1_L32_W16,op-1,ttc_any_complete: 18 -> 36
+D,ignore_webhooks,grid,2,G1_L32_W32,op-1,ttc_any_complete: 34 -> 36
+D,ignore_webhooks,grid,2,G1_L64_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+D,ignore_webhooks,grid,2,G1_L64_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,2,G1_L64_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,2,G1_L64_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+D,ignore_webhooks,grid,2,G1_L64_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+D,ignore_webhooks,grid,2,G1_L64_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+D,ignore_webhooks,grid,2,G1_Lnever_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+D,ignore_webhooks,grid,2,G1_Lnever_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,2,G1_Lnever_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,2,G1_Lnever_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+D,ignore_webhooks,grid,2,G1_Lnever_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+D,ignore_webhooks,grid,2,G1_Lnever_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+D,ignore_webhooks,grid,2,G2_E1_L0,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,2,G2_E1_L1,op-1,ttc_any_complete: 4 -> 6
+D,ignore_webhooks,grid,2,G2_E1_L4,op-1,ttc_any_complete: 4 -> 11
+D,ignore_webhooks,grid,2,G2_E1_L16,op-1,ttc_any_complete: 4 -> 21
+D,ignore_webhooks,grid,2,G2_E1_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,2,G2_E1_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+D,ignore_webhooks,grid,2,G2_E3_L4,op-1,ttc_any_complete: 6 -> 11
+D,ignore_webhooks,grid,2,G2_E3_L16,op-1,ttc_any_complete: 6 -> 21
+D,ignore_webhooks,grid,2,G2_E3_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,2,G2_E3_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_webhooks,grid,2,G2_E6_L0,op-1,ttc_any_complete: 9 -> 11
+D,ignore_webhooks,grid,2,G2_E6_L1,op-1,ttc_any_complete: 9 -> 11
+D,ignore_webhooks,grid,2,G2_E6_L4,op-1,ttc_any_complete: 9 -> 16
+D,ignore_webhooks,grid,2,G2_E6_L16,op-1,ttc_any_complete: 9 -> 26
+D,ignore_webhooks,grid,2,G2_E6_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+D,ignore_webhooks,grid,2,G2_E6_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+D,ignore_webhooks,grid,2,G2_E12_L0,op-1,ttc_any_complete: 15 -> 16
+D,ignore_webhooks,grid,2,G2_E12_L1,op-1,ttc_any_complete: 15 -> 16
+D,ignore_webhooks,grid,2,G2_E12_L4,op-1,ttc_any_complete: 15 -> 21
+D,ignore_webhooks,grid,2,G2_E12_L16,op-1,ttc_any_complete: 15 -> 31
+D,ignore_webhooks,grid,2,G2_E12_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+D,ignore_webhooks,grid,2,G2_E12_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+D,ignore_webhooks,grid,2,G2_E24_L1,op-1,ttc_any_complete: 27 -> 31
+D,ignore_webhooks,grid,2,G2_E24_L4,op-1,ttc_any_complete: 27 -> 31
+D,ignore_webhooks,grid,2,G2_E24_L16,op-1,ttc_any_complete: 27 -> 46
+D,ignore_webhooks,grid,2,G2_E24_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+D,ignore_webhooks,grid,2,G2_E24_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+D,ignore_webhooks,grid,2,G2_E48_L4,op-1,ttc_any_complete: 51 -> 56
+D,ignore_webhooks,grid,2,G2_E48_L16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+D,ignore_webhooks,grid,2,G2_E48_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+D,ignore_webhooks,grid,2,G2_E48_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+D,ignore_status,core,1,S02,op-1,belief_H: complete -> unresolved; dispatches: 2 -> 1; effects_F: 1 -> 0; effects_H: 1 -> 0; ttc_any_complete: 9 -> None
+D,ignore_status,core,1,S03,op-1,ttc_any_complete: 6 -> 8
+D,ignore_status,core,1,S06,op-1,ttc_any_complete: 9 -> 33
+D,ignore_status,core,1,S12,op-1,ttc_any_complete: 4 -> 10
+D,ignore_status,core,2,S02,op-1,belief_H: complete -> unresolved; dispatches: 2 -> 1; effects_F: 1 -> 0; effects_H: 1 -> 0; ttc_any_complete: 9 -> None
+D,ignore_status,core,2,S03,op-1,ttc_any_complete: 6 -> 8
+D,ignore_status,core,2,S06,op-1,ttc_any_complete: 9 -> 33
+D,ignore_status,core,2,S12,op-1,ttc_any_complete: 4 -> 10
+D,ignore_status,grid,1,G1_L0_W8,op-1,ttc_any_complete: 6 -> 10
+D,ignore_status,grid,1,G1_L0_W16,op-1,ttc_any_complete: 6 -> 18
+D,ignore_status,grid,1,G1_L0_W32,op-1,ttc_any_complete: 6 -> 34
+D,ignore_status,grid,1,G1_L0_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,1,G1_L0_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,1,G1_L1_W8,op-1,ttc_any_complete: 6 -> 10
+D,ignore_status,grid,1,G1_L1_W16,op-1,ttc_any_complete: 6 -> 18
+D,ignore_status,grid,1,G1_L1_W32,op-1,ttc_any_complete: 6 -> 34
+D,ignore_status,grid,1,G1_L1_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,1,G1_L1_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,1,G1_L2_W8,op-1,ttc_any_complete: 6 -> 10
+D,ignore_status,grid,1,G1_L2_W16,op-1,ttc_any_complete: 6 -> 18
+D,ignore_status,grid,1,G1_L2_W32,op-1,ttc_any_complete: 6 -> 34
+D,ignore_status,grid,1,G1_L2_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,1,G1_L2_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,1,G1_L4_W16,op-1,ttc_any_complete: 11 -> 18
+D,ignore_status,grid,1,G1_L4_W32,op-1,ttc_any_complete: 11 -> 34
+D,ignore_status,grid,1,G1_L4_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,1,G1_L4_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,1,G1_L8_W16,op-1,ttc_any_complete: 11 -> 18
+D,ignore_status,grid,1,G1_L8_W32,op-1,ttc_any_complete: 11 -> 34
+D,ignore_status,grid,1,G1_L8_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,1,G1_L8_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,1,G1_L16_W32,op-1,ttc_any_complete: 21 -> 34
+D,ignore_status,grid,1,G1_L16_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+D,ignore_status,grid,1,G1_L16_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+D,ignore_status,grid,1,G1_L32_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+D,ignore_status,grid,1,G1_L32_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+D,ignore_status,grid,1,G2_E24_L0,op-1,ttc_any_complete: 26 -> 27
+D,ignore_status,grid,2,G1_L0_W8,op-1,ttc_any_complete: 6 -> 10
+D,ignore_status,grid,2,G1_L0_W16,op-1,ttc_any_complete: 6 -> 18
+D,ignore_status,grid,2,G1_L0_W32,op-1,ttc_any_complete: 6 -> 34
+D,ignore_status,grid,2,G1_L0_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,2,G1_L0_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,2,G1_L1_W8,op-1,ttc_any_complete: 6 -> 10
+D,ignore_status,grid,2,G1_L1_W16,op-1,ttc_any_complete: 6 -> 18
+D,ignore_status,grid,2,G1_L1_W32,op-1,ttc_any_complete: 6 -> 34
+D,ignore_status,grid,2,G1_L1_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,2,G1_L1_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,2,G1_L2_W8,op-1,ttc_any_complete: 6 -> 10
+D,ignore_status,grid,2,G1_L2_W16,op-1,ttc_any_complete: 6 -> 18
+D,ignore_status,grid,2,G1_L2_W32,op-1,ttc_any_complete: 6 -> 34
+D,ignore_status,grid,2,G1_L2_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,2,G1_L2_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+D,ignore_status,grid,2,G1_L4_W16,op-1,ttc_any_complete: 11 -> 18
+D,ignore_status,grid,2,G1_L4_W32,op-1,ttc_any_complete: 11 -> 34
+D,ignore_status,grid,2,G1_L4_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,2,G1_L4_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,2,G1_L8_W16,op-1,ttc_any_complete: 11 -> 18
+D,ignore_status,grid,2,G1_L8_W32,op-1,ttc_any_complete: 11 -> 34
+D,ignore_status,grid,2,G1_L8_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,2,G1_L8_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+D,ignore_status,grid,2,G1_L16_W32,op-1,ttc_any_complete: 21 -> 34
+D,ignore_status,grid,2,G1_L16_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+D,ignore_status,grid,2,G1_L16_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+D,ignore_status,grid,2,G1_L32_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+D,ignore_status,grid,2,G1_L32_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+D,ignore_status,grid,2,G2_E24_L0,op-1,ttc_any_complete: 26 -> 27
+C,ignore_webhooks,core,1,S04,op-1,ttc_any_complete: 20 -> 36
+C,ignore_webhooks,core,1,S07,op-1,ttc_any_complete: 8 -> 36
+C,ignore_webhooks,core,1,S13,op-1,ttc_any_complete: 10 -> 11
+C,ignore_webhooks,core,1,S15,op-1,belief_H: complete -> failed; conflicts: 1 -> 0; ttc_any_complete: 14 -> None
+C,ignore_webhooks,core,2,S04,op-1,ttc_any_complete: 20 -> 36
+C,ignore_webhooks,core,2,S07,op-1,ttc_any_complete: 8 -> 36
+C,ignore_webhooks,core,2,S13,op-1,ttc_any_complete: 10 -> 11
+C,ignore_webhooks,core,2,S15,op-1,belief_H: complete -> failed; conflicts: 1 -> 0; ttc_any_complete: 14 -> None
+C,ignore_webhooks,grid,1,G1_L0_W1,op-1,ttc_any_complete: 3 -> 6
+C,ignore_webhooks,grid,1,G1_L0_W2,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,1,G1_L1_W1,op-1,ttc_any_complete: 3 -> 6
+C,ignore_webhooks,grid,1,G1_L1_W2,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,1,G1_L2_W1,op-1,ttc_any_complete: 3 -> 6
+C,ignore_webhooks,grid,1,G1_L2_W2,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,1,G1_L4_W1,op-1,ttc_any_complete: 3 -> 11
+C,ignore_webhooks,grid,1,G1_L4_W2,op-1,ttc_any_complete: 4 -> 11
+C,ignore_webhooks,grid,1,G1_L4_W4,op-1,ttc_any_complete: 6 -> 11
+C,ignore_webhooks,grid,1,G1_L4_W8,op-1,ttc_any_complete: 10 -> 11
+C,ignore_webhooks,grid,1,G1_L8_W1,op-1,ttc_any_complete: 3 -> 11
+C,ignore_webhooks,grid,1,G1_L8_W2,op-1,ttc_any_complete: 4 -> 11
+C,ignore_webhooks,grid,1,G1_L8_W4,op-1,ttc_any_complete: 6 -> 11
+C,ignore_webhooks,grid,1,G1_L8_W8,op-1,ttc_any_complete: 10 -> 11
+C,ignore_webhooks,grid,1,G1_L16_W1,op-1,ttc_any_complete: 3 -> 21
+C,ignore_webhooks,grid,1,G1_L16_W2,op-1,ttc_any_complete: 4 -> 21
+C,ignore_webhooks,grid,1,G1_L16_W4,op-1,ttc_any_complete: 6 -> 21
+C,ignore_webhooks,grid,1,G1_L16_W8,op-1,ttc_any_complete: 10 -> 21
+C,ignore_webhooks,grid,1,G1_L16_W16,op-1,ttc_any_complete: 18 -> 21
+C,ignore_webhooks,grid,1,G1_L32_W1,op-1,ttc_any_complete: 3 -> 36
+C,ignore_webhooks,grid,1,G1_L32_W2,op-1,ttc_any_complete: 4 -> 36
+C,ignore_webhooks,grid,1,G1_L32_W4,op-1,ttc_any_complete: 6 -> 36
+C,ignore_webhooks,grid,1,G1_L32_W8,op-1,ttc_any_complete: 10 -> 36
+C,ignore_webhooks,grid,1,G1_L32_W16,op-1,ttc_any_complete: 18 -> 36
+C,ignore_webhooks,grid,1,G1_L32_W32,op-1,ttc_any_complete: 34 -> 36
+C,ignore_webhooks,grid,1,G1_L64_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+C,ignore_webhooks,grid,1,G1_L64_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,1,G1_L64_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,1,G1_L64_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+C,ignore_webhooks,grid,1,G1_L64_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+C,ignore_webhooks,grid,1,G1_L64_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+C,ignore_webhooks,grid,1,G1_Lnever_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+C,ignore_webhooks,grid,1,G1_Lnever_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,1,G1_Lnever_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,1,G1_Lnever_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+C,ignore_webhooks,grid,1,G1_Lnever_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+C,ignore_webhooks,grid,1,G1_Lnever_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+C,ignore_webhooks,grid,1,G2_E1_L0,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,1,G2_E1_L1,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,1,G2_E1_L4,op-1,ttc_any_complete: 4 -> 11
+C,ignore_webhooks,grid,1,G2_E1_L16,op-1,ttc_any_complete: 4 -> 21
+C,ignore_webhooks,grid,1,G2_E1_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,1,G2_E1_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,1,G2_E3_L4,op-1,ttc_any_complete: 6 -> 11
+C,ignore_webhooks,grid,1,G2_E3_L16,op-1,ttc_any_complete: 6 -> 21
+C,ignore_webhooks,grid,1,G2_E3_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,1,G2_E3_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,1,G2_E6_L0,op-1,ttc_any_complete: 9 -> 11
+C,ignore_webhooks,grid,1,G2_E6_L1,op-1,ttc_any_complete: 9 -> 11
+C,ignore_webhooks,grid,1,G2_E6_L4,op-1,ttc_any_complete: 9 -> 16
+C,ignore_webhooks,grid,1,G2_E6_L16,op-1,ttc_any_complete: 9 -> 26
+C,ignore_webhooks,grid,1,G2_E6_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+C,ignore_webhooks,grid,1,G2_E6_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+C,ignore_webhooks,grid,1,G2_E12_L0,op-1,ttc_any_complete: 15 -> 16
+C,ignore_webhooks,grid,1,G2_E12_L1,op-1,ttc_any_complete: 15 -> 16
+C,ignore_webhooks,grid,1,G2_E12_L4,op-1,ttc_any_complete: 15 -> 21
+C,ignore_webhooks,grid,1,G2_E12_L16,op-1,ttc_any_complete: 15 -> 31
+C,ignore_webhooks,grid,1,G2_E12_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+C,ignore_webhooks,grid,1,G2_E12_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+C,ignore_webhooks,grid,1,G2_E24_L1,op-1,ttc_any_complete: 27 -> 31
+C,ignore_webhooks,grid,1,G2_E24_L4,op-1,ttc_any_complete: 27 -> 31
+C,ignore_webhooks,grid,1,G2_E24_L16,op-1,ttc_any_complete: 27 -> 46
+C,ignore_webhooks,grid,1,G2_E24_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+C,ignore_webhooks,grid,1,G2_E24_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+C,ignore_webhooks,grid,1,G2_E48_L4,op-1,ttc_any_complete: 51 -> 56
+C,ignore_webhooks,grid,1,G2_E48_L16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+C,ignore_webhooks,grid,1,G2_E48_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+C,ignore_webhooks,grid,1,G2_E48_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+C,ignore_webhooks,grid,2,G1_L0_W1,op-1,ttc_any_complete: 3 -> 6
+C,ignore_webhooks,grid,2,G1_L0_W2,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,2,G1_L1_W1,op-1,ttc_any_complete: 3 -> 6
+C,ignore_webhooks,grid,2,G1_L1_W2,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,2,G1_L2_W1,op-1,ttc_any_complete: 3 -> 6
+C,ignore_webhooks,grid,2,G1_L2_W2,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,2,G1_L4_W1,op-1,ttc_any_complete: 3 -> 11
+C,ignore_webhooks,grid,2,G1_L4_W2,op-1,ttc_any_complete: 4 -> 11
+C,ignore_webhooks,grid,2,G1_L4_W4,op-1,ttc_any_complete: 6 -> 11
+C,ignore_webhooks,grid,2,G1_L4_W8,op-1,ttc_any_complete: 10 -> 11
+C,ignore_webhooks,grid,2,G1_L8_W1,op-1,ttc_any_complete: 3 -> 11
+C,ignore_webhooks,grid,2,G1_L8_W2,op-1,ttc_any_complete: 4 -> 11
+C,ignore_webhooks,grid,2,G1_L8_W4,op-1,ttc_any_complete: 6 -> 11
+C,ignore_webhooks,grid,2,G1_L8_W8,op-1,ttc_any_complete: 10 -> 11
+C,ignore_webhooks,grid,2,G1_L16_W1,op-1,ttc_any_complete: 3 -> 21
+C,ignore_webhooks,grid,2,G1_L16_W2,op-1,ttc_any_complete: 4 -> 21
+C,ignore_webhooks,grid,2,G1_L16_W4,op-1,ttc_any_complete: 6 -> 21
+C,ignore_webhooks,grid,2,G1_L16_W8,op-1,ttc_any_complete: 10 -> 21
+C,ignore_webhooks,grid,2,G1_L16_W16,op-1,ttc_any_complete: 18 -> 21
+C,ignore_webhooks,grid,2,G1_L32_W1,op-1,ttc_any_complete: 3 -> 36
+C,ignore_webhooks,grid,2,G1_L32_W2,op-1,ttc_any_complete: 4 -> 36
+C,ignore_webhooks,grid,2,G1_L32_W4,op-1,ttc_any_complete: 6 -> 36
+C,ignore_webhooks,grid,2,G1_L32_W8,op-1,ttc_any_complete: 10 -> 36
+C,ignore_webhooks,grid,2,G1_L32_W16,op-1,ttc_any_complete: 18 -> 36
+C,ignore_webhooks,grid,2,G1_L32_W32,op-1,ttc_any_complete: 34 -> 36
+C,ignore_webhooks,grid,2,G1_L64_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+C,ignore_webhooks,grid,2,G1_L64_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,2,G1_L64_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,2,G1_L64_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+C,ignore_webhooks,grid,2,G1_L64_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+C,ignore_webhooks,grid,2,G1_L64_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+C,ignore_webhooks,grid,2,G1_Lnever_W1,op-1,belief_H: complete -> unresolved; ttc_any_complete: 3 -> None
+C,ignore_webhooks,grid,2,G1_Lnever_W2,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,2,G1_Lnever_W4,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,2,G1_Lnever_W8,op-1,belief_H: complete -> unresolved; ttc_any_complete: 10 -> None
+C,ignore_webhooks,grid,2,G1_Lnever_W16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 18 -> None
+C,ignore_webhooks,grid,2,G1_Lnever_W32,op-1,belief_H: complete -> unresolved; ttc_any_complete: 34 -> None
+C,ignore_webhooks,grid,2,G2_E1_L0,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,2,G2_E1_L1,op-1,ttc_any_complete: 4 -> 6
+C,ignore_webhooks,grid,2,G2_E1_L4,op-1,ttc_any_complete: 4 -> 11
+C,ignore_webhooks,grid,2,G2_E1_L16,op-1,ttc_any_complete: 4 -> 21
+C,ignore_webhooks,grid,2,G2_E1_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,2,G2_E1_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 4 -> None
+C,ignore_webhooks,grid,2,G2_E3_L4,op-1,ttc_any_complete: 6 -> 11
+C,ignore_webhooks,grid,2,G2_E3_L16,op-1,ttc_any_complete: 6 -> 21
+C,ignore_webhooks,grid,2,G2_E3_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,2,G2_E3_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_webhooks,grid,2,G2_E6_L0,op-1,ttc_any_complete: 9 -> 11
+C,ignore_webhooks,grid,2,G2_E6_L1,op-1,ttc_any_complete: 9 -> 11
+C,ignore_webhooks,grid,2,G2_E6_L4,op-1,ttc_any_complete: 9 -> 16
+C,ignore_webhooks,grid,2,G2_E6_L16,op-1,ttc_any_complete: 9 -> 26
+C,ignore_webhooks,grid,2,G2_E6_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+C,ignore_webhooks,grid,2,G2_E6_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 9 -> None
+C,ignore_webhooks,grid,2,G2_E12_L0,op-1,ttc_any_complete: 15 -> 16
+C,ignore_webhooks,grid,2,G2_E12_L1,op-1,ttc_any_complete: 15 -> 16
+C,ignore_webhooks,grid,2,G2_E12_L4,op-1,ttc_any_complete: 15 -> 21
+C,ignore_webhooks,grid,2,G2_E12_L16,op-1,ttc_any_complete: 15 -> 31
+C,ignore_webhooks,grid,2,G2_E12_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+C,ignore_webhooks,grid,2,G2_E12_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 15 -> None
+C,ignore_webhooks,grid,2,G2_E24_L1,op-1,ttc_any_complete: 27 -> 31
+C,ignore_webhooks,grid,2,G2_E24_L4,op-1,ttc_any_complete: 27 -> 31
+C,ignore_webhooks,grid,2,G2_E24_L16,op-1,ttc_any_complete: 27 -> 46
+C,ignore_webhooks,grid,2,G2_E24_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+C,ignore_webhooks,grid,2,G2_E24_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 27 -> None
+C,ignore_webhooks,grid,2,G2_E48_L4,op-1,ttc_any_complete: 51 -> 56
+C,ignore_webhooks,grid,2,G2_E48_L16,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+C,ignore_webhooks,grid,2,G2_E48_L64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+C,ignore_webhooks,grid,2,G2_E48_Lnever,op-1,belief_H: complete -> unresolved; ttc_any_complete: 51 -> None
+C,ignore_status,core,1,S02,op-1,belief_H: failed -> unresolved
+C,ignore_status,core,1,S03,op-1,ttc_any_complete: 6 -> 8
+C,ignore_status,core,1,S12,op-1,ttc_any_complete: 4 -> 10
+C,ignore_status,core,2,S02,op-1,belief_H: failed -> unresolved
+C,ignore_status,core,2,S03,op-1,ttc_any_complete: 6 -> 8
+C,ignore_status,core,2,S12,op-1,ttc_any_complete: 4 -> 10
+C,ignore_status,grid,1,G1_L0_W8,op-1,ttc_any_complete: 6 -> 10
+C,ignore_status,grid,1,G1_L0_W16,op-1,ttc_any_complete: 6 -> 18
+C,ignore_status,grid,1,G1_L0_W32,op-1,ttc_any_complete: 6 -> 34
+C,ignore_status,grid,1,G1_L0_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,1,G1_L0_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,1,G1_L1_W8,op-1,ttc_any_complete: 6 -> 10
+C,ignore_status,grid,1,G1_L1_W16,op-1,ttc_any_complete: 6 -> 18
+C,ignore_status,grid,1,G1_L1_W32,op-1,ttc_any_complete: 6 -> 34
+C,ignore_status,grid,1,G1_L1_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,1,G1_L1_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,1,G1_L2_W8,op-1,ttc_any_complete: 6 -> 10
+C,ignore_status,grid,1,G1_L2_W16,op-1,ttc_any_complete: 6 -> 18
+C,ignore_status,grid,1,G1_L2_W32,op-1,ttc_any_complete: 6 -> 34
+C,ignore_status,grid,1,G1_L2_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,1,G1_L2_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,1,G1_L4_W16,op-1,ttc_any_complete: 11 -> 18
+C,ignore_status,grid,1,G1_L4_W32,op-1,ttc_any_complete: 11 -> 34
+C,ignore_status,grid,1,G1_L4_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,1,G1_L4_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,1,G1_L8_W16,op-1,ttc_any_complete: 11 -> 18
+C,ignore_status,grid,1,G1_L8_W32,op-1,ttc_any_complete: 11 -> 34
+C,ignore_status,grid,1,G1_L8_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,1,G1_L8_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,1,G1_L16_W32,op-1,ttc_any_complete: 21 -> 34
+C,ignore_status,grid,1,G1_L16_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+C,ignore_status,grid,1,G1_L16_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+C,ignore_status,grid,1,G1_L32_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+C,ignore_status,grid,1,G1_L32_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+C,ignore_status,grid,1,G2_E24_L0,op-1,ttc_any_complete: 26 -> 27
+C,ignore_status,grid,2,G1_L0_W8,op-1,ttc_any_complete: 6 -> 10
+C,ignore_status,grid,2,G1_L0_W16,op-1,ttc_any_complete: 6 -> 18
+C,ignore_status,grid,2,G1_L0_W32,op-1,ttc_any_complete: 6 -> 34
+C,ignore_status,grid,2,G1_L0_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,2,G1_L0_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,2,G1_L1_W8,op-1,ttc_any_complete: 6 -> 10
+C,ignore_status,grid,2,G1_L1_W16,op-1,ttc_any_complete: 6 -> 18
+C,ignore_status,grid,2,G1_L1_W32,op-1,ttc_any_complete: 6 -> 34
+C,ignore_status,grid,2,G1_L1_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,2,G1_L1_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,2,G1_L2_W8,op-1,ttc_any_complete: 6 -> 10
+C,ignore_status,grid,2,G1_L2_W16,op-1,ttc_any_complete: 6 -> 18
+C,ignore_status,grid,2,G1_L2_W32,op-1,ttc_any_complete: 6 -> 34
+C,ignore_status,grid,2,G1_L2_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,2,G1_L2_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 6 -> None
+C,ignore_status,grid,2,G1_L4_W16,op-1,ttc_any_complete: 11 -> 18
+C,ignore_status,grid,2,G1_L4_W32,op-1,ttc_any_complete: 11 -> 34
+C,ignore_status,grid,2,G1_L4_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,2,G1_L4_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,2,G1_L8_W16,op-1,ttc_any_complete: 11 -> 18
+C,ignore_status,grid,2,G1_L8_W32,op-1,ttc_any_complete: 11 -> 34
+C,ignore_status,grid,2,G1_L8_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,2,G1_L8_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 11 -> None
+C,ignore_status,grid,2,G1_L16_W32,op-1,ttc_any_complete: 21 -> 34
+C,ignore_status,grid,2,G1_L16_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+C,ignore_status,grid,2,G1_L16_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 21 -> None
+C,ignore_status,grid,2,G1_L32_W64,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+C,ignore_status,grid,2,G1_L32_Wlost,op-1,belief_H: complete -> unresolved; ttc_any_complete: 36 -> None
+C,ignore_status,grid,2,G2_E24_L0,op-1,ttc_any_complete: 26 -> 27
