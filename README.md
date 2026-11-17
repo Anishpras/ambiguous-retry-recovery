@@ -30,7 +30,7 @@ It takes about 15 seconds. `python3 run_sim.py --check-reproducible` runs everyt
 - **Design and history.** `PROTOCOL.md` holds the design, the hand-derived predictions (§7) and every clarification and revision.
 - **Pre-specified results.** The v1.1.1 core results are the pre-specified record; they are kept byte-for-byte in `baselines/v1.1.1/`.
 - **Revisions.** v1.1, v1.1.1 and v1.2 are post-freeze revisions, logged with their reasons. `results/revision_v1.1_delta.md` and `results/revision_v1.2_delta.md` list every value they changed. v1.2 changed no outcome in the core matrix; only latency reporting and labels changed.
-- **Self-attestation.** The freeze is self-attested (no remote, no signed tag).
+- **Self-attestation.** The freeze is self-attested: there is no signed tag, and the repository was made public only after the study was complete.
 
 **Main outputs.**
 
@@ -91,3 +91,14 @@ Policies are registered in one place, `arr/registry.py`. A policy is any class w
 - **`docs/`** checklist, decision table, trace schema, scenario format, monotone-evidence argument.
 - **`examples/`** custom policy, commented scenario, replay file.
 - **`notes/`** hand-written interpretation, not frozen.
+
+## Citation and licence
+
+Citation metadata is in `CITATION.cff`; GitHub's "Cite this repository" button uses it.
+
+> Prashun, A. (2026). *Safe Retry After an Ambiguous Tool Timeout: A Hand-Checkable Conformance Suite for Agent Recovery with Provider Contracts and Webhook Evidence* (Version 1.2.2) [Software and technical report]. https://github.com/Anishpras/ambiguous-retry-recovery
+
+- **Code:** MIT (`LICENSE`).
+- **Paper, protocol, scenarios and results:** CC BY 4.0 (`LICENSE-DATA.md`).
+
+This work was prepared with substantial AI assistance; see the paper's acknowledgements.

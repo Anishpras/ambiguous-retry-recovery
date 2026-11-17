@@ -499,7 +499,7 @@ In a model small enough to check by hand, the suite reproduces the known results
 
 \section*{Code and data availability}
 
-The simulator (Python standard library only, no network access, no randomness), fixtures, protocol with its full revision log, freeze history, frozen baselines, traces and outputs are kept in a git repository that, at the time of writing, has no public remote. The frozen run is v1.2.2 (results commit \code{d11234a}). \code{python3 run\_sim.py} reproduces every result in this report and exits 0 only if every check passes; it takes about 15 seconds (CPython 3.13.7, macOS, arm64). Every number in this report is listed with its source in \code{paper/NUMBERS.md} and checked against the result files by \code{paper/check\_numbers.py}.
+The simulator (Python standard library only, no network access, no randomness), fixtures, protocol with its full revision log, freeze history, frozen baselines, traces and outputs are in a public git repository, \url{https://github.com/Anishpras/ambiguous-retry-recovery}. The frozen run is v1.2.2 (results commit \code{d11234a}). \code{python3 run\_sim.py} reproduces every result in this report and exits 0 only if every check passes; it takes about 15 seconds (CPython 3.13.7, macOS, arm64). Every number in this report is listed with its source in \code{paper/NUMBERS.md} and checked against the result files by \code{paper/check\_numbers.py}.
 
 \section*{Acknowledgements and AI-assistance statement}
 

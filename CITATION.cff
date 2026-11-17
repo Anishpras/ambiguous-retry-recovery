@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this code, suite or results, please cite them as below."
+type: software
+title: "Safe Retry After an Ambiguous Tool Timeout: A Hand-Checkable Conformance Suite for Agent Recovery with Provider Contracts and Webhook Evidence"
+authors:
+  - family-names: Prashun
+    given-names: Anish
+version: 1.2.2
+date-released: 2026-11-17
+license:
+  - MIT
+  - CC-BY-4.0
+repository-code: "https://github.com/Anishpras/ambiguous-retry-recovery"
+keywords:
+  - AI agents
+  - tool use
+  - retries
+  - idempotency
+  - exactly-once
+  - webhooks
+  - failure recovery
+  - conformance testing
+abstract: >-
+  A deterministic, hand-checkable discrete-event simulator (Python 3 standard library
+  only, no randomness) of a client's recovery layer after an ambiguous tool timeout,
+  with a mock provider under two explicit contracts (no deduplication, and deduplication
+  on a stable key), a lagging status endpoint, a webhook queue whose receipts can be
+  delayed, duplicated, reordered, lost or misleading, and a private effect ledger used
+  only for scoring. Sixteen scripted scenarios (17 operations) and 120 timing schedules
+  score immediate retry, check-then-retry, wait-then-verify, defer-and-report and
+  evidence reconciliation on duplicates, exactly-once completion, false completion,
+  unresolved operations, retries and time to confirmation, with sensitivity, ablation
+  and persistent-fault analyses. Includes a provider contract checklist, a decision
+  table, and commands to run custom scenarios and policies or replay recorded
+  observations.
