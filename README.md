@@ -94,9 +94,9 @@ Policies are registered in one place, `arr/registry.py`. A policy is any class w
 
 ## Citation and licence
 
-Citation metadata is in `CITATION.cff`; GitHub's "Cite this repository" button uses it.
+Archived on Zenodo: **https://doi.org/10.5281/zenodo.24304849** (all versions; this always resolves to the latest). Version 1.2.2 specifically: https://doi.org/10.5281/zenodo.24304850. Citation metadata is in `CITATION.cff`; GitHub's "Cite this repository" button uses it.
 
-> Prashun, A. (2026). *Safe Retry After an Ambiguous Tool Timeout: A Hand-Checkable Conformance Suite for Agent Recovery with Provider Contracts and Webhook Evidence* (Version 1.2.2) [Software and technical report]. https://github.com/Anishpras/ambiguous-retry-recovery
+> Prashun, A. (2026). *Safe Retry After an Ambiguous Tool Timeout: A Hand-Checkable Conformance Suite for Agent Recovery with Provider Contracts and Webhook Evidence* (Version 1.2.2) [Software and technical report]. Zenodo. https://doi.org/10.5281/zenodo.24304849
 
 - **Code:** MIT (`LICENSE`).
 - **Paper, protocol, scenarios and results:** CC BY 4.0 (`LICENSE-DATA.md`).

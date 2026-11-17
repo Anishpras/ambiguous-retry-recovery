@@ -7,6 +7,14 @@ authors:
     given-names: Anish
 version: 1.2.2
 date-released: 2026-11-17
+doi: 10.5281/zenodo.24304849
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24304849
+    description: Concept DOI (all versions)
+  - type: doi
+    value: 10.5281/zenodo.24304850
+    description: Version 1.2.2
 license:
   - MIT
   - CC-BY-4.0
