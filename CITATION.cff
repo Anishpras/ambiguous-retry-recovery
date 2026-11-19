@@ -5,6 +5,7 @@ title: "Safe Retry After an Ambiguous Tool Timeout: A Hand-Checkable Conformance
 authors:
   - family-names: Prashun
     given-names: Anish
+    orcid: "https://orcid.org/0009-0007-6360-6017"
 version: 1.2.2
 date-released: 2026-11-17
 doi: 10.5281/zenodo.24304849

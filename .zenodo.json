@@ -4,7 +4,8 @@
   "version": "1.2.2",
   "creators": [
     {
-      "name": "Prashun, Anish"
+      "name": "Prashun, Anish",
+      "orcid": "0009-0007-6360-6017"
     }
   ],
   "description": "<p>A deterministic, hand-checkable conformance suite, in standard-library Python, for the recovery layer around a side-effecting tool call that times out. A mock provider runs under two explicit contracts (no deduplication; deduplication on a stable key), with a lagging status endpoint and webhook receipts that can be delayed, duplicated, reordered, lost or misleading. A private effect ledger is used only for scoring.</p><p>Sixteen scripted scenarios (17 operations) and 120 timing schedules score immediate retry, check-then-retry, wait-then-verify, defer-and-report and evidence reconciliation, with sensitivity, ablation and persistent-fault analyses. Practitioner tools: <code>run_sim.py explore</code> for custom scenarios and policies, <code>run_sim.py replay</code> for recorded observations, a provider contract checklist and a decision table.</p><p>Run <code>python3 run_sim.py</code> to reproduce every result. Code: MIT. Paper, protocol, scenarios and results: CC BY 4.0. All data are synthetic.</p>",
